@@ -1,5 +1,5 @@
 ---
-title: "Dashboard - Stocks" 
+title: "Dashboard: Stocks" 
 author: Renan Peres
 date: '2022-10-11'
 categories:
