@@ -1,0 +1,174 @@
+---
+title: "Dashboard"
+# author: "Renan Peres"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    # logo: "C:/Users/renan/Desktop/icons8_shutdown_48px.png"
+    # favicon: "C:/Users/renan/Desktop/icons8_shutdown_48px.png"
+    social: menu
+    source_code: embed
+    
+    
+    theme:
+    # COLORS
+      version: 5                # Bootstrap Version
+      bg: "white"               # Background Color
+      fg: "black"               # Chart Tab Font Color
+      primary: "#0269ba"        # Title Tab Color
+      secondary: "#0269ba"      # Secondary Tab Color
+      navbar-bg: "#ed6492"      # Navigation Bar Color
+      progress-bar-bg: "orange" # Progress Bar Color
+      
+    # FONTS
+      base_font:
+        google: Open Sans       # Title Font
+      heading_font:
+        google: Noto Sans       # Chart Font
+        
+        
+editor_options:
+  chunck_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyquant)
+library(jsonlite)
+library(maptools)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(purrr)
+library(leaflet)
+library(plotly)
+library(forecast)
+library(treemap)
+library(DT)
+library(highcharter)
+
+sites <- fromJSON(flatten=TRUE,
+  "https://raw.githubusercontent.com/52vis/2016-15/ec4b0ef/sites.json")
+
+sites$locations <- map(sites$locations, function(x) {
+  if (nrow(x) == 0) {
+    tibble(latitude=NA, longitude=NA, postal_code=NA, name=NA, street_address=NA)
+  } else {
+    x
+  }
+})
+
+sites <- unnest(sites)
+sites <- sites[complete.cases(sites[,c("longitude", "latitude")]),]
+
+sites$ratingcol <- ifelse(sites$site.rating == 0, "orange",
+                          ifelse(sites$site.rating == 1, "green",
+                                 ifelse(sites$site.rating == 2, "red", "black")))
+
+sites$ratingf <- factor(sites$site.rating,
+                        levels=c(3:0),
+                        labels=c("Remote or no potential for radioactive contamination.",
+                                 "No authority to clean up or status unclear.",
+                                 "Cleanup declared complete.",
+                                 "Cleanup in progress."))
+
+sites$campus <- ifelse(grepl("University", sites$site.name) | 
+                       grepl("University", sites$street_address) | 
+                       grepl("Campus", sites$street_address), 1, 0)
+sites$campuscol <- ifelse(sites$campus == 1, "red", "black")
+```
+
+# Plots
+
+-----------------------------------------------------------------------
+
+## Column {data-width=1000, .tabset}
+
+### Chart A
+
+```{r}
+
+theme_set(cowplot::theme_cowplot())
+tidyquant::tq_get(x = c("AAPL", "GOOG"), 
+                  get = "stock.prices", 
+                  from = "1950-01-01") %>% arrange(date) %>% 
+  ggplot(aes(date, close, fill = symbol, color = symbol)) +
+  geom_area(alpha = .7, color = "black", size = .2) +
+  geom_smooth(se = T, size = 1.5) +
+  scale_x_date(limits = c(as.Date("2004-01-01"), as.Date("2022-09-01"))) +
+  scale_fill_viridis_d(option = "cividis") -> p1
+
+plotly::ggplotly(p1)
+```
+
+### Chart B
+
+```{r}
+AirPassengers %>% 
+  forecast(level = 90) %>% 
+  hchart()
+
+```
+
+### Map
+
+```{r}
+leaflet() %>% 
+  addTiles() %>% 
+  fitBounds(-127.44,24.05,-65.30,50.35) %>% 
+  addCircleMarkers(sites$longitude, 
+                   sites$latitude, 
+                   color = sites$ratingcol, 
+                   radius = 6, 
+                   fill = T,
+                   fillOpacity = 0.2,
+                   opacity = 0.6,
+                   popup = paste(sites$site.city,
+                                 sites$site.name, 
+                                 sep = "")) %>%
+  addLegend("bottomleft", 
+            colors = c("orange","green", "red", "black"),
+            labels = c("Cleanup in progress.",
+                       "Cleanup complete.",
+                       "Status unclear.",
+                       "No potential for radioactive contamination."), 
+            opacity = 0.8)
+```
+
+
+# Data
+
+-----------------------------------------------------------------------
+
+## Column {data-width=1000, .tabset}
+
+
+### MPG
+
+```{r}
+DT::datatable(
+  mpg, extensions = c('Responsive','Buttons'), options = list(
+    pageLength = 12,
+    autowidth = T,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  )
+)
+
+```
+
+### Mtcars
+
+```{r}
+DT::datatable(
+  mtcars, extensions = c('Responsive','Buttons'), options = list(
+    pageLength = 12,
+    autowidth = T,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  )
+)
+
+```
+
