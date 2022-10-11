@@ -73,18 +73,18 @@ canonifyurls = true
   name = "Categories"
   pre = "<i class=\"sidebar-button-icon fas fa-lg fa-bookmark\" aria-hidden=\"true\"></i>"
   url = "/categories"
-[[menu.main]]
-  weight = 3
-  identifier = "tags"
-  name = "Tags"
-  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-tags\" aria-hidden=\"true\"></i>"
-  url = "/tags"
-[[menu.main]]
-  weight = 4
-  identifier = "archives"
-  name = "Archives"
-  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-archive\" aria-hidden=\"true\"></i>"
-  url = "/archives"
+#[[menu.main]]
+#  weight = 3
+#  identifier = "tags"
+#  name = "Tags"
+#  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-tags\" aria-hidden=\"true\"></i>"
+#  url = "/tags"
+#[[menu.main]]
+#  weight = 4
+#  identifier = "archives"
+#  name = "Archives"
+#  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-archive\" aria-hidden=\"true\"></i>"
+#  url = "/archives"
 [[menu.main]]
   weight = 5
   identifier = "about"
@@ -98,13 +98,21 @@ canonifyurls = true
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fab fa-lg fa-github\" aria-hidden=\"true\"></i>"
   url = "https://github.com/renan-peres"
+  
 [[menu.links]]
   weight = 2
+  identifier = "linkedin"
+  name = "LinkedIn"
+  pre = "<i class=\"sidebar-button-icon fab fa-linkedin\"></i>"
+  url = "https://www.linkedin.com/in/renanperes/"
+  
+[[menu.links]]
+  weight = 3
   identifier = "stackoverflow"
   name = "Stack Overflow"
   pre = "<i class=\"sidebar-button-icon fab fa-lg fa-stack-overflow\" aria-hidden=\"true\"></i>"
   url = "https://stackoverflow.com/users/636472/kakawait"
-
+  
 [[menu.misc]]
   weight = 1
   identifier = "rss"
@@ -302,11 +310,10 @@ canonifyurls = true
     icon = "fab fa-twitter"
     url = "https://twitter.com/intent/tweet?text=%s"
 
-
-#  [[params.sharingOptions]]
-#    name = "Whatsapp"
-#    icon = "fab fa-whatsapp"
-#    url = "https://wa.me/?text=%s"
+  [[params.sharingOptions]]
+    name = "Whatsapp"
+    icon = "fab fa-whatsapp"
+    url = "https://wa.me/?text=%s"
 
   [[params.sharingOptions]]
     name = "Linkedin"
