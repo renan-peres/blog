@@ -2,9 +2,8 @@
 title: "Dashboard - Stocks" 
 author: Renan Peres
 date: '2022-10-11'
-# categories:
-# - dashboards
-# - releases
+categories:
+- Dashboards
 autoThumbnailImage: false
 thumbnailImagePosition: "left"
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png
