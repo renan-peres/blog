@@ -210,7 +210,7 @@ canonifyurls = true
   autoThumbnailImage = true
 
   # Your favicon path, default is "/favicon.png"
-  favicon = "images/favicon_red.png"
+  favicon = "images/memoji.png"
 
   # ------------------
   # External resources
