@@ -18,7 +18,7 @@ defaultContentLanguage = "en-us"
 title = "My Portfolio"
 theme = "hugo-tranquilpeak-theme"
 disqusShortname = "hugo-tranquilpeak-theme"
-# googleAnalytics = "UA-123-45"
+googleAnalytics = "G-28DEPBGLFN"
 paginate = 7
 canonifyurls = true
 
@@ -45,8 +45,8 @@ canonifyurls = true
 # ------
 [author]
   name = "Renan Peres"
-  bio = "Super bio with markdown support **COOL**"
-  job = "Financial Analyst"
+  bio = "Recent College Graduate **COOL**"
+  job = "Data Analyst"
   location = "USA"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   # gravatarEmail = "thibaud.lepretre@gmail.com"
