@@ -15,7 +15,7 @@
 baseURL = "https://www.renanperes.com/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "My Portfolio"
+title = "Home"
 theme = "hugo-tranquilpeak-theme"
 disqusShortname = "hugo-tranquilpeak-theme"
 googleAnalytics = "G-28DEPBGLFN"
