@@ -210,7 +210,7 @@ canonifyurls = true
   autoThumbnailImage = true
 
   # Your favicon path, default is "/favicon.png"
-  #  favicon = "/favicon.png"
+  favicon = "images/favicon_black_tranparent.png"
 
   # ------------------
   # External resources
