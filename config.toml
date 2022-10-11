@@ -106,12 +106,12 @@ canonifyurls = true
   pre = "<i class=\"sidebar-button-icon fab fa-linkedin\"></i>"
   url = "https://www.linkedin.com/in/renanperes/"
   
-[[menu.links]]
-  weight = 3
-  identifier = "stackoverflow"
-  name = "Stack Overflow"
-  pre = "<i class=\"sidebar-button-icon fab fa-lg fa-stack-overflow\" aria-hidden=\"true\"></i>"
-  url = "https://stackoverflow.com/users/636472/kakawait"
+#[[menu.links]]
+#  weight = 3
+#  identifier = "stackoverflow"
+#  name = "Stack Overflow"
+#  pre = "<i class=\"sidebar-button-icon fab fa-lg fa-stack-overflow\" aria-hidden=\"true\"></i>"
+#  url = "https://stackoverflow.com/users/636472/kakawait"
   
 [[menu.misc]]
   weight = 1
