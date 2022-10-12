@@ -45,7 +45,9 @@ pie(
   c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
   col = c('#0292D8', '#F7EA39', '#C4B632'),
   init.angle = -50, border = NA
-)
+) -> pie
+
+pie
 ```
 
 ![A fancy pie
