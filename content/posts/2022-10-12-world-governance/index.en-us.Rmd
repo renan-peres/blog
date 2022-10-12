@@ -1,5 +1,5 @@
 ---
-title: "Report: World Governance"
+title: "World Governance Indicators"
 author: Renan Peres
 date: '2022-10-12'
 slug: index.en-us
@@ -19,7 +19,7 @@ library(knitr)
 library(crosstalk)
 df <- read_csv("WGIData.csv")
 
-knitr::opts_chunk$set(fig.width = unit(20, "cm"), fig.height = unit(10, "cm"))
+knitr::opts_chunk$set(fig.width = unit(10, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
@@ -29,16 +29,15 @@ This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/
 
 ## Raw Data
 
-```{r import}
+```{r import, echo=FALSE}
 print(df)
 ```
 
 ## Prepararation
 
-During the preparation I had to pivot the years into a single variable and add the corresponding
-continent to each country from the package `countrycode::`
+During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
-```{r prepare, echo=TRUE}
+```{r prepare, echo=FALSE}
 
 # Pivoting
 df_wgi <- df %>%
@@ -72,7 +71,7 @@ filter(indicator_name %in% c("Government Effectiveness: Estimate",
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and
 compare them accordingly.
 
-```{r pressure, echo=TRUE}
+```{r pressure, include=FALSE}
 # Effectiveness
   df_wgi %>% 
   filter(indicator_name == "Government Effectiveness: Estimate") %>% 
@@ -167,10 +166,13 @@ compare them accordingly.
           title = element_text(size = 20),
           legend.text = element_text(size = 16),
           legend.title = element_blank()) -> p4
-  
-p1
-p2
-p3
-p4
+
+```
+
+```{r}
+print(p1)
+print(p2)
+print(p3)
+print(p4)
 ```
 
