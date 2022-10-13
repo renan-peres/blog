@@ -80,9 +80,9 @@ canonifyurls = true
 [[menu.main]]
   weight = 5
   name = "About Me"
-  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-question\" aria-hidden=\"true\"></i>"
+  pre = "<i class=\"sidebar-button-icon fas fa-user\"></i>"
   url = "/#about"
-
+  
 [[menu.links]]
   weight = 1
   identifier = "github"
