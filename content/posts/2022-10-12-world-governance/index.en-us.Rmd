@@ -7,7 +7,7 @@ categories:
   - Reports
 autoThumbnailImage: false
 thumbnailImagePosition: "left"
-thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png
+thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-governance_thumbnail_cxdamc.png
 ---
 
 ```{r setup, include=FALSE}
