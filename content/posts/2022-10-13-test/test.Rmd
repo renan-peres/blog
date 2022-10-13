@@ -1,0 +1,38 @@
+---
+title: test
+author: ''
+date: '2022-10-13'
+slug: test
+categories:
+  - Dashboards
+tags: []
+always_allow_html: yes
+---
+
+<!--more-->
+
+```{r, echo=FALSE, message=FALSE}
+library(webshot)
+library(knitr)
+library(htmltools)
+library(htmlwidgets)
+knitr::opts_chunk$set(fig.width = 10, fig.height=5)
+```
+
+
+```{r, out.width='100%', fig.align='left'}
+knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "600px")
+```
+
+
+```{r, out.width='100%', fig.align='left'}
+knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "600px")
+```
+
+```{r}
+library(leaflet)
+library(widgetframe)
+l <- leaflet::leaflet(height = 300) %>% addTiles() %>% setView(0, 0, 1)
+frameWidget(l)
+```
+
