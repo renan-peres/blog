@@ -110,7 +110,7 @@ codefolding_show = "hide"
 [[menu.links]]
   weight = 3
   identifier = "email"
-  name = "Email Me"
+  name = "Email"
   pre = "<i class=\"sidebar-button-icon fas fa-envelope\"></i>"
   url = "mailto:contact@renanperes.com"
   
@@ -121,12 +121,12 @@ codefolding_show = "hide"
 #  pre = "<i class=\"sidebar-button-icon fab fa-lg fa-stack-overflow\" aria-hidden=\"true\"></i>"
 #  url = "https://stackoverflow.com/users/636472/kakawait"
   
-[[menu.misc]]
-  weight = 1
-  identifier = "rss"
-  name = "RSS"
-  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-rss\" aria-hidden=\"true\"></i>"
-  url = "/index.xml"
+#[[menu.misc]]
+#  weight = 1
+#  identifier = "rss"
+#  name = "RSS"
+#  pre = "<i class=\"sidebar-button-icon fas fa-lg fa-rss\" aria-hidden=\"true\"></i>"
+#  url = "/index.xml"
 
 # -------------
 # Customization
