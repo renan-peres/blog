@@ -4,7 +4,7 @@
 
 [build.environment]
   HUGO_VERSION = "NA"
-  HUGO_BUILDFUTURE = "true"
+  HUGO_BUILDFUTURE = "0.104.3"
 
 [context.deploy-preview.environment]
   command = "hugo --baseURL $DEPLOY_PRIME_URL"
