@@ -20,12 +20,12 @@ knitr::opts_chunk$set(fig.width = 10, fig.height=5)
 ```
 
 
-```{r, out.width='100%', fig.align='left'}
+```{r}
 knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "600px")
 ```
 
 
-```{r, out.width='100%', fig.align='left'}
+```{r}
 knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "600px")
 ```
 
