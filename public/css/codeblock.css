@@ -1,0 +1,18 @@
+.code-folding-btn { 
+    margin-bottom: 4px; 
+}
+.row { 
+    display: flex;
+    border-bottom: solid 1px #d7d7d7;
+}
+.collapse {
+    display: none; 
+}
+.in { 
+    display: block ;
+    border: solid 1px #d7d7d7;
+    border-radius: 5px;
+}
+.col-md-12 {
+    margin: 0 0 0 auto;
+}

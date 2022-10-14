@@ -14,9 +14,64 @@ thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
+<pre class="r"><code>knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.0      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.1 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(rvest)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;
+## 
+## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<pre class="r"><code>library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;
+## 
+## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>library(plotly)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;
+## 
+## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot
+## 
+## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter
+## 
+## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<pre class="r"><code>library(countrycode)
+library(knitr)
+library(crosstalk)
+df &lt;- read_csv(&quot;WGIData.csv&quot;)</code></pre>
+<pre><code>## New names:
+## Rows: 7704 Columns: 28
+## ── Column specification
+## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+## (4): Country Name, Country Code, Indicator Name, Indicator Code dbl (23): 1996,
+## 1998, 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, ... lgl (1): ...28
+## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## • `` -&gt; `...28`</code></pre>
+<pre class="r"><code>knitr::opts_chunk$set(fig.width = unit(10, &quot;cm&quot;), fig.height = unit(10, &quot;cm&quot;))</code></pre>
 <div id="raw-data" class="section level2">
 <h2>Raw Data</h2>
-<pre><code>## # A tibble: 7,704 × 28
+<pre class="r"><code>print(df)
+## # A tibble: 7,704 × 28
 ##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
 ##    &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 Afghanistan AFG     Contro… CC.EST  -1.29  -1.18  -1.27  -1.25  -1.34  -1.35 
@@ -39,7 +94,19 @@ thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-
 <div id="prepararation" class="section level2">
 <h2>Prepararation</h2>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
-<pre><code>## # A tibble: 145,152 × 6
+<pre class="r"><code>
+# Pivoting
+df_wgi &lt;- df %&gt;%
+          pivot_longer(-c(1:4), names_to = &quot;year&quot;, values_to = &quot;value&quot;) %&gt;% 
+          clean_names() %&gt;% 
+          select(-indicator_code)
+
+# Adding Continents
+df_wgi &lt;- df_wgi %&gt;% 
+            inner_join(countrycode::codelist %&gt;% select(continent, cow.name), 
+                       by = c(country_name = &quot;cow.name&quot;))
+print(df_wgi)
+## # A tibble: 145,152 × 6
 ##    country_name country_code indicator_name                  year  value conti…¹
 ##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;                           &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;  
 ##  1 Afghanistan  AFG          Control of Corruption: Estimate 1996  -1.29 Asia   
@@ -57,7 +124,13 @@ thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-
 <div id="indicators" class="section level2">
 <h2>Indicators</h2>
 <p>Given the indicators available in the dataset I selected to analyzie the following:</p>
-<pre><code>## # A tibble: 4 × 1
+<pre class="r"><code>df_wgi %&gt;% 
+distinct(indicator_name) %&gt;% 
+filter(indicator_name %in% c(&quot;Government Effectiveness: Estimate&quot;, 
+                             &quot;Control of Corruption: Estimate&quot;,
+                             &quot;Regulatory Quality: Estimate&quot;, 
+                             &quot;Rule of Law: Estimate&quot;))
+## # A tibble: 4 × 1
 ##   indicator_name                    
 ##   &lt;chr&gt;                             
 ## 1 Control of Corruption: Estimate   
@@ -69,6 +142,100 @@ thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-
 <h2>Plots</h2>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and
 compare them accordingly.</p>
+<pre class="r"><code># Effectiveness
+  df_wgi %&gt;% 
+  filter(indicator_name == &quot;Government Effectiveness: Estimate&quot;) %&gt;% 
+  mutate(indicator_name = str_replace(indicator_name, 
+                                      pattern =  &quot;Government Effectiveness: Estimate&quot;,
+                                      replacement = &quot;Government Effectiveness&quot;)) %&gt;% 
+  group_by(continent) %&gt;% 
+  filter(continent != &quot;NA&quot;,
+         year &gt; 2015) %&gt;% 
+  ggplot(aes(x = year, y = value, fill = continent)) +
+  geom_boxplot(na.rm = T) +
+  # scale_fill_viridis_d(option = &quot;mako&quot;) +
+  scale_fill_brewer(palette = &quot;Dark2&quot;) +
+  coord_flip() +
+  geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, size = .8) +
+  labs(title = &quot;Effectiveness&quot;, x = element_blank(), y = element_blank()) +
+  # theme_bw() +
+  cowplot::theme_cowplot() +
+  theme(axis.text = element_text(size = 14, face = &quot;bold&quot;),
+        title = element_text(size = 20),
+        legend.text = element_text(size = 16),
+        legend.title = element_blank()) -&gt; p1
+
+
+# Control of Corruption
+  df_wgi %&gt;% 
+    filter(indicator_name == &quot;Control of Corruption: Estimate&quot;) %&gt;% 
+    mutate(indicator_name = str_replace(indicator_name, 
+                                        pattern =  &quot;Control of Corruption: Estimate&quot;,
+                                        replacement = &quot;Control of Corruption&quot;)) %&gt;% 
+    group_by(continent) %&gt;% 
+    filter(continent != &quot;NA&quot;,
+           year &gt; 2015) %&gt;% 
+    ggplot(aes(x = year, y = value, fill = continent)) +
+    geom_boxplot(na.rm = T) +
+    # scale_fill_viridis_d(option = &quot;mako&quot;) +
+    scale_fill_brewer(palette = &quot;Dark2&quot;) +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, size = .8) +
+    labs(title = &quot;Control of Corruption&quot;, x = element_blank(), y = element_blank()) +
+    # theme_bw() +
+    cowplot::theme_cowplot() +
+    theme(axis.text = element_text(size = 14, face = &quot;bold&quot;), 
+          title = element_text(size = 20),
+          legend.text = element_text(size = 16),
+          legend.title = element_blank()) -&gt; p2
+
+
+# Regulatory Quality
+  df_wgi %&gt;% 
+    filter(indicator_name == &quot;Regulatory Quality: Estimate&quot;) %&gt;% 
+    mutate(indicator_name = str_replace(indicator_name, 
+                                        pattern =  &quot;Regulatory Quality: Estimate&quot;,
+                                        replacement = &quot;Regulatory Quality&quot;)) %&gt;% 
+    group_by(continent) %&gt;% 
+    filter(continent != &quot;NA&quot;,
+           year &gt; 2015) %&gt;% 
+    ggplot(aes(x = year, y = value, fill = continent)) +
+    geom_boxplot(na.rm = T) +
+    # scale_fill_viridis_d(option = &quot;mako&quot;) +
+    scale_fill_brewer(palette = &quot;Dark2&quot;) +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, size = .8) +
+    labs(title = &quot;Regulatory Quality&quot;, x = element_blank(), y = element_blank()) +
+    # theme_bw() +
+    cowplot::theme_cowplot() +
+    theme(axis.text = element_text(size = 14, face = &quot;bold&quot;), 
+          title = element_text(size = 20),
+          legend.text = element_text(size = 16),
+          legend.title = element_blank()) -&gt; p3
+
+  
+# Rule of Law
+  df_wgi %&gt;% 
+    filter(indicator_name == &quot;Rule of Law: Estimate&quot;) %&gt;% 
+    mutate(indicator_name = str_replace(indicator_name, 
+                                        pattern =  &quot;Rule of Law: Estimate&quot;,
+                                        replacement = &quot;Rule of Law&quot;)) %&gt;% 
+    group_by(continent) %&gt;% 
+    filter(continent != &quot;NA&quot;,
+           year &gt; 2015) %&gt;% 
+    ggplot(aes(x = year, y = value, fill = continent)) +
+    geom_boxplot(na.rm = T) +
+    # scale_fill_viridis_d(option = &quot;mako&quot;) +
+    scale_fill_brewer(palette = &quot;Dark2&quot;) +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = &quot;dashed&quot;, size = .8) +
+    labs(title = &quot;Rule of Law&quot;, x = element_blank(), y = element_blank()) +
+    # theme_bw() +
+    cowplot::theme_cowplot() +
+    theme(axis.text = element_text(size = 14, face = &quot;bold&quot;), 
+          title = element_text(size = 20),
+          legend.text = element_text(size = 16),
+          legend.title = element_blank()) -&gt; p4</code></pre>
 <pre class="r"><code>print(p1)</code></pre>
 <p><img src="/posts/2022-10-12-world-governance/index.en-us_files/figure-html/unnamed-chunk-2-1.png" width="960cm" /></p>
 <pre class="r"><code>print(p2)</code></pre>

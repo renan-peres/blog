@@ -1,0 +1,34 @@
+---
+title: test
+author: ''
+date: '2022-10-13'
+slug: test
+categories:
+  - Dashboards
+output: 
+  hugodown::md_document:
+    code_folding: hide
+---
+
+<!--more-->
+
+```{r, echo=FALSE, message=FALSE}
+library(webshot)
+library(knitr)
+library(htmltools)
+library(htmlwidgets)
+knitr::opts_chunk$set(fig.width = 10, fig.height=5)
+```
+
+## Flexdashboard or Webpages
+
+```{r}
+knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "600px")
+```
+
+## Shiny App
+
+```{r}
+knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "600px")
+```
+

@@ -9,6 +9,11 @@ googleAnalytics = "G-28DEPBGLFN"
 paginate = 7
 canonifyurls = true
 
+# Set to true to disable code folding
+disable_codefolding = false
+# Set to "hide" or "show" all codes by default
+codefolding_show = "hide"
+
 [permalinks]
   posts = "/:year/:month/:slug/"
 
@@ -26,6 +31,10 @@ canonifyurls = true
     endLevel = 3
     ordered = false
     startLevel = 1
+  # In order to support HTML inside .md file
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 # ------
 # Author
@@ -36,6 +45,7 @@ canonifyurls = true
   job = "Data Analyst"
   location = "USA"
   picture = "images/profile.jpg"
+  email = "contact@renanperes.com"
   # gravatarEmail = "rperes@rollins.edu"
   # twitter = "renanperes"
   # googlePlus = "+ThibaudLepretre" or 114625208755123718311
@@ -96,6 +106,13 @@ canonifyurls = true
   name = "LinkedIn"
   pre = "<i class=\"sidebar-button-icon fab fa-linkedin\"></i>"
   url = "https://www.linkedin.com/in/renanperes/"
+  
+[[menu.links]]
+  weight = 3
+  identifier = "email"
+  name = "Email Me"
+  pre = "<i class=\"sidebar-button-icon fas fa-envelope\"></i>"
+  url = "mailto:contact@renanperes.com"
   
 #[[menu.links]]
 #  weight = 3
@@ -210,6 +227,16 @@ canonifyurls = true
   # they have to be referred from static root. Example
   #  [[params.customCSS]]
   #    href = "css/mystyle.css"
+  [[params.customCSS]]
+    href = "css/codefolding.css"
+  [[params.customCSS]]
+    href = "css/codeblock.css"
+  [[params.customJS]]
+    src = "js/codefolding.js"
+  [[params.customJS]]
+    src = "js/collapse.js"
+  [[params.customJS]]
+    src = "js/dropdown.js"
 
   # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
   # they have to be referred from static root. Example
@@ -382,3 +409,4 @@ canonifyurls = true
   # Customize copyright value "© 2017 <CUSTOMIZATION>. All Rights Reserved"
   #  [params.footer]
   #    copyright = "<a href=\"https://github.com/kakawait\">kakawait</a>"
+  

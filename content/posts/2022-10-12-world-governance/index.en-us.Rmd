@@ -10,14 +10,18 @@ thumbnailImagePosition: "left"
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1665687240/w-governance_thumbnail_cxdamc.png
 ---
 
-```{r setup, include=FALSE}
+This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
+
+<!--more--> 
+
+```{r setup}
+knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
 library(janitor)
 library(plotly)
 library(countrycode)
-library(rlang)
 library(knitr)
 library(crosstalk)
 df <- read_csv("WGIData.csv")
@@ -26,13 +30,11 @@ knitr::opts_chunk$set(fig.width = unit(10, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
-This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
-<!--more--> 
 
 ## Raw Data
 
-```{r import, echo=FALSE}
+```{r import}
 print(df)
 ```
 
@@ -40,7 +42,7 @@ print(df)
 
 During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
-```{r prepare, echo=FALSE}
+```{r prepare}
 
 # Pivoting
 df_wgi <- df %>%
@@ -59,7 +61,7 @@ print(df_wgi)
 
 Given the indicators available in the dataset I selected to analyzie the following:
 
-```{r, echo=FALSE}
+```{r}
 df_wgi %>% 
 distinct(indicator_name) %>% 
 filter(indicator_name %in% c("Government Effectiveness: Estimate", 
@@ -74,7 +76,7 @@ filter(indicator_name %in% c("Government Effectiveness: Estimate",
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and
 compare them accordingly.
 
-```{r pressure, include=FALSE}
+```{r pressure}
 # Effectiveness
   df_wgi %>% 
   filter(indicator_name == "Government Effectiveness: Estimate") %>% 
