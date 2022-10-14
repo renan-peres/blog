@@ -5,14 +5,11 @@ date: '2022-10-13'
 slug: test
 categories:
   - Dashboards
-output: 
-  hugodown::md_document:
-    code_folding: hide
 ---
 
 <!--more-->
 
-```{r, echo=FALSE, message=FALSE}
+```{r}
 library(webshot)
 library(knitr)
 library(htmltools)

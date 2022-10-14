@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reports on Home</title>
+    <link>https://www.renanperes.com/categories/reports/</link>
+    <description>Recent content in Reports on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>contact@renanperes.com (Renan Peres)</managingEditor>
+    <webMaster>contact@renanperes.com (Renan Peres)</webMaster>
+    <lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.renanperes.com/categories/reports/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>World Governance Indicators</title>
+      <link>https://www.renanperes.com/2022/10/index.en-us/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      <author>contact@renanperes.com (Renan Peres)</author>
+      <guid>https://www.renanperes.com/2022/10/index.en-us/</guid>
+      <description>
+
+
+&lt;p&gt;This data was retrieved from the &lt;a href=&#34;https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators&#34;&gt;World Bank&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Report: Hello R Markdown</title>
+      <link>https://www.renanperes.com/2020/12/report-hello-r-markdown/</link>
+      <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
+      <author>contact@renanperes.com (Renan Peres)</author>
+      <guid>https://www.renanperes.com/2020/12/report-hello-r-markdown/</guid>
+      <description>
+&lt;script src=&#34;https://www.renanperes.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://www.renanperes.com/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://www.renanperes.com/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

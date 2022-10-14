@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dashboards on Home</title>
+    <link>https://www.renanperes.com/categories/dashboards/</link>
+    <description>Recent content in Dashboards on Home</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>contact@renanperes.com (Renan Peres)</managingEditor>
+    <webMaster>contact@renanperes.com (Renan Peres)</webMaster>
+    <lastBuildDate>Thu, 13 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.renanperes.com/categories/dashboards/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>test</title>
+      <link>https://www.renanperes.com/2022/10/test/</link>
+      <pubDate>Thu, 13 Oct 2022 00:00:00 +0000</pubDate>
+      <author>contact@renanperes.com (Renan Peres)</author>
+      <guid>https://www.renanperes.com/2022/10/test/</guid>
+      <description>
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Dashboard: Stocks</title>
+      <link>https://www.renanperes.com/2022/10/dashboard-stocks/</link>
+      <pubDate>Tue, 11 Oct 2022 00:00:00 +0000</pubDate>
+      <author>contact@renanperes.com (Renan Peres)</author>
+      <guid>https://www.renanperes.com/2022/10/dashboard-stocks/</guid>
+      <description>&lt;p&gt;This a fully automated dashboard where the goal was to analyze the FANG historical data
+and valuations. &lt;a href=&#34;http://dashboard-stocks.renanperes.com/&#34;&gt;View&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
