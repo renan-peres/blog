@@ -14,7 +14,7 @@ library(webshot)
 library(knitr)
 library(htmltools)
 library(htmlwidgets)
-knitr::opts_chunk$set(fig.width = 10, fig.height=5)
+knitr::opts_chunk$set(fig.width = 11, fig.height=5)
 ```
 
 ## Flexdashboard. [View](http://dashboard-stocks.renanperes.com/)
@@ -23,10 +23,10 @@ knitr::opts_chunk$set(fig.width = 10, fig.height=5)
 knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "700px")
 ```
 
-## Shiny App. [View](https://danielrivera1.shinyapps.io/Regression2/)
+## Shiny App. [View](https://vac-lshtm.shinyapps.io/ncov_tracker/)
 
 ```{r, echo=FALSE}
-knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "700px")
+knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/", height = "700px")
 ```
 
 ## Power BI. [View](https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9)
@@ -35,9 +35,9 @@ knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "
 knitr::include_app("https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9", height = "700px")
 ```
 
-## Tableau. [View](https://public.tableau.com/views/Baseball_34/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link)
+<!-- ## Tableau. [View](https://public.tableau.com/views/Baseball_34/Dashboard1) -->
 
-```{r, echo=FALSE}
-knitr::include_app("https://public.tableau.com/views/Baseball_34/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link", height = "700px")
-```
+<!-- ```{r, echo=FALSE} -->
+<!-- knitr::include_app("https://public.tableau.com/app/profile/biqdata/viz/SSP1/Dashboard1", height = "700px") -->
+<!-- ``` -->
 
