@@ -18,7 +18,7 @@ library(htmlwidgets)
 knitr::opts_chunk$set(fig.width = 7.77, fig.height=5)
 ```
 
-## Flexdashboard or Webpages. [View](http://dashboard-stocks.renanperes.com/)
+## Flexdashboard. [View](http://dashboard-stocks.renanperes.com/)
 
 ```{r}
 knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "600px")
@@ -34,5 +34,11 @@ knitr::include_app("https://danielrivera1.shinyapps.io/Regression2/", height = "
 
 ```{r}
 knitr::include_app("https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9")
+```
+
+## Tableau. [View](https://public.tableau.com/views/BoeingCommercialMarketOutlook2018-2037/CommercialMarketOutlook?:language=en-US&:display_count=n&:origin=viz_share_link)
+
+```{r}
+knitr::include_url("https://public.tableau.com/views/BoeingCommercialMarketOutlook2018-2037/CommercialMarketOutlook?:language=en-US&:display_count=n&:origin=viz_share_link")
 ```
 
