@@ -1,3 +1,5 @@
+// This code was retrieved from: https://github.com/statnmap/blog_tips/blob/master/2017-11-13-enable-code-folding-in-bookdown-and-blogdown/js/codefolding.js
+
 window.initializeCodeFolding = function(show) {
 
   // handlers for show-all and hide all

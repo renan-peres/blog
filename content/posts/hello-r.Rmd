@@ -36,14 +36,3 @@ pie(
 )
 ```
 
-# Leaflet
-
-```{r}
-library(leaflet)
-library(widgetframe)
-leaflet::leaflet() %>% 
-  addTiles() -> l
-  widgetframe::frameWidget(l)
-```
-
-

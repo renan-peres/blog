@@ -5,6 +5,9 @@ date: '2022-10-13'
 slug: test
 categories:
   - Dashboards
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
 ---
 
 <!--more-->
@@ -19,7 +22,7 @@ knitr::opts_chunk$set(fig.width = 10, fig.height=5)
 
 ## Flexdashboard or Webpages
 
-```{r}
+```{r dpi = 200}
 knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "600px")
 ```
 
