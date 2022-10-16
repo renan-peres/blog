@@ -39,7 +39,11 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
 ```{r import, message=FALSE, echo=TRUE}
-df <- read_csv("WGIData.csv")
+url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
+td <- tempdir()
+tf <- tempfile(tmpdir = td, fileext = ".zip")
+download.file(url, tf)
+df <- vroom::vroom(tf)
 print(df)
 ```
 

@@ -11,7 +11,7 @@ tags: []
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
-<p><strong>Last Update:</strong> October 16, 2022 - 14:50</p>
+<p><strong>Last Update:</strong> October 16, 2022 - 15:18</p>
 <div id="table-of-contents" class="section level2">
 <h2>Table of Contents:</h2>
 <ol style="list-style-type: decimal">
@@ -24,7 +24,11 @@ tags: []
 <div id="raw-data" class="section level1">
 <h1>Raw Data</h1>
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
-<pre class="r"><code>df &lt;- read_csv(&quot;WGIData.csv&quot;)
+<pre class="r"><code>url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
+td &lt;- tempdir()
+tf &lt;- tempfile(tmpdir = td, fileext = &quot;.zip&quot;)
+download.file(url, tf)
+df &lt;- vroom::vroom(tf)
 print(df)
 ## # A tibble: 7,704 × 28
 ##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
