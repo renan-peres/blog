@@ -9,7 +9,7 @@ tags: []
 
 This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
-<!--more--> 
+<!--more-->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
@@ -21,25 +21,33 @@ library(plotly)
 library(countrycode)
 library(knitr)
 library(crosstalk)
-df <- read_csv("WGIData.csv")
-
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
+**Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
+
+## Table of Contents:
+
+1.  [Raw Data] 🗒️
+2.  [Preparation] 💻
+3.  [Indicators] 💰
+4.  [Plots] 📈
+
 # Raw Data
 
+This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
-```{r import}
+```{r import, message=FALSE, echo=TRUE}
+df <- read_csv("WGIData.csv")
 print(df)
 ```
 
-# Prepararation
+# Preparation
 
 During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
 ```{r prepare}
-
 # Pivoting
 df_wgi <- df %>%
           pivot_longer(-c(1:4), names_to = "year", values_to = "value") %>% 
@@ -66,11 +74,9 @@ filter(indicator_name %in% c("Government Effectiveness: Estimate",
                              "Rule of Law: Estimate"))
 ```
 
-
 # Plots
 
-To better analyze the dataset, I decided to group the countries available in the dataset by continent and
-compare them accordingly.
+To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
 You can also embed plots. See Figure \@ref(fig:pie) for example:
 
@@ -83,7 +89,6 @@ pie(
   init.angle = -50, border = NA
 )
 ```
-
 
 ```{r pressure}
 # Effectiveness
@@ -188,7 +193,3 @@ pie(
 ```{r}
 knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
 ```
-
-
-
-

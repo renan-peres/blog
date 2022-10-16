@@ -11,9 +11,21 @@ tags: []
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
+<p><strong>Last Update:</strong> October 16, 2022 - 14:50</p>
+<div id="table-of-contents" class="section level2">
+<h2>Table of Contents:</h2>
+<ol style="list-style-type: decimal">
+<li><a href="#raw-data">Raw Data</a> 🗒️</li>
+<li><a href="#preparation">Preparation</a> 💻</li>
+<li><a href="#indicators">Indicators</a> 💰</li>
+<li><a href="#plots">Plots</a> 📈</li>
+</ol>
+</div>
 <div id="raw-data" class="section level1">
 <h1>Raw Data</h1>
-<pre class="r"><code>print(df)
+<p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
+<pre class="r"><code>df &lt;- read_csv(&quot;WGIData.csv&quot;)
+print(df)
 ## # A tibble: 7,704 × 28
 ##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
 ##    &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -34,11 +46,10 @@ tags: []
 ## #   ...28 &lt;lgl&gt;, and abbreviated variable names ¹​`Country Name`,
 ## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`</code></pre>
 </div>
-<div id="prepararation" class="section level1">
-<h1>Prepararation</h1>
+<div id="preparation" class="section level1">
+<h1>Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
-<pre class="r"><code>
-# Pivoting
+<pre class="r"><code># Pivoting
 df_wgi &lt;- df %&gt;%
           pivot_longer(-c(1:4), names_to = &quot;year&quot;, values_to = &quot;value&quot;) %&gt;% 
           clean_names() %&gt;% 
@@ -83,8 +94,7 @@ filter(indicator_name %in% c(&quot;Government Effectiveness: Estimate&quot;,
 </div>
 <div id="plots" class="section level1">
 <h1>Plots</h1>
-<p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and
-compare them accordingly.</p>
+<p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
 <p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
 <pre class="r"><code>par(mar = c(0, 1, 0, 1))
 pie(
