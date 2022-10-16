@@ -29,7 +29,7 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ## Raw Data
 
-[View Resume](/files/resume.pdf)
+[View Resume](/resume.pdf)
 
 ```{r import}
 print(df)
@@ -187,7 +187,7 @@ pie(
 [View Plotly](/widgets/plotly.html)
 
 ```{r}
-knitr::include_url("https://www.renanperes.com/widgets/plotly.html")
+knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
 ```
 
 
