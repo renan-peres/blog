@@ -23,7 +23,7 @@ library(knitr)
 library(crosstalk)
 df <- read_csv("WGIData.csv")
 
-knitr::opts_chunk$set(fig.width = unit(10, "cm"), fig.height = unit(10, "cm"))
+knitr::opts_chunk$set(fig.width = unit(8, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
@@ -184,10 +184,10 @@ pie(
 
 ```
 
-[View Plotly](/files/widgets/plotly.html)
+[View Plotly]("widgets/plotly.html")
 
 ```{r}
-p1
+knitr::include_url("https://www.renanperes.com/files/widgets/plotly.html")
 ```
 
 
