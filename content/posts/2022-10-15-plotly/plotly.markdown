@@ -19,9 +19,7 @@ This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/
 
 ## Raw Data
 
-[Download File](/files/resume.pdf)
-
-This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
+[View Resume](/files/resume.pdf)
 
 ``` r
 print(df)

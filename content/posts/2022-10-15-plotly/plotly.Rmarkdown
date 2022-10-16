@@ -28,9 +28,7 @@ knitr::opts_chunk$set(fig.width = unit(10, "cm"), fig.height = unit(10, "cm"))
 
 ## Raw Data
 
-[Download File](/files/resume.pdf)
-
-This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
+[View Resume](/files/resume.pdf)
 
 ```{r import}
 print(df)
