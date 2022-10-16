@@ -184,9 +184,12 @@ pie(
 
 ```
 
-[View Plotly](/files/plotly.html)
+[View Plotly](/files/widgets/plotly.html)
 
 ```{r}
 p1
 ```
+
+
+
 
