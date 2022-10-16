@@ -184,7 +184,7 @@ pie(
 
 ```
 
-[View Plotly]("widgets/plotly.html")
+[View Plotly](widgets/plotly.html)
 
 ```{r}
 knitr::include_url("https://www.renanperes.com/files/widgets/plotly.html")
