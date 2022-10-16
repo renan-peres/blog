@@ -109,6 +109,12 @@ canonifyurls = true
   pre = "<i class=\"sidebar-button-icon fas fa-envelope\"></i>"
   url = "mailto:contact@renanperes.com"
   
+[[menu.links]]
+  weight = 4
+  name = "Resume"
+  pre = "<i class=\"sidebar-button-icon fas fa-briefcase\"></i>"
+  url = "/resume.pdf"
+  
 #[[menu.links]]
 #  weight = 3
 #  identifier = "stackoverflow"
