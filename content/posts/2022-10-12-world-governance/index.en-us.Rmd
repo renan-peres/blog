@@ -40,7 +40,7 @@ print(df)
 
 ## Prepararation
 
-During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
+During the preparation I had to **pivot** the years into a single variable and add the corresponding continent to each country.
 
 ```{r prepare}
 

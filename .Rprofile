@@ -6,7 +6,6 @@
 if (file.exists("~/.Rprofile")) {
   base::sys.source("~/.Rprofile", envir = environment())
 }
-
 # Now set options to customize the behavior of blogdown for this project. Below
 # are a few sample options; for more options, see
 # https://bookdown.org/yihui/blogdown/global-options.html
@@ -16,7 +15,9 @@ options(
   # to disable knitting Rmd files on save, set this option to FALSE
   blogdown.knit.on_save = TRUE,
   # build .Rmd to .html (via Pandoc); to build to Markdown, set this option to 'markdown'
-  blogdown.method = 'html'
+  blogdown.method = 'html',
+  blogdown.generator.server = TRUE,
+  blogdown.hugo.server = c('-D', '-F', '--navigateToChanged')
 )
 
 # fix Hugo version

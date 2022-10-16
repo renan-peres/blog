@@ -9,13 +9,6 @@ googleAnalytics = "G-28DEPBGLFN"
 paginate = 7
 canonifyurls = true
 
-# Set to true to disable code folding
-disable_codefolding = false
-# Set to "hide" or "show" all codes by default
-codefolding_show = "show"
-# Set to true to exclude the "Show/hide all" button
-codefolding_nobutton = false
-
 [permalinks]
   posts = "/:year/:month/:slug/"
 
@@ -138,7 +131,18 @@ codefolding_nobutton = false
   # Description
   # -----------
   description = "Hugo tranquilpeak theme demo"
-
+  
+  # -----------
+  # Code Folding
+  # ----------- 
+  
+  # Set to true to disable code folding
+  disable_codefolding = false
+  # Set to "hide" or "show" all codes by default
+  codefolding_show = "show"
+  # Set to true to exclude the "Show/hide all" button
+  codefolding_nobutton = false
+  
   # ------------------
   # Syntax highlighter
   # ------------------
@@ -229,6 +233,11 @@ codefolding_nobutton = false
   # they have to be referred from static root. Example
   #  [[params.customCSS]]
   #    href = "css/mystyle.css"
+  
+  # ------------------
+  # Codefolding
+  # ------------------
+  
   [[params.customCSS]]
     href = "css/codefolding.css"
   [[params.customCSS]]
@@ -239,11 +248,14 @@ codefolding_nobutton = false
     src = "js/collapse.js"
   [[params.customJS]]
     src = "js/dropdown.js"
+    
+#  [[params.customCSS]]
+#    href = "css/style.css"
 
-  # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
-  # they have to be referred from static root. Example
-  #  [[params.customJS]]
-  #     src = "js/myscript.js"
+  # ------------------
+  # External resources
+  # ------------------
+  
   [[params.customJS]]
     src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"
     integrity = "sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw=="

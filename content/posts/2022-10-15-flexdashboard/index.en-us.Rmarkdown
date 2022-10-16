@@ -1,9 +1,11 @@
 ---
-title: DT
+title: Htmlwidgets
 author: ''
 date: 2022-10-15
 ---
 <!--more-->
+
+[View Crosstalk](/files/cosstalk.html)
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 library(widgetframe)

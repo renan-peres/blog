@@ -19,6 +19,8 @@ This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/
 
 ## Raw Data
 
+[Download File](/files/resume.pdf)
+
 This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
 ``` r
@@ -219,6 +221,8 @@ Figure 1: A fancy pie chart.
           legend.text = element_text(size = 16),
           legend.title = element_blank()) -> p4
 ```
+
+[View Plotly](/files/plotly.html)
 
 ``` r
 plotly::ggplotly(p1) -> p1
