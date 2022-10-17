@@ -8,7 +8,7 @@ slug: world-gov-indicators
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
-coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666025164/world_continents_partial_sizvxf.svg
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666028691/world_continents_partial_qpzn7k.svg
 coverSize: partial
 metaAlignment: center
 ---
