@@ -1,10 +1,15 @@
 ---
-title: Plotly
+title: World Governance Indicators
 author: ''
 date: '2022-10-16'
+categories:
+  - Reports
 slug: resume
-categories: []
-tags: []
+autoThumbnailImage: no
+thumbnailImagePosition: left
+thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666023882/world_continents_2_bck49d.svg
+metaAlignment: center
 ---
 
 This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
@@ -25,7 +30,7 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
-**Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
+<!-- **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')` -->
 
 ## Table of Contents:
 
