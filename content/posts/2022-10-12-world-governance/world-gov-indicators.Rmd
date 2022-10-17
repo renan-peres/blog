@@ -4,7 +4,7 @@ author: ''
 date: '2022-10-16'
 categories:
   - Reports
-slug: resume
+slug: world-gov-indicators
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
