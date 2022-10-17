@@ -31,10 +31,40 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
+**Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
 
-<!-- **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')` -->
+```{css, echo=FALSE}
+.post .post-content {
+    text-rendering: optimizelegibility;
+    letter-spacing: -.3px;
+    font-family: Merriweather,serif;
+    color: #5d686f;
+    margin-top: 10px;
+    font-weight: 400;
+    overflow: hidden;
+}
 
-## Table of Contents:
+.post-header-cover .post-header .post-title {
+    max-width: 750px;
+    margin: 0 auto;
+    color: #141414;
+    text-shadow: 0 2px 0 #f7f8f8;
+    margin-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -.04em;
+    font-family: "Open Sans",sans-serif;
+    font-weight: 700;
+    line-height: 1.45em;
+    color: #29b542;
+}
+
+
+```
+
+
+# Table of Contents:
 
 1.  [Raw Data] 🗒️
 2.  [Preparation] 💻
