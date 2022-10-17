@@ -34,15 +34,6 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
 
 ```{css, echo=FALSE}
-.post .post-content {
-    text-rendering: optimizelegibility;
-    letter-spacing: -.3px;
-    font-family: Merriweather,serif;
-    color: #5d686f;
-    margin-top: 10px;
-    font-weight: 400;
-    overflow: hidden;
-}
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -52,7 +43,15 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     margin-bottom: 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.post .post-content :not(blockquote):not(li):not(.alert)>p {
+    margin: 0em 0 0 0;
+}
+
+h1{
+    margin: 1em 0 0em 0;
+}
+
+h1{
     letter-spacing: -.04em;
     font-family: "Open Sans",sans-serif;
     font-weight: 700;
@@ -60,6 +59,20 @@ h1, h2, h3, h4, h5, h6 {
     color: #29b542;
 }
 
+.post-header-cover .post-header .post-meta {
+    max-width: 750px;
+    font-family: "Open Sans",sans-serif;
+    font-size: 1.6rem;
+    color: #141414!important;
+    font-weight: 400;
+    letter-spacing: .05em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 90%);
+    margin: 0 auto;
+}
+
+.post-header-cover .post-header .post-meta a {
+    color: #ef3077;
+}
 
 ```
 
