@@ -133,6 +133,8 @@ canonifyurls = true
 # Customization
 # -------------
 [params]
+  GithubEdit = "https://github.com/renan-peres/blog/edit/master/content/"
+  
   # -----------
   # Description
   # -----------

@@ -27,10 +27,6 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
 
-```{r, echo=FALSE}
-knitr::include_url("https://www.renanperes.com/widgets/gauge.html")
-```
-
 ## Table of Contents:
 
 1.  [Raw Data] 🗒️
