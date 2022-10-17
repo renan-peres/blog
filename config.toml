@@ -259,8 +259,8 @@ canonifyurls = true
   [[params.customJS]]
     src = "js/dropdown.js"
     
-#  [[params.customCSS]]
-#    href = "css/style.css"
+  [[params.customCSS]]
+    href = "css/style.css"
 
   # ------------------
   # External resources

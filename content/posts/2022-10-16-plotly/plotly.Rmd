@@ -8,7 +8,8 @@ slug: resume
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
-coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666023882/world_continents_2_bck49d.svg
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666025164/world_continents_partial_sizvxf.svg
+coverSize: partial
 metaAlignment: center
 ---
 
@@ -29,6 +30,7 @@ library(crosstalk)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
+
 
 <!-- **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')` -->
 
