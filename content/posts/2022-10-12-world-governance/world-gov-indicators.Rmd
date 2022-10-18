@@ -104,17 +104,20 @@ h1{
 
 # Table of Contents
 
-1.  [Motivation]
-2.  [Dataset]🗒️
-3.  [Data Preparation] 💻
-4.  [Data Analysis] 💰
-5.  [Visualizations] 📈
-6.  [Conclusion]
-7.  [References]
+1.  [Introduction]
+2.  [Motivation]
+3.  [Dataset]🗒️
+4.  [Data Preparation] 💻
+5.  [Data Analysis] 💰
+6.  [Visualizations] 📈
+7.  [Conclusion]
+8.  [References]
 
-# Motivation
+# Introduction
 
 Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
+
+# Motivation
 
 As a worldwide traveler who has just recently been in a study abroad program during the summer in France, I have always been interested in understanding how each country operates internally and how they have progressed over time. Therefore, this report aims to present results of some of the governance indicators' data and compare them among the countries listed in the dataset.
 
