@@ -74,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 15:34</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 15:44</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -231,7 +231,8 @@ df &lt;- df %&gt;%
 
 # Creating Data Table
 dt &lt;- df %&gt;% 
-        DT::datatable(width = &quot;100%&quot;,
+        DT::datatable(rownames = FALSE,
+                      width = &quot;100%&quot;,
                       filter = &quot;top&quot;,
                       colnames = c(&#39;Country&#39;, &#39;Code&#39;, &#39;Continent&#39;, &#39;Region&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
                       class = &#39;cell-border stripe&#39;,

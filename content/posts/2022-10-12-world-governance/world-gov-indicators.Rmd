@@ -185,7 +185,8 @@ df <- df %>%
 
 # Creating Data Table
 dt <- df %>% 
-        DT::datatable(width = "100%",
+        DT::datatable(rownames = FALSE,
+                      width = "100%",
                       filter = "top",
                       colnames = c('Country', 'Code', 'Continent', 'Region', 'Indicator', "Year", "Score"),
                       class = 'cell-border stripe',
