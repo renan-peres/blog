@@ -32,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 ```
 
-<a class="header-title-link" href="http://localhost:4321/" aria-label="Go to homepage">Home💻</a>
+<a class="header-title-link" href="http://renanperes.com" aria-label="Go to homepage">Home💻</a>
 
 ```{css styles, echo=FALSE}
 
