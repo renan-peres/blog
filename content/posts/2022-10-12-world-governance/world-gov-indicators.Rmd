@@ -17,7 +17,7 @@ Governance consists of the traditions and institutions by which authority in a c
 
 <!--more-->
 
-```{r setup, include=FALSE}
+```{r setup, echo=TRUE, message=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
-```{css, echo=FALSE}
+```{css styles, echo=FALSE}
 
 p{
     font-size: 1.9rem;
@@ -132,7 +132,7 @@ This report retrieves the dataset [*Worldwide-Governance-Indicators*](https://da
 5.  Rule of Law;
 6.  Control of Corruption.
 
-### [View Raw Data](https://www.renanperes.com/2022/10/world-gov-indicators/WGIData.csv)
+### [View Raw Data](/WGIData.csv)
 
 ```{r import, message=FALSE, echo=TRUE}
 # IMPORTING DATASET

@@ -18,7 +18,7 @@ window.initializeCodeFolding = function(show) {
   var currentIndex = 1;
 
   // select all R code blocks
-  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.js');
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.css, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.js');
   rCodeBlocks.each(function() {
 
     // create a collapsable div to wrap the code in

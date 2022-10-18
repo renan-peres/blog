@@ -17,6 +17,16 @@ metaAlignment: center
 
 <p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.</p>
 <!--more-->
+<pre class="r"><code>knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(plotly)
+library(countrycode)
+library(knitr)
+library(crosstalk)
+knitr::opts_chunk$set(fig.width = unit(7.78, &quot;cm&quot;), fig.height = unit(10, &quot;cm&quot;))</code></pre>
 <style type="text/css">
 
 p{
@@ -85,7 +95,7 @@ h1{
 }
 
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 09:54</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 10:04</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -119,7 +129,7 @@ h1{
 <li>Control of Corruption.</li>
 </ol>
 <div id="view-raw-data" class="section level3">
-<h3><a href="https://www.renanperes.com/2022/10/world-gov-indicators/WGIData.csv">View Raw Data</a></h3>
+<h3><a href="/WGIData.csv">View Raw Data</a></h3>
 <pre class="r"><code># IMPORTING DATASET
 # url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
 # td &lt;- tempdir()
