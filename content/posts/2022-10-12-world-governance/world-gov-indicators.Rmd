@@ -132,7 +132,7 @@ This report retrieves the dataset [*Worldwide-Governance-Indicators*](https://da
 5.  Rule of Law;
 6.  Control of Corruption.
 
-### [View Raw Data](/widgets/DT.html)
+### [View Raw Data](https://www.renanperes.com/2022/10/world-gov-indicators/WGIData.csv)
 
 ```{r import, message=FALSE, echo=TRUE}
 # IMPORTING DATASET
