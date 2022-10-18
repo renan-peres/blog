@@ -74,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 15:08</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 15:27</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -181,8 +181,8 @@ print(df_continent)
 <h1>Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
 <p><a href="http://dashboard-stocks.renanperes.com/"><img src="https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png" alt="Dashboard" /></a></p>
-<div id="download-cleaned-data" class="section level4">
-<h4><a href="/WGI_cleaned.csv">Download Cleaned Data</a></h4>
+<div id="view-full-screen" class="section level4">
+<h4><a href="%22https://www.renanperes.com/widgets/WGI_DT.html%22">View Full Screen</a></h4>
 <pre class="r"><code># Cleaning
 df_data &lt;- df_data %&gt;% 
               clean_names() %&gt;%
@@ -216,7 +216,8 @@ df &lt;- df_data %&gt;%
                    by = &quot;country_code&quot;) %&gt;% 
         inner_join(df_continent %&gt;% select(country_code, continent),
                    by = &quot;country_code&quot;) %&gt;% 
-        filter(continent != &quot;&quot;)
+        filter(continent != &quot;&quot;) %&gt;% 
+        filter(value != &quot;&quot;)
 
 # Transforming Master Table
 df &lt;- df %&gt;% 
@@ -230,13 +231,14 @@ df &lt;- df %&gt;%
 
 # Creating Data Table
 dt &lt;- df %&gt;% 
-        DT::datatable(filter = &quot;top&quot;,
+        DT::datatable(width = &quot;100%&quot;,
+                      filter = &quot;top&quot;,
                       colnames = c(&#39;Country&#39;, &#39;Code&#39;, &#39;Continent&#39;, &#39;Region&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
                       class = &#39;cell-border stripe&#39;,
                       extensions = c(&quot;Responsive&quot;, &quot;Buttons&quot;),
                                     options = list(
                                                     autowidth = TRUE,
-                                                    lengthMenu = c(5, 10, 25, 50),
+                                                    lengthMenu = c(6, 12, 25, 50),
                                                     dom = &quot;Blfrtip&quot;,
                                                     buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;), 
                                                     initComplete = JS(&quot;function(settings, json) {&quot;,
@@ -247,7 +249,7 @@ dt &lt;- df %&gt;%
 # write_csv(df, file = &quot;./WGI_cleaned.csv&quot;)
 
 print(df)
-## # A tibble: 28,290 × 7
+## # A tibble: 27,591 × 7
 ##    country_name country_code continent region                indic…¹  year value
 ##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
 ##  1 Afghanistan  AFG          Asia      South Asia            Contro…  1996 -1.29
@@ -260,7 +262,7 @@ print(df)
 ##  8 Albania      ALB          Europe    Europe &amp; Central Asia Govern…  1996 -0.69
 ##  9 Albania      ALB          Europe    Europe &amp; Central Asia Politi…  1996 -0.34
 ## 10 Albania      ALB          Europe    Europe &amp; Central Asia Regula…  1996 -0.47
-## # … with 28,280 more rows, and abbreviated variable name ¹​indicator_name
+## # … with 27,581 more rows, and abbreviated variable name ¹​indicator_name
 
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;)</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="400px" data-external="1">

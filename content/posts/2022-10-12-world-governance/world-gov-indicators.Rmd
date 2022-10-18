@@ -134,7 +134,7 @@ During the preparation I had to pivot the years into a single variable and add t
 
 [![Dashboard](https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png)](http://dashboard-stocks.renanperes.com/)
 
-#### [Download Cleaned Data](/WGI_cleaned.csv)
+#### [View Full Screen]("https://www.renanperes.com/widgets/WGI_DT.html")
 
 ```{r prepare, echo=TRUE}
 # Cleaning
@@ -170,7 +170,8 @@ df <- df_data %>%
                    by = "country_code") %>% 
         inner_join(df_continent %>% select(country_code, continent),
                    by = "country_code") %>% 
-        filter(continent != "")
+        filter(continent != "") %>% 
+        filter(value != "")
 
 # Transforming Master Table
 df <- df %>% 
@@ -184,13 +185,14 @@ df <- df %>%
 
 # Creating Data Table
 dt <- df %>% 
-        DT::datatable(filter = "top",
+        DT::datatable(width = "100%",
+                      filter = "top",
                       colnames = c('Country', 'Code', 'Continent', 'Region', 'Indicator', "Year", "Score"),
                       class = 'cell-border stripe',
                       extensions = c("Responsive", "Buttons"),
                                     options = list(
                                                     autowidth = TRUE,
-                                                    lengthMenu = c(5, 10, 25, 50),
+                                                    lengthMenu = c(6, 12, 25, 50),
                                                     dom = "Blfrtip",
                                                     buttons = c("copy", "csv", "excel"), 
                                                     initComplete = JS("function(settings, json) {",
