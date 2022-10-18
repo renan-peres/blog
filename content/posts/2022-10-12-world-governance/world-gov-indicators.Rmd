@@ -47,6 +47,19 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     margin: 0em 0 0 0;
 }
 
+.post .post-content {
+    text-rendering: optimizelegibility;
+    letter-spacing: -.3px;
+    font-family: "Open Sans",serif;
+    color: #5d686f;
+    margin-top: 20px;
+    font-weight: 400;
+    overflow: hidden;
+    -webkit-hypens: auto;
+    -moz-hypens: auto;
+    hypens: auto;
+}
+
 h1{
     margin: 1em 0 0em 0;
 }
@@ -74,6 +87,17 @@ h1{
     color: #ef3077;
 }
 
+.post-header-cover .post-header .post-meta {
+    max-width: 750px;
+    font-family: "Open Sans",sans-serif;
+    font-size: 2rem;
+    color: #141414!important;
+    font-weight: 400;
+    letter-spacing: .05em;
+    text-shadow: 0 1px 0 #f7f8f800;
+    margin: 0 auto;
+}
+
 ```
 
 
@@ -95,6 +119,16 @@ tf <- tempfile(tmpdir = td, fileext = ".zip")
 download.file(url, tf)
 df <- vroom::vroom(tf)
 print(df)
+df %>%
+select(-"...28") %>% 
+DT::datatable(extensions = c('Responsive','Buttons'), options = list(
+    autowidth = T,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  )
+) -> data
+
+knitr::include_url("https://www.renanperes.com/widgets/DT.html", height = "600px")
 ```
 
 # Preparation

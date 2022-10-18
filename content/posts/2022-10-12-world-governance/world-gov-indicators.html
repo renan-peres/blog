@@ -17,7 +17,7 @@ metaAlignment: center
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
-<p><strong>Last Update:</strong> October 17, 2022 - 17:30</p>
+<p><strong>Last Update:</strong> October 17, 2022 - 21:34</p>
 <style type="text/css">
 
 .post-header-cover .post-header .post-title {
@@ -30,6 +30,19 @@ metaAlignment: center
 
 .post .post-content :not(blockquote):not(li):not(.alert)>p {
     margin: 0em 0 0 0;
+}
+
+.post .post-content {
+    text-rendering: optimizelegibility;
+    letter-spacing: -.3px;
+    font-family: "Open Sans",serif;
+    color: #5d686f;
+    margin-top: 20px;
+    font-weight: 400;
+    overflow: hidden;
+    -webkit-hypens: auto;
+    -moz-hypens: auto;
+    hypens: auto;
 }
 
 h1{
@@ -57,6 +70,17 @@ h1{
 
 .post-header-cover .post-header .post-meta a {
     color: #ef3077;
+}
+
+.post-header-cover .post-header .post-meta {
+    max-width: 750px;
+    font-family: "Open Sans",sans-serif;
+    font-size: 2rem;
+    color: #141414!important;
+    font-weight: 400;
+    letter-spacing: .05em;
+    text-shadow: 0 1px 0 #f7f8f800;
+    margin: 0 auto;
 }
 
 </style>
@@ -96,7 +120,19 @@ print(df)
 ## #   `2012` &lt;dbl&gt;, `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;, `2016` &lt;dbl&gt;,
 ## #   `2017` &lt;dbl&gt;, `2018` &lt;dbl&gt;, `2019` &lt;dbl&gt;, `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;,
 ## #   ...28 &lt;lgl&gt;, and abbreviated variable names ¹​`Country Name`,
-## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`</code></pre>
+## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`
+df %&gt;%
+select(-&quot;...28&quot;) %&gt;% 
+DT::datatable(extensions = c(&#39;Responsive&#39;,&#39;Buttons&#39;), options = list(
+    autowidth = T,
+    dom = &#39;Bfrtip&#39;,
+    buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;, &#39;print&#39;)
+  )
+) -&gt; data
+
+knitr::include_url(&quot;https://www.renanperes.com/widgets/DT.html&quot;, height = &quot;600px&quot;)</code></pre>
+<iframe src="https://www.renanperes.com/widgets/DT.html" width="746.88cm" height="600px" data-external="1">
+</iframe>
 </div>
 <div id="preparation" class="section level1">
 <h1>Preparation</h1>
