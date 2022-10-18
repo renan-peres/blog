@@ -75,6 +75,11 @@ h1{
     line-height: 1.45em;
     color: #29b542;
 }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+    display: none;
+}
+
 ```
 
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
