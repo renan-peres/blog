@@ -113,11 +113,12 @@ This report is based on the dataset [*Worldwide-Governance-Indicators*](https://
 #### [Download Raw Data](/WGIData.csv)
 
 ```{r import, message=FALSE, echo=TRUE}
-# IMPORTING DATASET
+# DATA IMPORTING
 # url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
-# td <- tempdir()
-# tf <- tempfile(tmpdir = td, fileext = ".zip")
+# directory <- getwd()
+# tf <- tempfile(tmpdir = directory, fileext = ".zip")
 # download.file(url, tf)
+# unzip(tf)
 df_data <- read_csv("WGIData.csv")
 df_country <- read_csv("WGICountry.csv")
 df_continent <- countrycode::codelist %>% select(continent, wb, country.name.en)

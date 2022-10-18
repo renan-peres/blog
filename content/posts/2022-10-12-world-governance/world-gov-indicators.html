@@ -74,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 16:56</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 17:09</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -109,11 +109,12 @@ h1{
 </ol>
 <div id="download-raw-data" class="section level4">
 <h4><a href="/WGIData.csv">Download Raw Data</a></h4>
-<pre class="r"><code># IMPORTING DATASET
+<pre class="r"><code># DATA IMPORTING
 # url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
-# td &lt;- tempdir()
-# tf &lt;- tempfile(tmpdir = td, fileext = &quot;.zip&quot;)
+# directory &lt;- getwd()
+# tf &lt;- tempfile(tmpdir = directory, fileext = &quot;.zip&quot;)
 # download.file(url, tf)
+# unzip(tf)
 df_data &lt;- read_csv(&quot;WGIData.csv&quot;)
 df_country &lt;- read_csv(&quot;WGICountry.csv&quot;)
 df_continent &lt;- countrycode::codelist %&gt;% select(continent, wb, country.name.en)
