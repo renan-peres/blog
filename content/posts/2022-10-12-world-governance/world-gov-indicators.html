@@ -15,10 +15,14 @@ metaAlignment: center
 
 
 
-<p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.</p>
 <!--more-->
-<p><strong>Last Update:</strong> October 18, 2022 - 06:49</p>
 <style type="text/css">
+
+p{
+    font-size: 1.9rem;
+}
+
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -40,9 +44,6 @@ metaAlignment: center
     margin-top: 20px;
     font-weight: 400;
     overflow: hidden;
-    -webkit-hypens: auto;
-    -moz-hypens: auto;
-    hypens: auto;
 }
 
 h1{
@@ -84,23 +85,44 @@ h1{
 }
 
 </style>
+<p><strong>Last Update:</strong> October 18, 2022 - 08:52</p>
 <div id="table-of-contents" class="section level1">
-<h1>Table of Contents:</h1>
+<h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
-<li>[Raw Data] 🗒️</li>
-<li><a href="#preparation">Preparation</a> 💻</li>
-<li><a href="#indicators">Indicators</a> 💰</li>
-<li><a href="#plots">Plots</a> 📈</li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#dataset">Dataset</a>🗒️</li>
+<li>[Data Preparation] 💻</li>
+<li>[Data Analysis] 💰</li>
+<li>[Visualizations] 📈</li>
+<li>[Conclusion]</li>
+<li>[References]</li>
 </ol>
 </div>
-<div id="raw-data-view" class="section level1">
-<h1>Raw Data <a href="/widgets/DT.html">View</a></h1>
-<p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
-<pre class="r"><code>url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
-td &lt;- tempdir()
-tf &lt;- tempfile(tmpdir = td, fileext = &quot;.zip&quot;)
-download.file(url, tf)
-df &lt;- vroom::vroom(tf)
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.</p>
+<p>As a worldwide traveler who has just recently been in a study abroad program during the summer in France, I have always been interested in understanding how each country operates internally and how they have progressed over time. Therefore, this report aims to present results of some of the governance indicators’ data and compare them among the countries listed in the dataset.</p>
+</div>
+<div id="dataset" class="section level1">
+<h1>Dataset</h1>
+<p>This report retrieves the dataset <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) from <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a>. The Worldwide Governance Indicators (WGI) report on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:</p>
+<ol style="list-style-type: decimal">
+<li>Voice and Accountability;</li>
+<li>Political Stability and Absence of Violence;</li>
+<li>Government Effectiveness;</li>
+<li>Regulatory Quality;</li>
+<li>Rule of Law;</li>
+<li>Control of Corruption.</li>
+</ol>
+<div id="view-raw-data" class="section level3">
+<h3><a href="/widgets/DT.html">View Raw Data</a></h3>
+<pre class="r"><code># IMPORTING DATASET
+# url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
+# td &lt;- tempdir()
+# tf &lt;- tempfile(tmpdir = td, fileext = &quot;.zip&quot;)
+# download.file(url, tf)
+# df &lt;- vroom::vroom(tf)
+df &lt;- read_csv(&quot;WGIData.csv&quot;)
 print(df)
 ## # A tibble: 7,704 × 28
 ##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
@@ -120,19 +142,8 @@ print(df)
 ## #   `2012` &lt;dbl&gt;, `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;, `2016` &lt;dbl&gt;,
 ## #   `2017` &lt;dbl&gt;, `2018` &lt;dbl&gt;, `2019` &lt;dbl&gt;, `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;,
 ## #   ...28 &lt;lgl&gt;, and abbreviated variable names ¹​`Country Name`,
-## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`
-df %&gt;%
-select(-&quot;...28&quot;) %&gt;% 
-DT::datatable(extensions = c(&#39;Responsive&#39;,&#39;Buttons&#39;), options = list(
-    autowidth = T,
-    dom = &#39;Bfrtip&#39;,
-    buttons = c(&#39;copy&#39;, &#39;csv&#39;, &#39;excel&#39;, &#39;pdf&#39;, &#39;print&#39;)
-  )
-) -&gt; data
-
-knitr::include_url(&quot;https://www.renanperes.com/widgets/DT.html&quot;, height = &quot;600px&quot;)</code></pre>
-<iframe src="https://www.renanperes.com/widgets/DT.html" width="746.88cm" height="600px" data-external="1">
-</iframe>
+## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`</code></pre>
+</div>
 </div>
 <div id="preparation" class="section level1">
 <h1>Preparation</h1>

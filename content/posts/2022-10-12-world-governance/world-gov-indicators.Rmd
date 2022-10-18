@@ -13,7 +13,7 @@ coverSize: partial
 metaAlignment: center
 ---
 
-This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
 
 <!--more-->
 
@@ -31,9 +31,12 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 
 ```
 
-**Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
-
 ```{css, echo=FALSE}
+
+p{
+    font-size: 1.9rem;
+}
+
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -55,9 +58,6 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     margin-top: 20px;
     font-weight: 400;
     overflow: hidden;
-    -webkit-hypens: auto;
-    -moz-hypens: auto;
-    hypens: auto;
 }
 
 h1{
@@ -100,35 +100,46 @@ h1{
 
 ```
 
+**Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
 
-# Table of Contents:
+# Table of Contents
 
-1.  [Raw Data] 🗒️
-2.  [Preparation] 💻
-3.  [Indicators] 💰
-4.  [Plots] 📈
+1.  [Motivation]
+2.  [Dataset]🗒️
+3.  [Data Preparation] 💻
+4.  [Data Analysis] 💰
+5.  [Visualizations] 📈
+6.  [Conclusion]
+7.  [References]
 
-# Raw Data [View](/widgets/DT.html)
+# Motivation
 
-This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
+
+As a worldwide traveler who has just recently been in a study abroad program during the summer in France, I have always been interested in understanding how each country operates internally and how they have progressed over time. Therefore, this report aims to present results of some of the governance indicators' data and compare them among the countries listed in the dataset.
+
+# Dataset
+
+This report retrieves the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) from <https://www.worldbank.org/>. The Worldwide Governance Indicators (WGI) report on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
+
+1.  Voice and Accountability;
+2.  Political Stability and Absence of Violence;
+3.  Government Effectiveness;
+4.  Regulatory Quality;
+5.  Rule of Law;
+6.  Control of Corruption.
+
+### [View Raw Data](/widgets/DT.html)
 
 ```{r import, message=FALSE, echo=TRUE}
-url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
-td <- tempdir()
-tf <- tempfile(tmpdir = td, fileext = ".zip")
-download.file(url, tf)
-df <- vroom::vroom(tf)
+# IMPORTING DATASET
+# url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
+# td <- tempdir()
+# tf <- tempfile(tmpdir = td, fileext = ".zip")
+# download.file(url, tf)
+# df <- vroom::vroom(tf)
+df <- read_csv("WGIData.csv")
 print(df)
-df %>%
-select(-"...28") %>% 
-DT::datatable(extensions = c('Responsive','Buttons'), options = list(
-    autowidth = T,
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
-  )
-) -> data
-
-knitr::include_url("https://www.renanperes.com/widgets/DT.html", height = "600px")
 ```
 
 # Preparation
