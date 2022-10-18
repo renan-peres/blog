@@ -8,18 +8,17 @@ slug: world-gov-indicators
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
-coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666028691/world_continents_partial_qpzn7k.svg
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666106580/world_continents_partial_2_pvadnp.svg
 coverSize: partial
 metaAlignment: center
 ---
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This report presents some governance indicators and compare them among the countries listed in the data source.
 
 <!--more-->
 
 ```{r setup, echo=TRUE, message=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
-knitr::opts_chunk$set(echo = TRUE)
+# Environment Setup
 library(tidyverse)
 library(rvest)
 library(janitor)
@@ -27,16 +26,12 @@ library(plotly)
 library(countrycode)
 library(knitr)
 library(crosstalk)
+knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
-
 ```
 
 ```{css styles, echo=FALSE}
-
-p{
-    font-size: 1.9rem;
-}
-
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -45,6 +40,15 @@ p{
     text-shadow: 0 2px 0 #f7f8f8;
     margin-bottom: 20px;
 }
+
+.post-header-cover .post-header .post-meta {
+    display: none
+}
+
+p{
+    font-size: 1.9rem;
+}
+
 
 .post .post-content :not(blockquote):not(li):not(.alert)>p {
     margin: 0em 0 0 0;
@@ -71,33 +75,6 @@ h1{
     line-height: 1.45em;
     color: #29b542;
 }
-
-.post-header-cover .post-header .post-meta {
-    max-width: 750px;
-    font-family: "Open Sans",sans-serif;
-    font-size: 1.6rem;
-    color: #141414!important;
-    font-weight: 400;
-    letter-spacing: .05em;
-    text-shadow: 0 1px 0 rgb(0 0 0 / 90%);
-    margin: 0 auto;
-}
-
-.post-header-cover .post-header .post-meta a {
-    color: #ef3077;
-}
-
-.post-header-cover .post-header .post-meta {
-    max-width: 750px;
-    font-family: "Open Sans",sans-serif;
-    font-size: 2rem;
-    color: #141414!important;
-    font-weight: 400;
-    letter-spacing: .05em;
-    text-shadow: 0 1px 0 #f7f8f800;
-    margin: 0 auto;
-}
-
 ```
 
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
@@ -119,11 +96,11 @@ Governance consists of the traditions and institutions by which authority in a c
 
 # Motivation
 
-As a worldwide traveler who has just recently been in a study abroad program during the summer in France, I have always been interested in understanding how each country operates internally and how they have progressed over time. Therefore, this report aims to present results of some of the governance indicators' data and compare them among the countries listed in the dataset.
+As a worldwide traveler who has just recently been in a study abroad program during the summer in Europe, I have always been interested in understanding how each country operates internally and how they have progressed over time.
 
 # Dataset
 
-This report retrieves the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) from <https://www.worldbank.org/>. The Worldwide Governance Indicators (WGI) report on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
+This report is based on the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) from <https://www.worldbank.org/>. The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
 
 1.  Voice and Accountability;
 2.  Political Stability and Absence of Violence;
@@ -132,7 +109,7 @@ This report retrieves the dataset [*Worldwide-Governance-Indicators*](https://da
 5.  Rule of Law;
 6.  Control of Corruption.
 
-### [View Raw Data](/WGIData.csv)
+#### [Download Raw Data](/WGIData.csv)
 
 ```{r import, message=FALSE, echo=TRUE}
 # IMPORTING DATASET

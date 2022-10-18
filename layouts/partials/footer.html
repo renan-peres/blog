@@ -18,7 +18,7 @@
 {{ end }}
 
 {{ with .Site.Params.GithubEdit}}
-<a href='{{ . }}{{ $.Scratch.Get "FilePath" }}'>Edit this page</a>
+<a href='{{ . }}{{ $.Scratch.Get "FilePath" }}'>Edit this page <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i></a>
 {{ end }}
 
 {{ end }}
