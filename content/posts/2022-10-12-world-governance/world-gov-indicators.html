@@ -74,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 16:46</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 16:56</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -182,7 +182,8 @@ print(df_continent)
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
 <div id="view-full-screen" class="section level4">
 <h4><a href="/widgets/WGI_DT.html">View Full Screen</a></h4>
-<pre class="r"><code># Cleaning
+<pre class="r"><code># DATA FRAME
+# Cleaning
 df_data &lt;- df_data %&gt;% 
               clean_names() %&gt;%
               select(-c(&quot;indicator_code&quot;,&quot;x28&quot;)) %&gt;%
@@ -219,7 +220,6 @@ df &lt;- df_data %&gt;%
         filter(value != &quot;&quot;)
 
 # DATA TABLE
-
 # Preparing
 dt &lt;- df %&gt;% 
         mutate_at(.vars = c(&quot;country_name&quot;, &quot;region&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 

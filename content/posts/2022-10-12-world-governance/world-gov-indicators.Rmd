@@ -135,6 +135,7 @@ During the preparation I had to pivot the years into a single variable and add t
 #### [View Full Screen](/widgets/WGI_DT.html)
 
 ```{r prepare, echo=TRUE}
+# DATA FRAME
 # Cleaning
 df_data <- df_data %>% 
               clean_names() %>%
@@ -172,7 +173,6 @@ df <- df_data %>%
         filter(value != "")
 
 # DATA TABLE
-
 # Preparing
 dt <- df %>% 
         mutate_at(.vars = c("country_name", "region", "continent"), .funs = str_to_title) %>% 
