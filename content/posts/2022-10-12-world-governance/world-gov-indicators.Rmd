@@ -132,8 +132,6 @@ print(df_continent)
 
 During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
-[![Dashboard](https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png)](http://dashboard-stocks.renanperes.com/)
-
 #### [View Full Screen](/widgets/WGI_DT.html)
 
 ```{r prepare, echo=TRUE}
