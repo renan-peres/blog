@@ -134,7 +134,7 @@ During the preparation I had to pivot the years into a single variable and add t
 
 [![Dashboard](https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png)](http://dashboard-stocks.renanperes.com/)
 
-#### [View Full Screen]("https://www.renanperes.com/widgets/WGI_DT.html")
+#### [View Full Screen](/widgets/WGI_DT.html)
 
 ```{r prepare, echo=TRUE}
 # Cleaning
@@ -204,7 +204,7 @@ dt <- df %>%
 
 print(df)
 
-knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html")
+knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "600px")
 ```
 
 
@@ -224,103 +224,103 @@ pie(
 )
 ```
 
-# ```{r pressure}
-# # Effectiveness
-#   df_wgi %>% 
-#   filter(indicator_name == "Government Effectiveness: Estimate") %>% 
-#   mutate(indicator_name = str_replace(indicator_name, 
-#                                       pattern =  "Government Effectiveness: Estimate",
-#                                       replacement = "Government Effectiveness")) %>% 
-#   group_by(continent) %>% 
-#   filter(continent != "NA",
-#          year > 2015) %>% 
-#   ggplot(aes(x = year, y = value, fill = continent)) +
-#   geom_boxplot(na.rm = T) +
-#   # scale_fill_viridis_d(option = "mako") +
-#   scale_fill_brewer(palette = "Dark2") +
-#   coord_flip() +
-#   geom_hline(yintercept = 0, linetype = "dashed", size = .8) +
-#   labs(title = "Effectiveness", x = element_blank(), y = element_blank()) +
-#   # theme_bw() +
-#   cowplot::theme_cowplot() +
-#   theme(axis.text = element_text(size = 14, face = "bold"),
-#         title = element_text(size = 20),
-#         legend.text = element_text(size = 16),
-#         legend.title = element_blank()) -> p1
-# 
-# 
-# # Control of Corruption
-#   df_wgi %>% 
-#     filter(indicator_name == "Control of Corruption: Estimate") %>% 
-#     mutate(indicator_name = str_replace(indicator_name, 
-#                                         pattern =  "Control of Corruption: Estimate",
-#                                         replacement = "Control of Corruption")) %>% 
-#     group_by(continent) %>% 
-#     filter(continent != "NA",
-#            year > 2015) %>% 
-#     ggplot(aes(x = year, y = value, fill = continent)) +
-#     geom_boxplot(na.rm = T) +
-#     # scale_fill_viridis_d(option = "mako") +
-#     scale_fill_brewer(palette = "Dark2") +
-#     coord_flip() +
-#     geom_hline(yintercept = 0, linetype = "dashed", size = .8) +
-#     labs(title = "Control of Corruption", x = element_blank(), y = element_blank()) +
-#     # theme_bw() +
-#     cowplot::theme_cowplot() +
-#     theme(axis.text = element_text(size = 14, face = "bold"), 
-#           title = element_text(size = 20),
-#           legend.text = element_text(size = 16),
-#           legend.title = element_blank()) -> p2
-# 
-# 
-# # Regulatory Quality
-#   df_wgi %>% 
-#     filter(indicator_name == "Regulatory Quality: Estimate") %>% 
-#     mutate(indicator_name = str_replace(indicator_name, 
-#                                         pattern =  "Regulatory Quality: Estimate",
-#                                         replacement = "Regulatory Quality")) %>% 
-#     group_by(continent) %>% 
-#     filter(continent != "NA",
-#            year > 2015) %>% 
-#     ggplot(aes(x = year, y = value, fill = continent)) +
-#     geom_boxplot(na.rm = T) +
-#     # scale_fill_viridis_d(option = "mako") +
-#     scale_fill_brewer(palette = "Dark2") +
-#     coord_flip() +
-#     geom_hline(yintercept = 0, linetype = "dashed", size = .8) +
-#     labs(title = "Regulatory Quality", x = element_blank(), y = element_blank()) +
-#     # theme_bw() +
-#     cowplot::theme_cowplot() +
-#     theme(axis.text = element_text(size = 14, face = "bold"), 
-#           title = element_text(size = 20),
-#           legend.text = element_text(size = 16),
-#           legend.title = element_blank()) -> p3
-# 
-#   
-# # Rule of Law
-#   df_wgi %>% 
-#     filter(indicator_name == "Rule of Law: Estimate") %>% 
-#     mutate(indicator_name = str_replace(indicator_name, 
-#                                         pattern =  "Rule of Law: Estimate",
-#                                         replacement = "Rule of Law")) %>% 
-#     group_by(continent) %>% 
-#     filter(continent != "NA",
-#            year > 2015) %>% 
-#     ggplot(aes(x = year, y = value, fill = continent)) +
-#     geom_boxplot(na.rm = T) +
-#     # scale_fill_viridis_d(option = "mako") +
-#     scale_fill_brewer(palette = "Dark2") +
-#     coord_flip() +
-#     geom_hline(yintercept = 0, linetype = "dashed", size = .8) +
-#     labs(title = "Rule of Law", x = element_blank(), y = element_blank()) +
-#     # theme_bw() +
-#     cowplot::theme_cowplot() +
-#     theme(axis.text = element_text(size = 14, face = "bold"), 
-#           title = element_text(size = 20),
-#           legend.text = element_text(size = 16),
-#           legend.title = element_blank()) -> p4
-# 
-# ```
+<!-- ```{r pressure} -->
+<!-- # Effectiveness -->
+<!--   df_wgi %>% -->
+<!--   filter(indicator_name == "Government Effectiveness: Estimate") %>% -->
+<!--   mutate(indicator_name = str_replace(indicator_name, -->
+<!--                                       pattern =  "Government Effectiveness: Estimate", -->
+<!--                                       replacement = "Government Effectiveness")) %>% -->
+<!--   group_by(continent) %>% -->
+<!--   filter(continent != "NA", -->
+<!--          year > 2015) %>% -->
+<!--   ggplot(aes(x = year, y = value, fill = continent)) + -->
+<!--   geom_boxplot(na.rm = T) + -->
+<!--   # scale_fill_viridis_d(option = "mako") + -->
+<!--   scale_fill_brewer(palette = "Dark2") + -->
+<!--   coord_flip() + -->
+<!--   geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+<!--   labs(title = "Effectiveness", x = element_blank(), y = element_blank()) + -->
+<!--   # theme_bw() + -->
+<!--   cowplot::theme_cowplot() + -->
+<!--   theme(axis.text = element_text(size = 14, face = "bold"), -->
+<!--         title = element_text(size = 20), -->
+<!--         legend.text = element_text(size = 16), -->
+<!--         legend.title = element_blank()) -> p1 -->
+
+
+<!-- # Control of Corruption -->
+<!--   df_wgi %>% -->
+<!--     filter(indicator_name == "Control of Corruption: Estimate") %>% -->
+<!--     mutate(indicator_name = str_replace(indicator_name, -->
+<!--                                         pattern =  "Control of Corruption: Estimate", -->
+<!--                                         replacement = "Control of Corruption")) %>% -->
+<!--     group_by(continent) %>% -->
+<!--     filter(continent != "NA", -->
+<!--            year > 2015) %>% -->
+<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+<!--     geom_boxplot(na.rm = T) + -->
+<!--     # scale_fill_viridis_d(option = "mako") + -->
+<!--     scale_fill_brewer(palette = "Dark2") + -->
+<!--     coord_flip() + -->
+<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+<!--     labs(title = "Control of Corruption", x = element_blank(), y = element_blank()) + -->
+<!--     # theme_bw() + -->
+<!--     cowplot::theme_cowplot() + -->
+<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+<!--           title = element_text(size = 20), -->
+<!--           legend.text = element_text(size = 16), -->
+<!--           legend.title = element_blank()) -> p2 -->
+
+
+<!-- # Regulatory Quality -->
+<!--   df_wgi %>% -->
+<!--     filter(indicator_name == "Regulatory Quality: Estimate") %>% -->
+<!--     mutate(indicator_name = str_replace(indicator_name, -->
+<!--                                         pattern =  "Regulatory Quality: Estimate", -->
+<!--                                         replacement = "Regulatory Quality")) %>% -->
+<!--     group_by(continent) %>% -->
+<!--     filter(continent != "NA", -->
+<!--            year > 2015) %>% -->
+<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+<!--     geom_boxplot(na.rm = T) + -->
+<!--     # scale_fill_viridis_d(option = "mako") + -->
+<!--     scale_fill_brewer(palette = "Dark2") + -->
+<!--     coord_flip() + -->
+<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+<!--     labs(title = "Regulatory Quality", x = element_blank(), y = element_blank()) + -->
+<!--     # theme_bw() + -->
+<!--     cowplot::theme_cowplot() + -->
+<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+<!--           title = element_text(size = 20), -->
+<!--           legend.text = element_text(size = 16), -->
+<!--           legend.title = element_blank()) -> p3 -->
+
+
+<!-- # Rule of Law -->
+<!--   df_wgi %>% -->
+<!--     filter(indicator_name == "Rule of Law: Estimate") %>% -->
+<!--     mutate(indicator_name = str_replace(indicator_name, -->
+<!--                                         pattern =  "Rule of Law: Estimate", -->
+<!--                                         replacement = "Rule of Law")) %>% -->
+<!--     group_by(continent) %>% -->
+<!--     filter(continent != "NA", -->
+<!--            year > 2015) %>% -->
+<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+<!--     geom_boxplot(na.rm = T) + -->
+<!--     # scale_fill_viridis_d(option = "mako") + -->
+<!--     scale_fill_brewer(palette = "Dark2") + -->
+<!--     coord_flip() + -->
+<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+<!--     labs(title = "Rule of Law", x = element_blank(), y = element_blank()) + -->
+<!--     # theme_bw() + -->
+<!--     cowplot::theme_cowplot() + -->
+<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+<!--           title = element_text(size = 20), -->
+<!--           legend.text = element_text(size = 16), -->
+<!--           legend.title = element_blank()) -> p4 -->
+
+<!-- ``` -->
 
 ## Plotly [View](/widgets/plotly.html)
 
