@@ -171,8 +171,10 @@ df <- df_data %>%
         filter(continent != "") %>% 
         filter(value != "")
 
-# Transforming Master Table
-df <- df %>% 
+# DATA TABLE
+
+# Preparing
+dt <- df %>% 
         mutate_at(.vars = c("country_name", "region", "continent"), .funs = str_to_title) %>% 
         mutate(country_code = str_to_upper(country_code),
                year = str_sub(year, start = 1, end = 4),
@@ -180,10 +182,9 @@ df <- df %>%
                value = round(value, 2)) %>% 
         select(country_name, country_code, continent, region, everything()) %>% 
         arrange(year) %>% 
-        mutate_at(.vars = c("country_name", "country_code", "region", "continent", "indicator_name") ,~as_factor(.))
-
-# Creating Data Table
-dt <- df %>% 
+        mutate_at(.vars = c("country_name", "country_code", "region", "continent", "indicator_name") ,~as_factor(.)) %>%  
+  
+# Creating
         DT::datatable(rownames = FALSE,
                       width = "100%",
                       filter = "top",
@@ -194,7 +195,7 @@ dt <- df %>%
                                                     autowidth = TRUE,
                                                     lengthMenu = c(6, 12, 25, 50),
                                                     dom = "Blfrtip",
-                                                    buttons = c("copy", "csv", "excel"), 
+                                                    buttons = c("copy", "csv", "excel", "print", "pdf"), 
                                                     initComplete = JS("function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#c23d1d', 'color': '#fff'});",
     "}")))
