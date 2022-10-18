@@ -108,7 +108,7 @@ h1{
 3.  [Indicators] 💰
 4.  [Plots] 📈
 
-# Raw Data
+# Raw Data [View](/widgets/DT.html)
 
 This data was retrieved from the [World Bank](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators).
 
@@ -276,7 +276,7 @@ pie(
 
 ```
 
-[View Plotly](/widgets/plotly.html)
+## Plotly [View](/widgets/plotly.html)
 
 ```{r}
 knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")

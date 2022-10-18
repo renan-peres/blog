@@ -17,7 +17,7 @@ metaAlignment: center
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
-<p><strong>Last Update:</strong> October 17, 2022 - 21:34</p>
+<p><strong>Last Update:</strong> October 17, 2022 - 21:42</p>
 <style type="text/css">
 
 .post-header-cover .post-header .post-title {
@@ -87,14 +87,14 @@ h1{
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents:</h1>
 <ol style="list-style-type: decimal">
-<li><a href="#raw-data">Raw Data</a> 🗒️</li>
+<li>[Raw Data] 🗒️</li>
 <li><a href="#preparation">Preparation</a> 💻</li>
 <li><a href="#indicators">Indicators</a> 💰</li>
 <li><a href="#plots">Plots</a> 📈</li>
 </ol>
 </div>
-<div id="raw-data" class="section level1">
-<h1>Raw Data</h1>
+<div id="raw-data-view" class="section level1">
+<h1>Raw Data <a href="/widgets/DT.html">View</a></h1>
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <pre class="r"><code>url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
 td &lt;- tempdir()
@@ -291,8 +291,10 @@ Figure 1: A fancy pie chart.
           title = element_text(size = 20),
           legend.text = element_text(size = 16),
           legend.title = element_blank()) -&gt; p4</code></pre>
-<p><a href="/widgets/plotly.html">View Plotly</a></p>
+<div id="plotly-view" class="section level2">
+<h2>Plotly <a href="/widgets/plotly.html">View</a></h2>
 <pre class="r"><code>knitr::include_url(&quot;https://www.renanperes.com/widgets/plotly.html&quot;, height = &quot;600px&quot;)</code></pre>
 <iframe src="https://www.renanperes.com/widgets/plotly.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
+</div>
 </div>
