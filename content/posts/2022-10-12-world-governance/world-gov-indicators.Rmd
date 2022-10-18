@@ -177,6 +177,8 @@ df <- df_data %>%
 df <- df %>% 
         mutate_at(.vars = c("country_name", "region", "continent"), .funs = str_to_title) %>% 
         mutate(country_code = str_to_upper(country_code),
+               year = str_sub(year, start = 1, end = 4),
+               year = as.integer(year),
                value = round(value, 2)) %>% 
         select(country_name, country_code, continent, region, everything()) %>% 
         arrange(year) %>% 

@@ -74,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 16:06</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 16:13</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -223,6 +223,8 @@ df &lt;- df_data %&gt;%
 df &lt;- df %&gt;% 
         mutate_at(.vars = c(&quot;country_name&quot;, &quot;region&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
         mutate(country_code = str_to_upper(country_code),
+               year = str_sub(year, start = 1, end = 4),
+               year = as.integer(year),
                value = round(value, 2)) %&gt;% 
         select(country_name, country_code, continent, region, everything()) %&gt;% 
         arrange(year) %&gt;% 
@@ -250,18 +252,18 @@ dt &lt;- df %&gt;%
 
 print(df)
 ## # A tibble: 27,591 × 7
-##    country_name country_code continent region           indic…¹ year       value
-##    &lt;fct&gt;        &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;   &lt;date&gt;     &lt;dbl&gt;
-##  1 Afghanistan  AFG          Asia      South Asia       contro… 1996-12-31 -1.29
-##  2 Afghanistan  AFG          Asia      South Asia       govern… 1996-12-31 -2.18
-##  3 Afghanistan  AFG          Asia      South Asia       politi… 1996-12-31 -2.42
-##  4 Afghanistan  AFG          Asia      South Asia       regula… 1996-12-31 -2.09
-##  5 Afghanistan  AFG          Asia      South Asia       rule o… 1996-12-31 -1.79
-##  6 Afghanistan  AFG          Asia      South Asia       voice … 1996-12-31 -1.91
-##  7 Albania      ALB          Europe    Europe &amp; Centra… contro… 1996-12-31 -0.89
-##  8 Albania      ALB          Europe    Europe &amp; Centra… govern… 1996-12-31 -0.69
-##  9 Albania      ALB          Europe    Europe &amp; Centra… politi… 1996-12-31 -0.34
-## 10 Albania      ALB          Europe    Europe &amp; Centra… regula… 1996-12-31 -0.47
+##    country_name country_code continent region                indic…¹  year value
+##    &lt;fct&gt;        &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;                 &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt;
+##  1 Afghanistan  AFG          Asia      South Asia            contro…  1996 -1.29
+##  2 Afghanistan  AFG          Asia      South Asia            govern…  1996 -2.18
+##  3 Afghanistan  AFG          Asia      South Asia            politi…  1996 -2.42
+##  4 Afghanistan  AFG          Asia      South Asia            regula…  1996 -2.09
+##  5 Afghanistan  AFG          Asia      South Asia            rule o…  1996 -1.79
+##  6 Afghanistan  AFG          Asia      South Asia            voice …  1996 -1.91
+##  7 Albania      ALB          Europe    Europe &amp; Central Asia contro…  1996 -0.89
+##  8 Albania      ALB          Europe    Europe &amp; Central Asia govern…  1996 -0.69
+##  9 Albania      ALB          Europe    Europe &amp; Central Asia politi…  1996 -0.34
+## 10 Albania      ALB          Europe    Europe &amp; Central Asia regula…  1996 -0.47
 ## # … with 27,581 more rows, and abbreviated variable name ¹​indicator_name
 
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, height = &quot;600px&quot;)</code></pre>
