@@ -32,7 +32,24 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 ```
 
+<a class="header-title-link" href="http://localhost:4321/" aria-label="Go to homepage">Home💻</a>
+
 ```{css styles, echo=FALSE}
+
+#header .header-title .header-title-link {
+    color: #349ef3;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 1.6em;
+    text-decoration: underline;
+}
+
+a, a:active, a:hover, a:visited {
+    cursor: pointer;
+    color: #349ef3;
+    text-decoration: none;
+    font-size: 19px;
+}
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
