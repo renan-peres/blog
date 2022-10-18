@@ -25,6 +25,7 @@ library(plotly)
 library(countrycode)
 library(knitr)
 library(crosstalk)
+library(htmlwidgets)
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, &quot;cm&quot;), fig.height = unit(10, &quot;cm&quot;))</code></pre>
@@ -73,7 +74,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 14:03</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 15:08</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -217,22 +218,53 @@ df &lt;- df_data %&gt;%
                    by = &quot;country_code&quot;) %&gt;% 
         filter(continent != &quot;&quot;)
 
-write_csv(df, file = &quot;./WGI_cleaned.csv&quot;)
+# Transforming Master Table
+df &lt;- df %&gt;% 
+        mutate_at(.vars = c(&quot;country_name&quot;, &quot;indicator_name&quot;, &quot;region&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
+        mutate(country_code = str_to_upper(country_code),
+               year = str_sub(year, start = 1, end = 4),
+               year = as.integer(year),
+               value = round(value, 2)) %&gt;% 
+        select(country_name, country_code, continent, region, everything()) %&gt;% 
+        arrange(year)
+
+# Creating Data Table
+dt &lt;- df %&gt;% 
+        DT::datatable(filter = &quot;top&quot;,
+                      colnames = c(&#39;Country&#39;, &#39;Code&#39;, &#39;Continent&#39;, &#39;Region&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
+                      class = &#39;cell-border stripe&#39;,
+                      extensions = c(&quot;Responsive&quot;, &quot;Buttons&quot;),
+                                    options = list(
+                                                    autowidth = TRUE,
+                                                    lengthMenu = c(5, 10, 25, 50),
+                                                    dom = &quot;Blfrtip&quot;,
+                                                    buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;), 
+                                                    initComplete = JS(&quot;function(settings, json) {&quot;,
+    &quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#c23d1d&#39;, &#39;color&#39;: &#39;#fff&#39;});&quot;,
+    &quot;}&quot;)))
+
+# htmlwidgets::saveWidget(dt, file = &quot;WGI_DT.html&quot;)
+# write_csv(df, file = &quot;./WGI_cleaned.csv&quot;)
+
 print(df)
 ## # A tibble: 28,290 × 7
-##    country_name country_code indicator_name      year       value region conti…¹
-##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;               &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
-##  1 afghanistan  afg          control of corrupt… 1996-12-31 -1.29 south… asia   
-##  2 afghanistan  afg          control of corrupt… 1998-12-31 -1.18 south… asia   
-##  3 afghanistan  afg          control of corrupt… 2000-12-31 -1.27 south… asia   
-##  4 afghanistan  afg          control of corrupt… 2002-12-31 -1.25 south… asia   
-##  5 afghanistan  afg          control of corrupt… 2003-12-31 -1.34 south… asia   
-##  6 afghanistan  afg          control of corrupt… 2004-12-31 -1.35 south… asia   
-##  7 afghanistan  afg          control of corrupt… 2005-12-31 -1.45 south… asia   
-##  8 afghanistan  afg          control of corrupt… 2006-12-31 -1.45 south… asia   
-##  9 afghanistan  afg          control of corrupt… 2007-12-31 -1.61 south… asia   
-## 10 afghanistan  afg          control of corrupt… 2008-12-31 -1.67 south… asia   
-## # … with 28,280 more rows, and abbreviated variable name ¹​continent</code></pre>
+##    country_name country_code continent region                indic…¹  year value
+##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;                 &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
+##  1 Afghanistan  AFG          Asia      South Asia            Contro…  1996 -1.29
+##  2 Afghanistan  AFG          Asia      South Asia            Govern…  1996 -2.18
+##  3 Afghanistan  AFG          Asia      South Asia            Politi…  1996 -2.42
+##  4 Afghanistan  AFG          Asia      South Asia            Regula…  1996 -2.09
+##  5 Afghanistan  AFG          Asia      South Asia            Rule O…  1996 -1.79
+##  6 Afghanistan  AFG          Asia      South Asia            Voice …  1996 -1.91
+##  7 Albania      ALB          Europe    Europe &amp; Central Asia Contro…  1996 -0.89
+##  8 Albania      ALB          Europe    Europe &amp; Central Asia Govern…  1996 -0.69
+##  9 Albania      ALB          Europe    Europe &amp; Central Asia Politi…  1996 -0.34
+## 10 Albania      ALB          Europe    Europe &amp; Central Asia Regula…  1996 -0.47
+## # … with 28,280 more rows, and abbreviated variable name ¹​indicator_name
+
+knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;)</code></pre>
+<iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="400px" data-external="1">
+</iframe>
 </div>
 </div>
 <div id="plots" class="section level1">

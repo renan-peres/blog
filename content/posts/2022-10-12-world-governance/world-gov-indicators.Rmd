@@ -26,6 +26,7 @@ library(plotly)
 library(countrycode)
 library(knitr)
 library(crosstalk)
+library(htmlwidgets)
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
@@ -171,8 +172,37 @@ df <- df_data %>%
                    by = "country_code") %>% 
         filter(continent != "")
 
-write_csv(df, file = "./WGI_cleaned.csv")
+# Transforming Master Table
+df <- df %>% 
+        mutate_at(.vars = c("country_name", "indicator_name", "region", "continent"), .funs = str_to_title) %>% 
+        mutate(country_code = str_to_upper(country_code),
+               year = str_sub(year, start = 1, end = 4),
+               year = as.integer(year),
+               value = round(value, 2)) %>% 
+        select(country_name, country_code, continent, region, everything()) %>% 
+        arrange(year)
+
+# Creating Data Table
+dt <- df %>% 
+        DT::datatable(filter = "top",
+                      colnames = c('Country', 'Code', 'Continent', 'Region', 'Indicator', "Year", "Score"),
+                      class = 'cell-border stripe',
+                      extensions = c("Responsive", "Buttons"),
+                                    options = list(
+                                                    autowidth = TRUE,
+                                                    lengthMenu = c(5, 10, 25, 50),
+                                                    dom = "Blfrtip",
+                                                    buttons = c("copy", "csv", "excel"), 
+                                                    initComplete = JS("function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#c23d1d', 'color': '#fff'});",
+    "}")))
+
+# htmlwidgets::saveWidget(dt, file = "WGI_DT.html")
+# write_csv(df, file = "./WGI_cleaned.csv")
+
 print(df)
+
+knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html")
 ```
 
 
