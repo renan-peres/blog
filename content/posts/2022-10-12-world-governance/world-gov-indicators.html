@@ -17,7 +17,7 @@ metaAlignment: center
 
 <p>This data was retrieved from the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">World Bank</a>.</p>
 <!--more-->
-<p><strong>Last Update:</strong> October 17, 2022 - 21:42</p>
+<p><strong>Last Update:</strong> October 18, 2022 - 06:49</p>
 <style type="text/css">
 
 .post-header-cover .post-header .post-title {
@@ -137,6 +137,7 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/DT.html&quot;, heigh
 <div id="preparation" class="section level1">
 <h1>Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
+<p><a href="http://dashboard-stocks.renanperes.com/"><img src="https://res.cloudinary.com/dqtnflaeh/image/upload/v1665516878/dashboard_thumbnail_o3v4qp.png" alt="Dashboard" /></a></p>
 <pre class="r"><code># Pivoting
 df_wgi &lt;- df %&gt;%
           pivot_longer(-c(1:4), names_to = &quot;year&quot;, values_to = &quot;value&quot;) %&gt;% 
