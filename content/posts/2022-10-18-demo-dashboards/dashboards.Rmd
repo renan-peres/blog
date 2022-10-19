@@ -1,0 +1,52 @@
+---
+title: 'Demo: Dashboards'
+author: ''
+date: '2022-10-18'
+categories:
+  - Dashboards
+slug: dashboards
+autoThumbnailImage: no
+thumbnailImagePosition: left
+thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666178340/dashboards_cphppx.png
+---
+This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.
+
+<!--more-->
+
+```{r, echo=FALSE}
+library(webshot)
+library(knitr)
+library(htmltools)
+library(htmlwidgets)
+knitr::opts_chunk$set(fig.width = 8, fig.height=5)
+```
+
+***This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.***
+
+## Flexdashboard. ([View in Full Screen](http://dashboard-stocks.renanperes.com/))
+
+```{r, echo=FALSE}
+knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "700px")
+```
+
+## Shiny App. ([View in Full Screen](https://vac-lshtm.shinyapps.io/ncov_tracker/))
+
+```{r, echo=FALSE}
+knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/", height = "700px")
+```
+
+## Power BI. ([View in Full Screen](https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9))
+
+```{r, echo=FALSE}
+knitr::include_app("https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9", height = "700px")
+```
+
+<!-- ## Tableau. [View in Full Screen](https://public.tableau.com/views/Baseball_34/Dashboard1) -->
+
+<!-- ```{r, echo=FALSE} -->
+<!-- knitr::include_url("https://public.tableau.com/app/profile/biqdata/viz/SSP1/Dashboard1", height = "700px") -->
+<!-- ``` -->
+
+
+---
+

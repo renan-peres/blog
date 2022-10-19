@@ -1,7 +1,7 @@
 ---
-title: World Governance Indicators
+title: Governance Indicators
 author: ''
-date: '2022-10-16'
+date: '2022-10-19'
 categories:
   - Reports
 slug: world-gov-indicators
@@ -110,15 +110,15 @@ h1{
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) which includes six broad indicators of a country's governance between the periods of 1996-2021.
 
 # Motivation
 
-As a worldwide traveler who has just recently been in a study abroad program during the summer in Europe, I have always been interested in understanding how each country operates internally and how they have progressed over time.
+As a worldwide traveler who has just recently been in a 3-month trip in Europe - traveling across 13 different countries, I had always been curious in knowing how each country's government operates and how they have progressed over time. Indeed, when I was navigating through <https://www.worldbank.org/> looking for a dataset where I could perform some analyzes, I found the [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which really caught my attention.
 
 # Dataset
 
-This report is based on the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) from <https://www.worldbank.org/>. The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
+The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
 
 1.  Voice and Accountability;
 2.  Political Stability and Absence of Violence;
@@ -127,7 +127,9 @@ This report is based on the dataset [*Worldwide-Governance-Indicators*](https://
 5.  Rule of Law;
 6.  Control of Corruption.
 
-#### [Download Raw Data](/WGIData.csv)
+Feel free to download the raw data if you want to perform some analyzes as well!
+
+#### [[Download Raw Data](/WGIData.csv)]
 
 ```{r import, message=FALSE, echo=TRUE}
 # DATA IMPORTING
@@ -146,11 +148,11 @@ print(df_country)
 print(df_continent)
 ```
 
-# Preparation
+# Data Preparation
 
 During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
-#### [View Full Screen](/widgets/WGI_DT.html)
+#### [[View Full Screen](/widgets/WGI_DT.html)]
 
 ```{r prepare, echo=TRUE}
 # DATA FRAME

@@ -1,7 +1,7 @@
 ---
-title: World Governance Indicators
+title: Governance Indicators
 author: ''
-date: '2022-10-16'
+date: '2022-10-19'
 categories:
   - Reports
 slug: world-gov-indicators
@@ -90,14 +90,14 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 18, 2022 - 18:26</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 07:46</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#motivation">Motivation</a></li>
 <li><a href="#dataset">Dataset</a>🗒️</li>
-<li>[Data Preparation] 💻</li>
+<li><a href="#data-preparation">Data Preparation</a> 💻</li>
 <li>[Data Analysis] 💰</li>
 <li>[Visualizations] 📈</li>
 <li>[Conclusion]</li>
@@ -106,15 +106,15 @@ h1{
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.</p>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the dataset <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) which includes six broad indicators of a country’s governance between the periods of 1996-2021.</p>
 </div>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>As a worldwide traveler who has just recently been in a study abroad program during the summer in Europe, I have always been interested in understanding how each country operates internally and how they have progressed over time.</p>
+<p>As a worldwide traveler who has just recently been in a 3-month trip in Europe - traveling across 13 different countries, I had always been curious in knowing how each country’s government operates and how they have progressed over time. Indeed, when I was navigating through <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a> looking for a dataset where I could perform some analyzes, I found the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), which really caught my attention.</p>
 </div>
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
-<p>This report is based on the dataset <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) from <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a>. The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:</p>
+<p>The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:</p>
 <ol style="list-style-type: decimal">
 <li>Voice and Accountability;</li>
 <li>Political Stability and Absence of Violence;</li>
@@ -123,8 +123,9 @@ h1{
 <li>Rule of Law;</li>
 <li>Control of Corruption.</li>
 </ol>
+<p>Feel free to download the raw data if you want to perform some analyzes as well!</p>
 <div id="download-raw-data" class="section level4">
-<h4><a href="/WGIData.csv">Download Raw Data</a></h4>
+<h4>[<a href="/WGIData.csv">Download Raw Data</a>]</h4>
 <pre class="r"><code># DATA IMPORTING
 # url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
 # directory &lt;- getwd()
@@ -194,11 +195,11 @@ print(df_continent)
 ## # … with 278 more rows</code></pre>
 </div>
 </div>
-<div id="preparation" class="section level1">
-<h1>Preparation</h1>
+<div id="data-preparation" class="section level1">
+<h1>Data Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
 <div id="view-full-screen" class="section level4">
-<h4><a href="/widgets/WGI_DT.html">View Full Screen</a></h4>
+<h4>[<a href="/widgets/WGI_DT.html">View Full Screen</a>]</h4>
 <pre class="r"><code># DATA FRAME
 # Cleaning
 df_data &lt;- df_data %&gt;% 
