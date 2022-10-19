@@ -17,7 +17,7 @@ This report presents six broad dimensions of governance for over 215 countries a
 
 <!--more-->
 
-```{r setup, echo=TRUE, message=FALSE}
+```{r setup, echo=FALSE, message=FALSE}
 # Environment Setup
 library(tidyverse)
 library(klippy)
@@ -28,7 +28,7 @@ library(countrycode)
 library(knitr)
 library(crosstalk)
 library(htmlwidgets)
-# klippy::klippy(c("r", "python", "sql"), position = "left")
+klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
