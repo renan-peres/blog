@@ -139,26 +139,9 @@ The dataset lists composite governance indicators based on over 30 underlying da
 5.  Rule of Law;
 6.  Voice and Accountability.
 
-Feel free to download the raw data if you want to perform some analyzes as well!
+<!-- Feel free to download the raw data if you want to perform some analyzes as well! -->
 
-#### [[Download Raw Data](/WGIData.csv)]
-
-```{r import, message=FALSE, echo=TRUE}
-# DATA IMPORTING
-# url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
-# directory <- getwd()
-# tf <- tempfile(tmpdir = directory, fileext = ".zip")
-# download.file(url, tf)
-# unzip(tf)
-df_data <- read_csv("WGIData.csv")
-df_country <- read_csv("WGICountry.csv")
-df_continent <- countrycode::codelist %>% select(continent, wb, country.name.en, iso2c, unicode.symbol)
-print(df_data)
-
-print(df_country)
-
-print(df_continent)
-```
+<!-- #### [[Download Raw Data](/WGIData.csv)] -->
 
 # Data Preparation
 
@@ -166,79 +149,88 @@ During the preparation I had to pivot the years into a single variable and add t
 
 #### [[View Table in Full Screen](/widgets/WGI_DT.html)]
 
-```{r prepare, echo=TRUE}
-# DATA FRAME
-# Cleaning
-df_data <- df_data %>% 
-              clean_names() %>%
-              select(-c("indicator_code","x28")) %>%
-              mutate_all(~str_to_lower(.)) %>% 
-              pivot_longer(-c("country_name", "country_code", "indicator_name"), 
-                           names_to = "year", 
-                           values_to = "value") %>% 
-              mutate(year = str_remove_all(year, pattern = "x"),
-                     year = paste0(year, "-12-31"),
-                     year = lubridate::ymd(year)) %>% 
-              filter(str_detect(indicator_name, "estimate")) %>% 
-              mutate(indicator_name = str_extract(indicator_name, pattern = "(.*):"),
-                     indicator_name = str_remove_all(indicator_name, ":")) %>% 
-              mutate(value = as.double(value))
+```{r prepare, echo=TRUE, message=FALSE, warning=FALSE}
+# 1_Importing
+  # url <- "https://databank.worldbank.org/data/download/WGI_csv.zip"
+  # directory <- getwd()
+  # tf <- tempfile(tmpdir = directory, fileext = ".zip")
+  # download.file(url, tf)
+  # unzip(tf)
+  df_data <- read_csv("WGIData.csv")
+  df_country <- read_csv("WGICountry.csv")
+  df_continent <- countrycode::codelist %>% select(continent, wb, country.name.en, iso2c, unicode.symbol)
 
-df_country <- df_country %>% 
-                clean_names() %>% 
-                mutate_all(~str_to_lower(.)) %>%
-                select(country_code, table_name, region)
-
-df_continent <- df_continent %>% 
+# 2_Cleaning
+  df_data <- df_data %>% 
+                clean_names() %>%
+                select(-c("indicator_code","x28")) %>%
+                mutate_all(~str_to_lower(.)) %>% 
+                pivot_longer(-c("country_name", "country_code", "indicator_name"), 
+                             names_to = "year", 
+                             values_to = "value") %>% 
+                mutate(year = str_remove_all(year, pattern = "x"),
+                       year = paste0(year, "-12-31"),
+                       year = lubridate::ymd(year)) %>% 
+                filter(str_detect(indicator_name, "estimate")) %>% 
+                mutate(indicator_name = str_extract(indicator_name, pattern = "(.*):"),
+                       indicator_name = str_remove_all(indicator_name, ":")) %>% 
+                mutate(value = as.double(value))
+  
+  df_country <- df_country %>% 
                   clean_names() %>% 
-                  rename(country_code = wb,
-                         country_name = country_name_en) %>% 
-                  mutate_at(.vars = c("continent", "country_code", "country_name"), ~str_to_lower(.))
-    
-# Merging Tables
-df <- df_data %>% 
-        inner_join(df_country %>% select(country_code, region), 
-                   by = "country_code") %>% 
-        inner_join(df_continent %>% select(country_code, continent, iso2c, unicode_symbol),
-                   by = "country_code") %>% 
-        mutate(continent = case_when(region == "latin america & caribbean" ~ "south america",
-                                     region == "north america" ~ "north america",
-                                     country_name == "greenland" ~ "north america",
-                                     T ~ continent)) %>% 
-        filter(continent != "") %>% 
-        filter(value != "") %>% 
-        select(-region) %>% 
-        arrange(year, country_name)
+                  mutate_all(~str_to_lower(.)) %>%
+                  select(country_code, table_name, region)
+  
+  df_continent <- df_continent %>% 
+                    clean_names() %>% 
+                    rename(country_code = wb,
+                           country_name = country_name_en) %>% 
+                    mutate_at(.vars = c("continent", "country_code", "country_name"), ~str_to_lower(.))
+      
+# 3_Creating_Master_Table
+  df <- df_data %>% 
+          inner_join(df_country %>% select(country_code, region), 
+                     by = "country_code") %>% 
+          inner_join(df_continent %>% select(country_code, continent, iso2c, unicode_symbol),
+                     by = "country_code") %>% 
+          mutate(continent = case_when(region == "latin america & caribbean" ~ "south america",
+                                       region == "north america" ~ "north america",
+                                       country_name == "greenland" ~ "north america",
+                                       T ~ continent)) %>% 
+          filter(continent != "") %>% 
+          filter(value != "") %>% 
+          select(-region) %>% 
+          arrange(year, country_name)
 
 # DATA TABLE
-# Preparing
-dt <- df %>% 
-        mutate_at(.vars = c("country_name", "continent"), .funs = str_to_title) %>% 
-        mutate(country_code = str_to_upper(country_code),
-               year = str_sub(year, start = 1, end = 4),
-               year = as.integer(year),
-               value = round(value, 2)) %>% 
-        select(country_name,  country_code, continent, indicator_name, year, value) %>% 
-        mutate_at(.vars = c("country_name", "country_code", "indicator_name", "year") ,~as_factor(.)) %>%
-        arrange(continent) %>% 
-        mutate(continent = as_factor(continent)) %>%
-        arrange(year, country_name) %>% 
+  # Preparing
+    dt <- df %>% 
+            mutate_at(.vars = c("country_name", "continent"), .funs = str_to_title) %>% 
+            mutate(country_code = str_to_upper(country_code),
+                   year = str_sub(year, start = 1, end = 4),
+                   year = as.integer(year),
+                   value = round(value, 2)) %>% 
+            select(country_name,  country_code, continent, indicator_name, year, value) %>% 
+            mutate_at(.vars = c("country_name", "country_code", "indicator_name", "year") ,~as_factor(.)) %>%
+            arrange(continent) %>% 
+            mutate(continent = as_factor(continent)) %>%
+            arrange(year, country_name) %>% 
   
-# Creating
-        DT::datatable(rownames = FALSE,
-                      width = "100%",
-                      filter = "top",
-                      colnames = c('Country','Code', 'Continent', 'Indicator', "Year", "Score"),
-                      class = 'cell-border stripe',
-                      extensions = c("Responsive", "Buttons"),
-                                    options = list(
-                                                    autowidth = TRUE,
-                                                    lengthMenu = c(6, 12, 25, 50),
-                                                    dom = "Blfrtip",
-                                                    buttons = c("copy", "csv", "excel", "print", "pdf"), 
-                                                    initComplete = JS("function(settings, json) {",
-    "$(this.api().table().header()).css({'background-color': '#c23d1d', 'color': '#fff'});",
-    "}")))
+  # Creating
+          DT::datatable(rownames = FALSE,
+                        width = "100%",
+                        filter = "top",
+                        colnames = c('Country','Code', 'Continent', 'Indicator', "Year", "Score"),
+                        class = 'cell-border stripe',
+                        extensions = c("Responsive", "Buttons"),
+                                      options = list(
+                                                      autowidth = TRUE,
+                                                      lengthMenu = c(6, 12, 25, 50),
+                                                      dom = "Blfrtip",
+                                                      buttons = c("copy", "csv", "excel", "print", "pdf"), 
+                                                      initComplete = JS("function(settings, json) {",
+      "$(this.api().table().header()).css({'background-color': '#c23d1d', 'color': '#fff'});",
+      "}")))
 
 # htmlwidgets::saveWidget(dt, file = "WGI_DT.html")
 # write_csv(df, file = "./WGI_cleaned.csv")

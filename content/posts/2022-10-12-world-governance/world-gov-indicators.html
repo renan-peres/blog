@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 16:33</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 17:05</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -115,155 +115,95 @@ h1{
 <li>Rule of Law;</li>
 <li>Voice and Accountability.</li>
 </ol>
-<p>Feel free to download the raw data if you want to perform some analyzes as well!</p>
-<div id="download-raw-data" class="section level4">
-<h4>[<a href="/WGIData.csv">Download Raw Data</a>]</h4>
-<pre class="r"><code># DATA IMPORTING
-# url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
-# directory &lt;- getwd()
-# tf &lt;- tempfile(tmpdir = directory, fileext = &quot;.zip&quot;)
-# download.file(url, tf)
-# unzip(tf)
-df_data &lt;- read_csv(&quot;WGIData.csv&quot;)
-df_country &lt;- read_csv(&quot;WGICountry.csv&quot;)
-df_continent &lt;- countrycode::codelist %&gt;% select(continent, wb, country.name.en, iso2c, unicode.symbol)
-print(df_data)
-## # A tibble: 7,704 × 28
-##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
-##    &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Afghanistan AFG     Contro… CC.EST  -1.29  -1.18  -1.27  -1.25  -1.34  -1.35 
-##  2 Afghanistan AFG     Contro… CC.NO.…  2      2      2      2      3      5    
-##  3 Afghanistan AFG     Contro… CC.PER…  4.30   8.02   4.79   4.76   4.76   6.40 
-##  4 Afghanistan AFG     Contro… CC.PER…  0      0      0      0      0      0    
-##  5 Afghanistan AFG     Contro… CC.PER… 27.4   33.7   30.9   32.8   19.0   15.3  
-##  6 Afghanistan AFG     Contro… CC.STD…  0.341  0.324  0.347  0.353  0.270  0.213
-##  7 Afghanistan AFG     Govern… GE.EST  -2.18  -2.10  -2.17  -1.59  -1.13  -0.910
-##  8 Afghanistan AFG     Govern… GE.NO.…  1      1      1      2      2      4    
-##  9 Afghanistan AFG     Govern… GE.PER…  0      0      0      2.16  11.4   18.9  
-## 10 Afghanistan AFG     Govern… GE.PER…  0      0      0      0      1.62   5.97 
-## # … with 7,694 more rows, 18 more variables: `2005` &lt;dbl&gt;, `2006` &lt;dbl&gt;,
-## #   `2007` &lt;dbl&gt;, `2008` &lt;dbl&gt;, `2009` &lt;dbl&gt;, `2010` &lt;dbl&gt;, `2011` &lt;dbl&gt;,
-## #   `2012` &lt;dbl&gt;, `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;, `2016` &lt;dbl&gt;,
-## #   `2017` &lt;dbl&gt;, `2018` &lt;dbl&gt;, `2019` &lt;dbl&gt;, `2020` &lt;dbl&gt;, `2021` &lt;dbl&gt;,
-## #   ...28 &lt;lgl&gt;, and abbreviated variable names ¹​`Country Name`,
-## #   ²​`Country Code`, ³​`Indicator Name`, ⁴​`Indicator Code`
-
-print(df_country)
-## # A tibble: 213 × 31
-##    `Country Code` Short…¹ Table…² Long …³ 2-alp…⁴ Curre…⁵ Speci…⁶ Region Incom…⁷
-##    &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  
-##  1 ABW            Aruba   Aruba   Aruba   AW      Aruban…  &lt;NA&gt;   Latin… High i…
-##  2 AFG            Afghan… Afghan… Islami… AF      Afghan… &quot;The r… South… Low in…
-##  3 AGO            Angola  Angola  People… AO      Angola… &quot;The W… Sub-S… Lower …
-##  4 AIA            Anguil… Anguil… Anguil… AI      &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   
-##  5 ALB            Albania Albania Republ… AL      Albani…  &lt;NA&gt;   Europ… Upper …
-##  6 AND            Andorra Andorra Princi… AD      Euro     &lt;NA&gt;   Europ… High i…
-##  7 ANT            Nether… Nether… Nether… AN      Nether…  &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   
-##  8 ARE            United… United… United… AE      U.A.E.…  &lt;NA&gt;   Middl… High i…
-##  9 ARG            Argent… Argent… Argent… AR      Argent… &quot;The W… Latin… Upper …
-## 10 ARM            Armenia Armenia Republ… AM      Armeni…  &lt;NA&gt;   Europ… Upper …
-## # … with 203 more rows, 22 more variables: `WB-2 code` &lt;chr&gt;,
-## #   `National accounts base year` &lt;chr&gt;,
-## #   `National accounts reference year` &lt;dbl&gt;, `SNA price valuation` &lt;chr&gt;,
-## #   `Lending category` &lt;chr&gt;, `Other groups` &lt;chr&gt;,
-## #   `System of National Accounts` &lt;chr&gt;, `Alternative conversion factor` &lt;lgl&gt;,
-## #   `PPP survey year` &lt;lgl&gt;, `Balance of Payments Manual in use` &lt;chr&gt;,
-## #   `External debt Reporting status` &lt;chr&gt;, `System of trade` &lt;chr&gt;, …
-
-print(df_continent)
-## # A tibble: 288 × 5
-##    continent wb    country.name.en   iso2c unicode.symbol        
-##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;                 
-##  1 Asia      AFG   Afghanistan       AF    &quot;\U0001f1e6\U0001f1eb&quot;
-##  2 Europe    &lt;NA&gt;  Åland Islands     AX    &quot;\U0001f1e6\U0001f1fd&quot;
-##  3 Europe    ALB   Albania           AL    &quot;\U0001f1e6\U0001f1f1&quot;
-##  4 Africa    DZA   Algeria           DZ    &quot;\U0001f1e9\U0001f1ff&quot;
-##  5 Oceania   ASM   American Samoa    AS    &quot;\U0001f1e6\U0001f1f8&quot;
-##  6 Europe    AND   Andorra           AD    &quot;\U0001f1e6\U0001f1e9&quot;
-##  7 Africa    AGO   Angola            AO    &quot;\U0001f1e6\U0001f1f4&quot;
-##  8 Americas  &lt;NA&gt;  Anguilla          AI    &quot;\U0001f1e6\U0001f1ee&quot;
-##  9 &lt;NA&gt;      &lt;NA&gt;  Antarctica        AQ    &quot;\U0001f1e6\U0001f1f6&quot;
-## 10 Americas  ATG   Antigua &amp; Barbuda AG    &quot;\U0001f1e6\U0001f1ec&quot;
-## # … with 278 more rows</code></pre>
-</div>
+<!-- Feel free to download the raw data if you want to perform some analyzes as well! -->
+<!-- #### [[Download Raw Data](/WGIData.csv)] -->
 </div>
 <div id="data-preparation" class="section level1">
 <h1>Data Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
 <div id="view-table-in-full-screen" class="section level4">
 <h4>[<a href="/widgets/WGI_DT.html">View Table in Full Screen</a>]</h4>
-<pre class="r"><code># DATA FRAME
-# Cleaning
-df_data &lt;- df_data %&gt;% 
-              clean_names() %&gt;%
-              select(-c(&quot;indicator_code&quot;,&quot;x28&quot;)) %&gt;%
-              mutate_all(~str_to_lower(.)) %&gt;% 
-              pivot_longer(-c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;), 
-                           names_to = &quot;year&quot;, 
-                           values_to = &quot;value&quot;) %&gt;% 
-              mutate(year = str_remove_all(year, pattern = &quot;x&quot;),
-                     year = paste0(year, &quot;-12-31&quot;),
-                     year = lubridate::ymd(year)) %&gt;% 
-              filter(str_detect(indicator_name, &quot;estimate&quot;)) %&gt;% 
-              mutate(indicator_name = str_extract(indicator_name, pattern = &quot;(.*):&quot;),
-                     indicator_name = str_remove_all(indicator_name, &quot;:&quot;)) %&gt;% 
-              mutate(value = as.double(value))
+<pre class="r"><code># 1_Importing
+  # url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
+  # directory &lt;- getwd()
+  # tf &lt;- tempfile(tmpdir = directory, fileext = &quot;.zip&quot;)
+  # download.file(url, tf)
+  # unzip(tf)
+  df_data &lt;- read_csv(&quot;WGIData.csv&quot;)
+  df_country &lt;- read_csv(&quot;WGICountry.csv&quot;)
+  df_continent &lt;- countrycode::codelist %&gt;% select(continent, wb, country.name.en, iso2c, unicode.symbol)
 
-df_country &lt;- df_country %&gt;% 
-                clean_names() %&gt;% 
-                mutate_all(~str_to_lower(.)) %&gt;%
-                select(country_code, table_name, region)
-
-df_continent &lt;- df_continent %&gt;% 
+# 2_Cleaning
+  df_data &lt;- df_data %&gt;% 
+                clean_names() %&gt;%
+                select(-c(&quot;indicator_code&quot;,&quot;x28&quot;)) %&gt;%
+                mutate_all(~str_to_lower(.)) %&gt;% 
+                pivot_longer(-c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;), 
+                             names_to = &quot;year&quot;, 
+                             values_to = &quot;value&quot;) %&gt;% 
+                mutate(year = str_remove_all(year, pattern = &quot;x&quot;),
+                       year = paste0(year, &quot;-12-31&quot;),
+                       year = lubridate::ymd(year)) %&gt;% 
+                filter(str_detect(indicator_name, &quot;estimate&quot;)) %&gt;% 
+                mutate(indicator_name = str_extract(indicator_name, pattern = &quot;(.*):&quot;),
+                       indicator_name = str_remove_all(indicator_name, &quot;:&quot;)) %&gt;% 
+                mutate(value = as.double(value))
+  
+  df_country &lt;- df_country %&gt;% 
                   clean_names() %&gt;% 
-                  rename(country_code = wb,
-                         country_name = country_name_en) %&gt;% 
-                  mutate_at(.vars = c(&quot;continent&quot;, &quot;country_code&quot;, &quot;country_name&quot;), ~str_to_lower(.))
-    
-# Merging Tables
-df &lt;- df_data %&gt;% 
-        inner_join(df_country %&gt;% select(country_code, region), 
-                   by = &quot;country_code&quot;) %&gt;% 
-        inner_join(df_continent %&gt;% select(country_code, continent, iso2c, unicode_symbol),
-                   by = &quot;country_code&quot;) %&gt;% 
-        mutate(continent = case_when(region == &quot;latin america &amp; caribbean&quot; ~ &quot;south america&quot;,
-                                     region == &quot;north america&quot; ~ &quot;north america&quot;,
-                                     country_name == &quot;greenland&quot; ~ &quot;north america&quot;,
-                                     T ~ continent)) %&gt;% 
-        filter(continent != &quot;&quot;) %&gt;% 
-        filter(value != &quot;&quot;) %&gt;% 
-        select(-region) %&gt;% 
-        arrange(year, country_name)
+                  mutate_all(~str_to_lower(.)) %&gt;%
+                  select(country_code, table_name, region)
+  
+  df_continent &lt;- df_continent %&gt;% 
+                    clean_names() %&gt;% 
+                    rename(country_code = wb,
+                           country_name = country_name_en) %&gt;% 
+                    mutate_at(.vars = c(&quot;continent&quot;, &quot;country_code&quot;, &quot;country_name&quot;), ~str_to_lower(.))
+      
+# 3_Creating_Master_Table
+  df &lt;- df_data %&gt;% 
+          inner_join(df_country %&gt;% select(country_code, region), 
+                     by = &quot;country_code&quot;) %&gt;% 
+          inner_join(df_continent %&gt;% select(country_code, continent, iso2c, unicode_symbol),
+                     by = &quot;country_code&quot;) %&gt;% 
+          mutate(continent = case_when(region == &quot;latin america &amp; caribbean&quot; ~ &quot;south america&quot;,
+                                       region == &quot;north america&quot; ~ &quot;north america&quot;,
+                                       country_name == &quot;greenland&quot; ~ &quot;north america&quot;,
+                                       T ~ continent)) %&gt;% 
+          filter(continent != &quot;&quot;) %&gt;% 
+          filter(value != &quot;&quot;) %&gt;% 
+          select(-region) %&gt;% 
+          arrange(year, country_name)
 
 # DATA TABLE
-# Preparing
-dt &lt;- df %&gt;% 
-        mutate_at(.vars = c(&quot;country_name&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
-        mutate(country_code = str_to_upper(country_code),
-               year = str_sub(year, start = 1, end = 4),
-               year = as.integer(year),
-               value = round(value, 2)) %&gt;% 
-        select(country_name,  country_code, continent, indicator_name, year, value) %&gt;% 
-        mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;, &quot;year&quot;) ,~as_factor(.)) %&gt;%
-        arrange(continent) %&gt;% 
-        mutate(continent = as_factor(continent)) %&gt;%
-        arrange(year, country_name) %&gt;% 
+  # Preparing
+    dt &lt;- df %&gt;% 
+            mutate_at(.vars = c(&quot;country_name&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
+            mutate(country_code = str_to_upper(country_code),
+                   year = str_sub(year, start = 1, end = 4),
+                   year = as.integer(year),
+                   value = round(value, 2)) %&gt;% 
+            select(country_name,  country_code, continent, indicator_name, year, value) %&gt;% 
+            mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;, &quot;year&quot;) ,~as_factor(.)) %&gt;%
+            arrange(continent) %&gt;% 
+            mutate(continent = as_factor(continent)) %&gt;%
+            arrange(year, country_name) %&gt;% 
   
-# Creating
-        DT::datatable(rownames = FALSE,
-                      width = &quot;100%&quot;,
-                      filter = &quot;top&quot;,
-                      colnames = c(&#39;Country&#39;,&#39;Code&#39;, &#39;Continent&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
-                      class = &#39;cell-border stripe&#39;,
-                      extensions = c(&quot;Responsive&quot;, &quot;Buttons&quot;),
-                                    options = list(
-                                                    autowidth = TRUE,
-                                                    lengthMenu = c(6, 12, 25, 50),
-                                                    dom = &quot;Blfrtip&quot;,
-                                                    buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;, &quot;print&quot;, &quot;pdf&quot;), 
-                                                    initComplete = JS(&quot;function(settings, json) {&quot;,
-    &quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#c23d1d&#39;, &#39;color&#39;: &#39;#fff&#39;});&quot;,
-    &quot;}&quot;)))
+  # Creating
+          DT::datatable(rownames = FALSE,
+                        width = &quot;100%&quot;,
+                        filter = &quot;top&quot;,
+                        colnames = c(&#39;Country&#39;,&#39;Code&#39;, &#39;Continent&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
+                        class = &#39;cell-border stripe&#39;,
+                        extensions = c(&quot;Responsive&quot;, &quot;Buttons&quot;),
+                                      options = list(
+                                                      autowidth = TRUE,
+                                                      lengthMenu = c(6, 12, 25, 50),
+                                                      dom = &quot;Blfrtip&quot;,
+                                                      buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;, &quot;print&quot;, &quot;pdf&quot;), 
+                                                      initComplete = JS(&quot;function(settings, json) {&quot;,
+      &quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#c23d1d&#39;, &#39;color&#39;: &#39;#fff&#39;});&quot;,
+      &quot;}&quot;)))
 
 # htmlwidgets::saveWidget(dt, file = &quot;WGI_DT.html&quot;)
 # write_csv(df, file = &quot;./WGI_cleaned.csv&quot;)
