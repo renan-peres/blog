@@ -46,7 +46,7 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     font-family: inherit;
     font-weight: 400;
     font-size: 1.6em;
-    text-decoration: underline;
+    text-decoration: auto;
 }
 
 
