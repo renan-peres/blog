@@ -256,12 +256,15 @@ To better analyze the dataset, I decided to group the countries available in the
 
 You can see the 2021 scores. See Figure \@ref(fig:control-of-corruption) for example:
 
+#### [[View Map in Full Screen](/widgets/WGI_corruption_2021.html)]
+
 ```{r control-of-corruption, fig.cap='2021 Control of Corruption.', tidy=FALSE}
 
 corruption <- df %>% 
                 filter(indicator_name == "control of corruption") %>% 
                 mutate(country_name = str_to_title(country_name),
-                       country_code = str_to_upper(country_code))
+                       country_code = str_to_upper(country_code),
+                       value = round(value, 2))
 
 # Highcharter
 map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres", 
@@ -290,7 +293,7 @@ map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres",
                         #                          useHTML = TRUE))
 
 print(corruption)
-# htmltools::save_html(map_corruption_2021, "WGI_corruption_2021.html")
+# htmlwidgets::saveWidget(map_corruption_2021, "WGI_corruption_2021.html")
 knitr::include_url("https://www.renanperes.com/widgets/WGI_corruption_2021.html", height = "600px")
 ```
 

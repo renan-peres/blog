@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 16:20</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 16:33</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -296,11 +296,14 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 <h3>Most Recent Results <strong><em>(2021)</em></strong></h3>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
 <p>You can see the 2021 scores. See Figure <a href="#fig:control-of-corruption">1</a> for example:</p>
+<div id="view-map-in-full-screen" class="section level4">
+<h4>[<a href="/widgets/WGI_corruption_2021.html">View Map in Full Screen</a>]</h4>
 <pre class="r"><code>
 corruption &lt;- df %&gt;% 
                 filter(indicator_name == &quot;control of corruption&quot;) %&gt;% 
                 mutate(country_name = str_to_title(country_name),
-                       country_code = str_to_upper(country_code))
+                       country_code = str_to_upper(country_code),
+                       value = round(value, 2))
 
 # Highcharter
 map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
@@ -330,21 +333,21 @@ map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
 
 print(corruption)
 ## # A tibble: 4,566 × 8
-##    country_name        country…¹ indic…² year        value conti…³ iso2c unico…⁴
-##    &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt;   &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 Afghanistan         AFG       contro… 1996-12-31 -1.29  asia    AF    &quot;\U000…
-##  2 Albania             ALB       contro… 1996-12-31 -0.894 europe  AL    &quot;\U000…
-##  3 Algeria             DZA       contro… 1996-12-31 -0.567 africa  DZ    &quot;\U000…
-##  4 Andorra             AND       contro… 1996-12-31  1.32  europe  AD    &quot;\U000…
-##  5 Angola              AGO       contro… 1996-12-31 -1.17  africa  AO    &quot;\U000…
-##  6 Antigua And Barbuda ATG       contro… 1996-12-31  0.870 south … AG    &quot;\U000…
-##  7 Argentina           ARG       contro… 1996-12-31 -0.101 south … AR    &quot;\U000…
-##  8 Armenia             ARM       contro… 1996-12-31 -0.473 asia    AM    &quot;\U000…
-##  9 Australia           AUS       contro… 1996-12-31  1.88  oceania AU    &quot;\U000…
-## 10 Austria             AUT       contro… 1996-12-31  1.73  europe  AT    &quot;\U000…
+##    country_name        country_…¹ indic…² year       value conti…³ iso2c unico…⁴
+##    &lt;chr&gt;               &lt;chr&gt;      &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan         AFG        contro… 1996-12-31 -1.29 asia    AF    &quot;\U000…
+##  2 Albania             ALB        contro… 1996-12-31 -0.89 europe  AL    &quot;\U000…
+##  3 Algeria             DZA        contro… 1996-12-31 -0.57 africa  DZ    &quot;\U000…
+##  4 Andorra             AND        contro… 1996-12-31  1.32 europe  AD    &quot;\U000…
+##  5 Angola              AGO        contro… 1996-12-31 -1.17 africa  AO    &quot;\U000…
+##  6 Antigua And Barbuda ATG        contro… 1996-12-31  0.87 south … AG    &quot;\U000…
+##  7 Argentina           ARG        contro… 1996-12-31 -0.1  south … AR    &quot;\U000…
+##  8 Armenia             ARM        contro… 1996-12-31 -0.47 asia    AM    &quot;\U000…
+##  9 Australia           AUS        contro… 1996-12-31  1.88 oceania AU    &quot;\U000…
+## 10 Austria             AUT        contro… 1996-12-31  1.73 europe  AT    &quot;\U000…
 ## # … with 4,556 more rows, and abbreviated variable names ¹​country_code,
 ## #   ²​indicator_name, ³​continent, ⁴​unicode_symbol
-# htmltools::save_html(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
+# htmlwidgets::saveWidget(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;600px&quot;)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:control-of-corruption"></span>
 <iframe src="https://www.renanperes.com/widgets/WGI_corruption_2021.html" width="746.88cm" height="600px" data-external="1">
@@ -443,6 +446,7 @@ Figure 1: 2021 Control of Corruption.
 <!--           legend.text = element_text(size = 16), -->
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
+</div>
 </div>
 <div id="plotly-view" class="section level2">
 <h2>Plotly <a href="/widgets/plotly.html">View</a></h2>
