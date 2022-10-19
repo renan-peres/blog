@@ -13,13 +13,14 @@ coverSize: partial
 metaAlignment: center
 ---
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This report presents some governance indicators and compare them among the countries listed in the data source.
+This report presents six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.
 
 <!--more-->
 
 ```{r setup, echo=TRUE, message=FALSE}
 # Environment Setup
 library(tidyverse)
+library(klippy)
 library(rvest)
 library(janitor)
 library(plotly)
@@ -27,6 +28,7 @@ library(countrycode)
 library(knitr)
 library(crosstalk)
 library(htmlwidgets)
+# klippy::klippy(c("r", "python", "sql"), position = "left")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
@@ -44,12 +46,18 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     text-decoration: underline;
 }
 
-a, a:active, a:hover, a:visited {
-    cursor: pointer;
-    color: #349ef3;
-    text-decoration: none;
+
+ol {
+    display: block;
+    list-style-type: decimal;
     font-size: 19px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
 }
+
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -86,13 +94,13 @@ h1{
     margin: 1em 0 0em 0;
 }
 
-h1{
-    letter-spacing: -.04em;
-    font-family: "Open Sans",sans-serif;
-    font-weight: 700;
-    line-height: 1.45em;
-    color: #29b542;
-}
+<!-- h1{ -->
+<!--     letter-spacing: -.04em; -->
+<!--     font-family: "Open Sans",sans-serif; -->
+<!--     font-weight: 700; -->
+<!--     line-height: 1.45em; -->
+<!--     color: #29b542; -->
+<!-- } -->
 ```
 
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
@@ -100,7 +108,7 @@ h1{
 # Table of Contents
 
 1.  [Introduction]
-2.  [Motivation]
+2.  [Motivation] 💡
 3.  [Dataset]🗒️
 4.  [Data Preparation] 💻
 5.  [Visualizations] 📈
@@ -109,15 +117,15 @@ h1{
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the dataset [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) which includes six broad indicators of a country's governance between the periods of 1996-2021.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) which includes six broad indicators of a country's governance between the periods of 1996-2021.
 
 # Motivation
 
-As a worldwide traveler who has just recently been in a 3-month trip in Europe - traveling across 13 different countries, I had always been curious in knowing how each country's government operates and how they have progressed over time. Indeed, when I was navigating through <https://www.worldbank.org/> looking for a dataset where I could perform some analyzes, I found the [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which really caught my attention.
+As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I had always been curious in understanding how each country's government operates and how they have progressed over time. Indeed, when I was navigating through <https://www.worldbank.org/> looking for a dataset to perform some analyzes, I couldn't choose any other dataset than the [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), to release my first open-source data analysis project.
 
 # Dataset
 
-The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:
+The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021 which are:
 
 1.  Voice and Accountability;
 2.  Political Stability and Absence of Violence;
@@ -227,7 +235,6 @@ print(df)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "600px")
 ```
 
-
 # Visualizations
 
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
@@ -245,99 +252,181 @@ pie(
 ```
 
 <!-- ```{r pressure} -->
+
 <!-- # Effectiveness -->
+
 <!--   df_wgi %>% -->
+
 <!--   filter(indicator_name == "Government Effectiveness: Estimate") %>% -->
+
 <!--   mutate(indicator_name = str_replace(indicator_name, -->
+
 <!--                                       pattern =  "Government Effectiveness: Estimate", -->
+
 <!--                                       replacement = "Government Effectiveness")) %>% -->
+
 <!--   group_by(continent) %>% -->
+
 <!--   filter(continent != "NA", -->
+
 <!--          year > 2015) %>% -->
+
 <!--   ggplot(aes(x = year, y = value, fill = continent)) + -->
+
 <!--   geom_boxplot(na.rm = T) + -->
+
 <!--   # scale_fill_viridis_d(option = "mako") + -->
+
 <!--   scale_fill_brewer(palette = "Dark2") + -->
+
 <!--   coord_flip() + -->
+
 <!--   geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+
 <!--   labs(title = "Effectiveness", x = element_blank(), y = element_blank()) + -->
+
 <!--   # theme_bw() + -->
+
 <!--   cowplot::theme_cowplot() + -->
+
 <!--   theme(axis.text = element_text(size = 14, face = "bold"), -->
+
 <!--         title = element_text(size = 20), -->
+
 <!--         legend.text = element_text(size = 16), -->
+
 <!--         legend.title = element_blank()) -> p1 -->
 
-
 <!-- # Control of Corruption -->
+
 <!--   df_wgi %>% -->
+
 <!--     filter(indicator_name == "Control of Corruption: Estimate") %>% -->
+
 <!--     mutate(indicator_name = str_replace(indicator_name, -->
+
 <!--                                         pattern =  "Control of Corruption: Estimate", -->
+
 <!--                                         replacement = "Control of Corruption")) %>% -->
+
 <!--     group_by(continent) %>% -->
+
 <!--     filter(continent != "NA", -->
+
 <!--            year > 2015) %>% -->
+
 <!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+
 <!--     geom_boxplot(na.rm = T) + -->
+
 <!--     # scale_fill_viridis_d(option = "mako") + -->
+
 <!--     scale_fill_brewer(palette = "Dark2") + -->
+
 <!--     coord_flip() + -->
+
 <!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+
 <!--     labs(title = "Control of Corruption", x = element_blank(), y = element_blank()) + -->
+
 <!--     # theme_bw() + -->
+
 <!--     cowplot::theme_cowplot() + -->
+
 <!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+
 <!--           title = element_text(size = 20), -->
+
 <!--           legend.text = element_text(size = 16), -->
+
 <!--           legend.title = element_blank()) -> p2 -->
 
-
 <!-- # Regulatory Quality -->
+
 <!--   df_wgi %>% -->
+
 <!--     filter(indicator_name == "Regulatory Quality: Estimate") %>% -->
+
 <!--     mutate(indicator_name = str_replace(indicator_name, -->
+
 <!--                                         pattern =  "Regulatory Quality: Estimate", -->
+
 <!--                                         replacement = "Regulatory Quality")) %>% -->
+
 <!--     group_by(continent) %>% -->
+
 <!--     filter(continent != "NA", -->
+
 <!--            year > 2015) %>% -->
+
 <!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+
 <!--     geom_boxplot(na.rm = T) + -->
+
 <!--     # scale_fill_viridis_d(option = "mako") + -->
+
 <!--     scale_fill_brewer(palette = "Dark2") + -->
+
 <!--     coord_flip() + -->
+
 <!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+
 <!--     labs(title = "Regulatory Quality", x = element_blank(), y = element_blank()) + -->
+
 <!--     # theme_bw() + -->
+
 <!--     cowplot::theme_cowplot() + -->
+
 <!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+
 <!--           title = element_text(size = 20), -->
+
 <!--           legend.text = element_text(size = 16), -->
+
 <!--           legend.title = element_blank()) -> p3 -->
 
-
 <!-- # Rule of Law -->
+
 <!--   df_wgi %>% -->
+
 <!--     filter(indicator_name == "Rule of Law: Estimate") %>% -->
+
 <!--     mutate(indicator_name = str_replace(indicator_name, -->
+
 <!--                                         pattern =  "Rule of Law: Estimate", -->
+
 <!--                                         replacement = "Rule of Law")) %>% -->
+
 <!--     group_by(continent) %>% -->
+
 <!--     filter(continent != "NA", -->
+
 <!--            year > 2015) %>% -->
+
 <!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
+
 <!--     geom_boxplot(na.rm = T) + -->
+
 <!--     # scale_fill_viridis_d(option = "mako") + -->
+
 <!--     scale_fill_brewer(palette = "Dark2") + -->
+
 <!--     coord_flip() + -->
+
 <!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
+
 <!--     labs(title = "Rule of Law", x = element_blank(), y = element_blank()) + -->
+
 <!--     # theme_bw() + -->
+
 <!--     cowplot::theme_cowplot() + -->
+
 <!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
+
 <!--           title = element_text(size = 20), -->
+
 <!--           legend.text = element_text(size = 16), -->
+
 <!--           legend.title = element_blank()) -> p4 -->
 
 <!-- ``` -->

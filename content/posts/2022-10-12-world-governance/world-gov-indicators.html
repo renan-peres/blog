@@ -15,10 +15,11 @@ metaAlignment: center
 
 
 
-<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This report presents some governance indicators and compare them among the countries listed in the data source.</p>
+<p>This report presents six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.</p>
 <!--more-->
 <pre class="r"><code># Environment Setup
 library(tidyverse)
+library(klippy)
 library(rvest)
 library(janitor)
 library(plotly)
@@ -26,6 +27,7 @@ library(countrycode)
 library(knitr)
 library(crosstalk)
 library(htmlwidgets)
+# klippy::klippy(c(&quot;r&quot;, &quot;python&quot;, &quot;sql&quot;), position = &quot;left&quot;)
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, &quot;cm&quot;), fig.height = unit(10, &quot;cm&quot;))</code></pre>
@@ -40,12 +42,18 @@ knitr::opts_chunk$set(fig.width = unit(7.78, &quot;cm&quot;), fig.height = unit(
     text-decoration: underline;
 }
 
-a, a:active, a:hover, a:visited {
-    cursor: pointer;
-    color: #349ef3;
-    text-decoration: none;
+
+ol {
+    display: block;
+    list-style-type: decimal;
     font-size: 19px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
 }
+
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
@@ -82,20 +90,20 @@ h1{
     margin: 1em 0 0em 0;
 }
 
-h1{
-    letter-spacing: -.04em;
-    font-family: "Open Sans",sans-serif;
-    font-weight: 700;
-    line-height: 1.45em;
-    color: #29b542;
-}
+<!-- h1{ -->
+<!--     letter-spacing: -.04em; -->
+<!--     font-family: "Open Sans",sans-serif; -->
+<!--     font-weight: 700; -->
+<!--     line-height: 1.45em; -->
+<!--     color: #29b542; -->
+<!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 07:58</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 11:56</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#motivation">Motivation</a></li>
+<li><a href="#motivation">Motivation</a> 💡</li>
 <li><a href="#dataset">Dataset</a>🗒️</li>
 <li><a href="#data-preparation">Data Preparation</a> 💻</li>
 <li><a href="#visualizations">Visualizations</a> 📈</li>
@@ -105,15 +113,15 @@ h1{
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the dataset <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) which includes six broad indicators of a country’s governance between the periods of 1996-2021.</p>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the data source <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) which includes six broad indicators of a country’s governance between the periods of 1996-2021.</p>
 </div>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>As a worldwide traveler who has just recently been in a 3-month trip in Europe - traveling across 13 different countries, I had always been curious in knowing how each country’s government operates and how they have progressed over time. Indeed, when I was navigating through <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a> looking for a dataset where I could perform some analyzes, I found the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), which really caught my attention.</p>
+<p>As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I had always been curious in understanding how each country’s government operates and how they have progressed over time. Indeed, when I was navigating through <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a> looking for a dataset to perform some analyzes, I couldn’t choose any other dataset than the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), to release my first open-source data analysis project.</p>
 </div>
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
-<p>The Worldwide Governance Indicators (WGI) are composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021:</p>
+<p>The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021 which are:</p>
 <ol style="list-style-type: decimal">
 <li>Voice and Accountability;</li>
 <li>Political Stability and Absence of Violence;</li>
