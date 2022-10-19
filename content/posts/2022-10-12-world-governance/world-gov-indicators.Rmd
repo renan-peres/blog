@@ -28,13 +28,13 @@ library(countrycode)
 library(knitr)
 library(crosstalk)
 library(htmlwidgets)
-klippy::klippy(c("r", "python", "sql"), position = "right")
+# klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
 ```
 
-<a class="header-title-link" href="http://renanperes.com" aria-label="Go to homepage">Home💻</a>
+<!-- <a class="header-title-link" href="http://renanperes.com" aria-label="Go to homepage">Home💻</a> -->
 
 ```{css styles, echo=FALSE}
 
@@ -51,13 +51,12 @@ ol {
     display: block;
     list-style-type: decimal;
     font-size: 19px;
-    margin-block-start: 1em;
+    margin-block-start: 0em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 40px;
 }
-
 
 .post-header-cover .post-header .post-title {
     max-width: 750px;
