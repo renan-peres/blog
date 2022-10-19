@@ -129,12 +129,12 @@ As a worldwide traveler who has just recently been in an almost 3-month study ab
 
 The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021 which are:
 
-1.  Voice and Accountability;
-2.  Political Stability and Absence of Violence;
-3.  Government Effectiveness;
+1.  Control of Corruption;
+2.  Government Effectiveness;
+3.  Political Stability and Absence of Violence;
 4.  Regulatory Quality;
 5.  Rule of Law;
-6.  Control of Corruption.
+6.  Voice and Accountability.
 
 Feel free to download the raw data if you want to perform some analyzes as well!
 
