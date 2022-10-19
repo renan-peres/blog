@@ -90,7 +90,7 @@ h1{
     color: #29b542;
 }
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 07:46</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 07:58</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -98,8 +98,7 @@ h1{
 <li><a href="#motivation">Motivation</a></li>
 <li><a href="#dataset">Dataset</a>🗒️</li>
 <li><a href="#data-preparation">Data Preparation</a> 💻</li>
-<li>[Data Analysis] 💰</li>
-<li>[Visualizations] 📈</li>
+<li><a href="#visualizations">Visualizations</a> 📈</li>
 <li>[Conclusion]</li>
 <li>[References]</li>
 </ol>
@@ -198,8 +197,8 @@ print(df_continent)
 <div id="data-preparation" class="section level1">
 <h1>Data Preparation</h1>
 <p>During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.</p>
-<div id="view-full-screen" class="section level4">
-<h4>[<a href="/widgets/WGI_DT.html">View Full Screen</a>]</h4>
+<div id="view-table-in-full-screen" class="section level4">
+<h4>[<a href="/widgets/WGI_DT.html">View Table in Full Screen</a>]</h4>
 <pre class="r"><code># DATA FRAME
 # Cleaning
 df_data &lt;- df_data %&gt;% 
@@ -289,8 +288,8 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 </iframe>
 </div>
 </div>
-<div id="plots" class="section level1">
-<h1>Plots</h1>
+<div id="visualizations" class="section level1">
+<h1>Visualizations</h1>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
 <p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
 <pre class="r"><code>par(mar = c(0, 1, 0, 1))

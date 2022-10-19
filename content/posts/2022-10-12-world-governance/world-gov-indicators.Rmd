@@ -103,10 +103,9 @@ h1{
 2.  [Motivation]
 3.  [Dataset]🗒️
 4.  [Data Preparation] 💻
-5.  [Data Analysis] 💰
-6.  [Visualizations] 📈
-7.  [Conclusion]
-8.  [References]
+5.  [Visualizations] 📈
+6.  [Conclusion]
+7.  [References]
 
 # Introduction
 
@@ -152,7 +151,7 @@ print(df_continent)
 
 During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
 
-#### [[View Full Screen](/widgets/WGI_DT.html)]
+#### [[View Table in Full Screen](/widgets/WGI_DT.html)]
 
 ```{r prepare, echo=TRUE}
 # DATA FRAME
@@ -229,7 +228,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 ```
 
 
-# Plots
+# Visualizations
 
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
