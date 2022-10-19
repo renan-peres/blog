@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 13:54</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 16:20</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -292,19 +292,65 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
+<div id="most-recent-results-2021" class="section level3">
+<h3>Most Recent Results <strong><em>(2021)</em></strong></h3>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
-<pre class="r"><code>par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
-  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
-  init.angle = -50, border = NA
-)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:pie"></span>
-<img src="/posts/2022-10-12-world-governance/world-gov-indicators_files/figure-html/pie-1.png" alt="A fancy pie chart." width="746.88cm" />
+<p>You can see the 2021 scores. See Figure <a href="#fig:control-of-corruption">1</a> for example:</p>
+<pre class="r"><code>
+corruption &lt;- df %&gt;% 
+                filter(indicator_name == &quot;control of corruption&quot;) %&gt;% 
+                mutate(country_name = str_to_title(country_name),
+                       country_code = str_to_upper(country_code))
+
+# Highcharter
+map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
+                             download_map_data = FALSE,
+                             data = corruption,
+                             name = &quot;Control of Corruption&quot;,
+                             value = &quot;GNI&quot;,
+                             borderWidth = 0,
+                             nullColor = &quot;#d3d3d3&quot;,
+                             joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
+                        hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %&gt;% 
+                        hc_title(text = &quot;&lt;b&gt;Control of Corruption&lt;/b&gt;&quot;,
+                                 margin = 5,
+                                 floating= FALSE,
+                                 align = &quot;center&quot;,
+                                 style = list(fontSize = &quot;28px&quot;,
+                                              color = &quot;#0e3881&quot;, 
+                                              useHTML = TRUE))
+  
+                        # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
+                        #             margin = 20,
+                        #             floating= FALSE,
+                        #             align = &quot;center&quot;,
+                        #             style = list(fontSize = &quot;28px&quot;,
+                        #                          color = &quot;#e1a615&quot;,
+                        #                          useHTML = TRUE))
+
+print(corruption)
+## # A tibble: 4,566 × 8
+##    country_name        country…¹ indic…² year        value conti…³ iso2c unico…⁴
+##    &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt;   &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan         AFG       contro… 1996-12-31 -1.29  asia    AF    &quot;\U000…
+##  2 Albania             ALB       contro… 1996-12-31 -0.894 europe  AL    &quot;\U000…
+##  3 Algeria             DZA       contro… 1996-12-31 -0.567 africa  DZ    &quot;\U000…
+##  4 Andorra             AND       contro… 1996-12-31  1.32  europe  AD    &quot;\U000…
+##  5 Angola              AGO       contro… 1996-12-31 -1.17  africa  AO    &quot;\U000…
+##  6 Antigua And Barbuda ATG       contro… 1996-12-31  0.870 south … AG    &quot;\U000…
+##  7 Argentina           ARG       contro… 1996-12-31 -0.101 south … AR    &quot;\U000…
+##  8 Armenia             ARM       contro… 1996-12-31 -0.473 asia    AM    &quot;\U000…
+##  9 Australia           AUS       contro… 1996-12-31  1.88  oceania AU    &quot;\U000…
+## 10 Austria             AUT       contro… 1996-12-31  1.73  europe  AT    &quot;\U000…
+## # … with 4,556 more rows, and abbreviated variable names ¹​country_code,
+## #   ²​indicator_name, ³​continent, ⁴​unicode_symbol
+# htmltools::save_html(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
+knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;600px&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:control-of-corruption"></span>
+<iframe src="https://www.renanperes.com/widgets/WGI_corruption_2021.html" width="746.88cm" height="600px" data-external="1">
+</iframe>
 <p class="caption">
-Figure 1: A fancy pie chart.
+Figure 1: 2021 Control of Corruption.
 </p>
 </div>
 <!-- ```{r pressure} -->
@@ -397,6 +443,7 @@ Figure 1: A fancy pie chart.
 <!--           legend.text = element_text(size = 16), -->
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
+</div>
 <div id="plotly-view" class="section level2">
 <h2>Plotly <a href="/widgets/plotly.html">View</a></h2>
 <pre class="r"><code>knitr::include_url(&quot;https://www.renanperes.com/widgets/plotly.html&quot;, height = &quot;600px&quot;)</code></pre>

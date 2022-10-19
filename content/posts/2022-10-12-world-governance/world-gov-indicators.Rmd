@@ -31,6 +31,9 @@ library(htmlwidgets)
 library(DT)
 library(gt)
 library(ggimage)
+library(leaflet)
+library(htmltools)
+library(highcharter)
 # klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
@@ -247,18 +250,48 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 # Visualizations
 
+### Most Recent Results ***(2021)***
+
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
+You can see the 2021 scores. See Figure \@ref(fig:control-of-corruption) for example:
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
+```{r control-of-corruption, fig.cap='2021 Control of Corruption.', tidy=FALSE}
+
+corruption <- df %>% 
+                filter(indicator_name == "control of corruption") %>% 
+                mutate(country_name = str_to_title(country_name),
+                       country_code = str_to_upper(country_code))
+
+# Highcharter
+map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres", 
+                             download_map_data = FALSE,
+                             data = corruption,
+                             name = "Control of Corruption",
+                             value = "GNI",
+                             borderWidth = 0,
+                             nullColor = "#d3d3d3",
+                             joinBy = c("iso-a3", "country_code")) %>% 
+                        hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %>% 
+                        hc_title(text = "<b>Control of Corruption</b>",
+                                 margin = 5,
+                                 floating= FALSE,
+                                 align = "center",
+                                 style = list(fontSize = "28px",
+                                              color = "#0e3881", 
+                                              useHTML = TRUE))
+  
+                        # hc_subtitle(text = "<i>2021</i>",
+                        #             margin = 20,
+                        #             floating= FALSE,
+                        #             align = "center",
+                        #             style = list(fontSize = "28px",
+                        #                          color = "#e1a615",
+                        #                          useHTML = TRUE))
+
+print(corruption)
+# htmltools::save_html(map_corruption_2021, "WGI_corruption_2021.html")
+knitr::include_url("https://www.renanperes.com/widgets/WGI_corruption_2021.html", height = "600px")
 ```
 
 <!-- ```{r pressure} -->
