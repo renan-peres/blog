@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 12:17</p>
+<p><strong>Last Update:</strong> October 19, 2022 - 13:32</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -126,7 +126,7 @@ h1{
 # unzip(tf)
 df_data &lt;- read_csv(&quot;WGIData.csv&quot;)
 df_country &lt;- read_csv(&quot;WGICountry.csv&quot;)
-df_continent &lt;- countrycode::codelist %&gt;% select(continent, wb, country.name.en)
+df_continent &lt;- countrycode::codelist %&gt;% select(continent, wb, country.name.en, iso2c, unicode.symbol)
 print(df_data)
 ## # A tibble: 7,704 × 28
 ##    Country N…¹ Count…² Indic…³ Indic…⁴ `1996` `1998` `2000` `2002` `2003` `2004`
@@ -171,19 +171,19 @@ print(df_country)
 ## #   `External debt Reporting status` &lt;chr&gt;, `System of trade` &lt;chr&gt;, …
 
 print(df_continent)
-## # A tibble: 288 × 3
-##    continent wb    country.name.en  
-##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;            
-##  1 Asia      AFG   Afghanistan      
-##  2 Europe    &lt;NA&gt;  Åland Islands    
-##  3 Europe    ALB   Albania          
-##  4 Africa    DZA   Algeria          
-##  5 Oceania   ASM   American Samoa   
-##  6 Europe    AND   Andorra          
-##  7 Africa    AGO   Angola           
-##  8 Americas  &lt;NA&gt;  Anguilla         
-##  9 &lt;NA&gt;      &lt;NA&gt;  Antarctica       
-## 10 Americas  ATG   Antigua &amp; Barbuda
+## # A tibble: 288 × 5
+##    continent wb    country.name.en   iso2c unicode.symbol        
+##    &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;                 
+##  1 Asia      AFG   Afghanistan       AF    &quot;\U0001f1e6\U0001f1eb&quot;
+##  2 Europe    &lt;NA&gt;  Åland Islands     AX    &quot;\U0001f1e6\U0001f1fd&quot;
+##  3 Europe    ALB   Albania           AL    &quot;\U0001f1e6\U0001f1f1&quot;
+##  4 Africa    DZA   Algeria           DZ    &quot;\U0001f1e9\U0001f1ff&quot;
+##  5 Oceania   ASM   American Samoa    AS    &quot;\U0001f1e6\U0001f1f8&quot;
+##  6 Europe    AND   Andorra           AD    &quot;\U0001f1e6\U0001f1e9&quot;
+##  7 Africa    AGO   Angola            AO    &quot;\U0001f1e6\U0001f1f4&quot;
+##  8 Americas  &lt;NA&gt;  Anguilla          AI    &quot;\U0001f1e6\U0001f1ee&quot;
+##  9 &lt;NA&gt;      &lt;NA&gt;  Antarctica        AQ    &quot;\U0001f1e6\U0001f1f6&quot;
+## 10 Americas  ATG   Antigua &amp; Barbuda AG    &quot;\U0001f1e6\U0001f1ec&quot;
 ## # … with 278 more rows</code></pre>
 </div>
 </div>
@@ -216,36 +216,44 @@ df_country &lt;- df_country %&gt;%
 
 df_continent &lt;- df_continent %&gt;% 
                   clean_names() %&gt;% 
-                  mutate_all(~str_to_lower(.)) %&gt;% 
                   rename(country_code = wb,
-                         country_name = country_name_en)
+                         country_name = country_name_en) %&gt;% 
+                  mutate_at(.vars = c(&quot;continent&quot;, &quot;country_code&quot;, &quot;country_name&quot;), ~str_to_lower(.))
     
 # Merging Tables
 df &lt;- df_data %&gt;% 
         inner_join(df_country %&gt;% select(country_code, region), 
                    by = &quot;country_code&quot;) %&gt;% 
-        inner_join(df_continent %&gt;% select(country_code, continent),
+        inner_join(df_continent %&gt;% select(country_code, continent, iso2c, unicode_symbol),
                    by = &quot;country_code&quot;) %&gt;% 
+        mutate(continent = case_when(region == &quot;latin america &amp; caribbean&quot; ~ &quot;south america&quot;,
+                                     region == &quot;north america&quot; ~ &quot;north america&quot;,
+                                     country_name == &quot;greenland&quot; ~ &quot;north america&quot;,
+                                     T ~ continent)) %&gt;% 
         filter(continent != &quot;&quot;) %&gt;% 
-        filter(value != &quot;&quot;)
+        filter(value != &quot;&quot;) %&gt;% 
+        select(-region) %&gt;% 
+        arrange(year, country_name)
 
 # DATA TABLE
 # Preparing
 dt &lt;- df %&gt;% 
-        mutate_at(.vars = c(&quot;country_name&quot;, &quot;region&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
+        mutate_at(.vars = c(&quot;country_name&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
         mutate(country_code = str_to_upper(country_code),
                year = str_sub(year, start = 1, end = 4),
                year = as.integer(year),
                value = round(value, 2)) %&gt;% 
-        select(country_name, country_code, continent, region, everything()) %&gt;% 
-        arrange(year) %&gt;% 
-        mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;region&quot;, &quot;continent&quot;, &quot;indicator_name&quot;) ,~as_factor(.)) %&gt;%  
+        select(country_name,  country_code, continent, indicator_name, year, value) %&gt;% 
+        mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;, &quot;year&quot;) ,~as_factor(.)) %&gt;%
+        arrange(continent) %&gt;% 
+        mutate(continent = as_factor(continent)) %&gt;%
+        arrange(year, country_name) %&gt;% 
   
 # Creating
         DT::datatable(rownames = FALSE,
                       width = &quot;100%&quot;,
                       filter = &quot;top&quot;,
-                      colnames = c(&#39;Country&#39;, &#39;Code&#39;, &#39;Continent&#39;, &#39;Region&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
+                      colnames = c(&#39;Country&#39;,&#39;Code&#39;, &#39;Continent&#39;, &#39;Indicator&#39;, &quot;Year&quot;, &quot;Score&quot;),
                       class = &#39;cell-border stripe&#39;,
                       extensions = c(&quot;Responsive&quot;, &quot;Buttons&quot;),
                                     options = list(
@@ -261,20 +269,21 @@ dt &lt;- df %&gt;%
 # write_csv(df, file = &quot;./WGI_cleaned.csv&quot;)
 
 print(df)
-## # A tibble: 27,591 × 7
-##    country_name country_code indicator_name      year       value region conti…¹
-##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;               &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  
-##  1 afghanistan  afg          control of corrupt… 1996-12-31 -1.29 south… asia   
-##  2 afghanistan  afg          control of corrupt… 1998-12-31 -1.18 south… asia   
-##  3 afghanistan  afg          control of corrupt… 2000-12-31 -1.27 south… asia   
-##  4 afghanistan  afg          control of corrupt… 2002-12-31 -1.25 south… asia   
-##  5 afghanistan  afg          control of corrupt… 2003-12-31 -1.34 south… asia   
-##  6 afghanistan  afg          control of corrupt… 2004-12-31 -1.35 south… asia   
-##  7 afghanistan  afg          control of corrupt… 2005-12-31 -1.45 south… asia   
-##  8 afghanistan  afg          control of corrupt… 2006-12-31 -1.45 south… asia   
-##  9 afghanistan  afg          control of corrupt… 2007-12-31 -1.61 south… asia   
-## 10 afghanistan  afg          control of corrupt… 2008-12-31 -1.67 south… asia   
-## # … with 27,581 more rows, and abbreviated variable name ¹​continent
+## # A tibble: 27,591 × 8
+##    country_name country_code indicator…¹ year        value conti…² iso2c unico…³
+##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 afghanistan  afg          control of… 1996-12-31 -1.29  asia    AF    &quot;\U000…
+##  2 afghanistan  afg          government… 1996-12-31 -2.18  asia    AF    &quot;\U000…
+##  3 afghanistan  afg          political … 1996-12-31 -2.42  asia    AF    &quot;\U000…
+##  4 afghanistan  afg          regulatory… 1996-12-31 -2.09  asia    AF    &quot;\U000…
+##  5 afghanistan  afg          rule of law 1996-12-31 -1.79  asia    AF    &quot;\U000…
+##  6 afghanistan  afg          voice and … 1996-12-31 -1.91  asia    AF    &quot;\U000…
+##  7 albania      alb          control of… 1996-12-31 -0.894 europe  AL    &quot;\U000…
+##  8 albania      alb          government… 1996-12-31 -0.689 europe  AL    &quot;\U000…
+##  9 albania      alb          political … 1996-12-31 -0.337 europe  AL    &quot;\U000…
+## 10 albania      alb          regulatory… 1996-12-31 -0.474 europe  AL    &quot;\U000…
+## # … with 27,581 more rows, and abbreviated variable names ¹​indicator_name,
+## #   ²​continent, ³​unicode_symbol
 
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, height = &quot;600px&quot;)</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="600px" data-external="1">

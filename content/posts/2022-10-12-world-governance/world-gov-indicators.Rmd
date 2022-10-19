@@ -28,6 +28,9 @@ library(countrycode)
 library(knitr)
 library(crosstalk)
 library(htmlwidgets)
+library(DT)
+library(gt)
+library(ggimage)
 # klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
@@ -146,7 +149,7 @@ Feel free to download the raw data if you want to perform some analyzes as well!
 # unzip(tf)
 df_data <- read_csv("WGIData.csv")
 df_country <- read_csv("WGICountry.csv")
-df_continent <- countrycode::codelist %>% select(continent, wb, country.name.en)
+df_continent <- countrycode::codelist %>% select(continent, wb, country.name.en, iso2c, unicode.symbol)
 print(df_data)
 
 print(df_country)
@@ -185,36 +188,44 @@ df_country <- df_country %>%
 
 df_continent <- df_continent %>% 
                   clean_names() %>% 
-                  mutate_all(~str_to_lower(.)) %>% 
                   rename(country_code = wb,
-                         country_name = country_name_en)
+                         country_name = country_name_en) %>% 
+                  mutate_at(.vars = c("continent", "country_code", "country_name"), ~str_to_lower(.))
     
 # Merging Tables
 df <- df_data %>% 
         inner_join(df_country %>% select(country_code, region), 
                    by = "country_code") %>% 
-        inner_join(df_continent %>% select(country_code, continent),
+        inner_join(df_continent %>% select(country_code, continent, iso2c, unicode_symbol),
                    by = "country_code") %>% 
+        mutate(continent = case_when(region == "latin america & caribbean" ~ "south america",
+                                     region == "north america" ~ "north america",
+                                     country_name == "greenland" ~ "north america",
+                                     T ~ continent)) %>% 
         filter(continent != "") %>% 
-        filter(value != "")
+        filter(value != "") %>% 
+        select(-region) %>% 
+        arrange(year, country_name)
 
 # DATA TABLE
 # Preparing
 dt <- df %>% 
-        mutate_at(.vars = c("country_name", "region", "continent"), .funs = str_to_title) %>% 
+        mutate_at(.vars = c("country_name", "continent"), .funs = str_to_title) %>% 
         mutate(country_code = str_to_upper(country_code),
                year = str_sub(year, start = 1, end = 4),
                year = as.integer(year),
                value = round(value, 2)) %>% 
-        select(country_name, country_code, continent, region, everything()) %>% 
-        arrange(year) %>% 
-        mutate_at(.vars = c("country_name", "country_code", "region", "continent", "indicator_name") ,~as_factor(.)) %>%  
+        select(country_name,  country_code, continent, indicator_name, year, value) %>% 
+        mutate_at(.vars = c("country_name", "country_code", "indicator_name", "year") ,~as_factor(.)) %>%
+        arrange(continent) %>% 
+        mutate(continent = as_factor(continent)) %>%
+        arrange(year, country_name) %>% 
   
 # Creating
         DT::datatable(rownames = FALSE,
                       width = "100%",
                       filter = "top",
-                      colnames = c('Country', 'Code', 'Continent', 'Region', 'Indicator', "Year", "Score"),
+                      colnames = c('Country','Code', 'Continent', 'Indicator', "Year", "Score"),
                       class = 'cell-border stripe',
                       extensions = c("Responsive", "Buttons"),
                                     options = list(
