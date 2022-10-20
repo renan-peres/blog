@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 19, 2022 - 17:05</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 09:32</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -136,29 +136,25 @@ h1{
 # 2_Cleaning
   df_data &lt;- df_data %&gt;% 
                 clean_names() %&gt;%
-                select(-c(&quot;indicator_code&quot;,&quot;x28&quot;)) %&gt;%
-                mutate_all(~str_to_lower(.)) %&gt;% 
+                select(-c(&quot;indicator_code&quot;,&quot;x28&quot;)) %&gt;% 
                 pivot_longer(-c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;), 
                              names_to = &quot;year&quot;, 
                              values_to = &quot;value&quot;) %&gt;% 
-                mutate(year = str_remove_all(year, pattern = &quot;x&quot;),
-                       year = paste0(year, &quot;-12-31&quot;),
-                       year = lubridate::ymd(year)) %&gt;% 
-                filter(str_detect(indicator_name, &quot;estimate&quot;)) %&gt;% 
+                mutate(year = str_remove_all(year, pattern = &quot;x&quot;)) %&gt;% 
+                filter(str_detect(indicator_name, &quot;Estimate&quot;)) %&gt;% 
                 mutate(indicator_name = str_extract(indicator_name, pattern = &quot;(.*):&quot;),
                        indicator_name = str_remove_all(indicator_name, &quot;:&quot;)) %&gt;% 
-                mutate(value = as.double(value))
+                mutate(year = as.integer(year),
+                       value = as.double(value))
   
   df_country &lt;- df_country %&gt;% 
                   clean_names() %&gt;% 
-                  mutate_all(~str_to_lower(.)) %&gt;%
                   select(country_code, table_name, region)
   
   df_continent &lt;- df_continent %&gt;% 
                     clean_names() %&gt;% 
                     rename(country_code = wb,
-                           country_name = country_name_en) %&gt;% 
-                    mutate_at(.vars = c(&quot;continent&quot;, &quot;country_code&quot;, &quot;country_name&quot;), ~str_to_lower(.))
+                           country_name = country_name_en)
       
 # 3_Creating_Master_Table
   df &lt;- df_data %&gt;% 
@@ -178,11 +174,7 @@ h1{
 # DATA TABLE
   # Preparing
     dt &lt;- df %&gt;% 
-            mutate_at(.vars = c(&quot;country_name&quot;, &quot;continent&quot;), .funs = str_to_title) %&gt;% 
-            mutate(country_code = str_to_upper(country_code),
-                   year = str_sub(year, start = 1, end = 4),
-                   year = as.integer(year),
-                   value = round(value, 2)) %&gt;% 
+            mutate(value = round(value, 2)) %&gt;% 
             select(country_name,  country_code, continent, indicator_name, year, value) %&gt;% 
             mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;, &quot;year&quot;) ,~as_factor(.)) %&gt;%
             arrange(continent) %&gt;% 
@@ -210,20 +202,20 @@ h1{
 
 print(df)
 ## # A tibble: 27,591 × 8
-##    country_name country_code indicator…¹ year        value conti…² iso2c unico…³
-##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;       &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 afghanistan  afg          control of… 1996-12-31 -1.29  asia    AF    &quot;\U000…
-##  2 afghanistan  afg          government… 1996-12-31 -2.18  asia    AF    &quot;\U000…
-##  3 afghanistan  afg          political … 1996-12-31 -2.42  asia    AF    &quot;\U000…
-##  4 afghanistan  afg          regulatory… 1996-12-31 -2.09  asia    AF    &quot;\U000…
-##  5 afghanistan  afg          rule of law 1996-12-31 -1.79  asia    AF    &quot;\U000…
-##  6 afghanistan  afg          voice and … 1996-12-31 -1.91  asia    AF    &quot;\U000…
-##  7 albania      alb          control of… 1996-12-31 -0.894 europe  AL    &quot;\U000…
-##  8 albania      alb          government… 1996-12-31 -0.689 europe  AL    &quot;\U000…
-##  9 albania      alb          political … 1996-12-31 -0.337 europe  AL    &quot;\U000…
-## 10 albania      alb          regulatory… 1996-12-31 -0.474 europe  AL    &quot;\U000…
-## # … with 27,581 more rows, and abbreviated variable names ¹​indicator_name,
-## #   ²​continent, ³​unicode_symbol
+##    country_name country_code indicator_name    year  value conti…¹ iso2c unico…²
+##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan  AFG          Control of Corr…  1996 -1.29  Asia    AF    &quot;\U000…
+##  2 Afghanistan  AFG          Government Effe…  1996 -2.18  Asia    AF    &quot;\U000…
+##  3 Afghanistan  AFG          Political Stabi…  1996 -2.42  Asia    AF    &quot;\U000…
+##  4 Afghanistan  AFG          Regulatory Qual…  1996 -2.09  Asia    AF    &quot;\U000…
+##  5 Afghanistan  AFG          Rule of Law       1996 -1.79  Asia    AF    &quot;\U000…
+##  6 Afghanistan  AFG          Voice and Accou…  1996 -1.91  Asia    AF    &quot;\U000…
+##  7 Albania      ALB          Control of Corr…  1996 -0.894 Europe  AL    &quot;\U000…
+##  8 Albania      ALB          Government Effe…  1996 -0.689 Europe  AL    &quot;\U000…
+##  9 Albania      ALB          Political Stabi…  1996 -0.337 Europe  AL    &quot;\U000…
+## 10 Albania      ALB          Regulatory Qual…  1996 -0.474 Europe  AL    &quot;\U000…
+## # … with 27,581 more rows, and abbreviated variable names ¹​continent,
+## #   ²​unicode_symbol
 
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, height = &quot;600px&quot;)</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="600px" data-external="1">
@@ -232,36 +224,37 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
-<div id="most-recent-results-2021" class="section level3">
-<h3>Most Recent Results <strong><em>(2021)</em></strong></h3>
+<div id="most-recent-results-2021" class="section level2">
+<h2>Most Recent Results <strong><em>(2021)</em></strong></h2>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
 <p>You can see the 2021 scores. See Figure <a href="#fig:control-of-corruption">1</a> for example:</p>
-<div id="view-map-in-full-screen" class="section level4">
-<h4>[<a href="/widgets/WGI_corruption_2021.html">View Map in Full Screen</a>]</h4>
+<div id="control-of-corruption-view-map-in-full-screen" class="section level3">
+<h3>Control of Corruption [<a href="/widgets/WGI_corruption_2021.html">View Map in Full Screen</a>]</h3>
 <pre class="r"><code>
-corruption &lt;- df %&gt;% 
-                filter(indicator_name == &quot;control of corruption&quot;) %&gt;% 
-                mutate(country_name = str_to_title(country_name),
-                       country_code = str_to_upper(country_code),
-                       value = round(value, 2))
+df_corruption &lt;- df %&gt;% 
+                  mutate(value = round(value, 2)) %&gt;% 
+                  filter(year == &quot;2021&quot; ,
+                         indicator_name == &quot;Control of Corruption&quot;)
 
 # Highcharter
 map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
                              download_map_data = FALSE,
-                             data = corruption,
-                             name = &quot;Control of Corruption&quot;,
+                             data = df_corruption,
+                             name = &quot;Control of Corruption:&quot;, color = &quot;#d53b01&quot;,
                              value = &quot;GNI&quot;,
                              borderWidth = 0,
                              nullColor = &quot;#d3d3d3&quot;,
                              joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
+  
                         hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %&gt;% 
+  
                         hc_title(text = &quot;&lt;b&gt;Control of Corruption&lt;/b&gt;&quot;,
                                  margin = 5,
                                  floating= FALSE,
                                  align = &quot;center&quot;,
                                  style = list(fontSize = &quot;28px&quot;,
                                               color = &quot;#0e3881&quot;, 
-                                              useHTML = TRUE))
+                                              useHTML = TRUE)) %&gt;% 
   
                         # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
                         #             margin = 20,
@@ -269,24 +262,39 @@ map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                         #             align = &quot;center&quot;,
                         #             style = list(fontSize = &quot;28px&quot;,
                         #                          color = &quot;#e1a615&quot;,
-                        #                          useHTML = TRUE))
+                        #                          useHTML = TRUE)) %&gt;% 
+  
+                        hc_mapNavigation(enabled = TRUE,
+                                         enableMouseWheelZoom = TRUE,
+                                         enableDoubleClickZoom = TRUE) %&gt;% 
+  
+                        hc_exporting(enabled = TRUE) %&gt;% 
+  
+                        hc_credits(enabled = FALSE) %&gt;% 
+                        
+                        hc_tooltip(shared = TRUE,
+                                    useHTML = TRUE,
+                                    headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
+                                    pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {series.color}&quot;&gt;{series.name} &lt;/td&gt;&lt;td style=&quot;text-align: right&quot;&gt;&lt;b&gt;{point.y} {point.value}&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&#39;)
+  
+                        
 
-print(corruption)
-## # A tibble: 4,566 × 8
-##    country_name        country_…¹ indic…² year       value conti…³ iso2c unico…⁴
-##    &lt;chr&gt;               &lt;chr&gt;      &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 Afghanistan         AFG        contro… 1996-12-31 -1.29 asia    AF    &quot;\U000…
-##  2 Albania             ALB        contro… 1996-12-31 -0.89 europe  AL    &quot;\U000…
-##  3 Algeria             DZA        contro… 1996-12-31 -0.57 africa  DZ    &quot;\U000…
-##  4 Andorra             AND        contro… 1996-12-31  1.32 europe  AD    &quot;\U000…
-##  5 Angola              AGO        contro… 1996-12-31 -1.17 africa  AO    &quot;\U000…
-##  6 Antigua And Barbuda ATG        contro… 1996-12-31  0.87 south … AG    &quot;\U000…
-##  7 Argentina           ARG        contro… 1996-12-31 -0.1  south … AR    &quot;\U000…
-##  8 Armenia             ARM        contro… 1996-12-31 -0.47 asia    AM    &quot;\U000…
-##  9 Australia           AUS        contro… 1996-12-31  1.88 oceania AU    &quot;\U000…
-## 10 Austria             AUT        contro… 1996-12-31  1.73 europe  AT    &quot;\U000…
-## # … with 4,556 more rows, and abbreviated variable names ¹​country_code,
-## #   ²​indicator_name, ³​continent, ⁴​unicode_symbol
+print(df_corruption)
+## # A tibble: 203 × 8
+##    country_name        country_code indicato…¹  year value conti…² iso2c unico…³
+##    &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan         AFG          Control o…  2021 -1.14 Asia    AF    &quot;\U000…
+##  2 Albania             ALB          Control o…  2021 -0.56 Europe  AL    &quot;\U000…
+##  3 Algeria             DZA          Control o…  2021 -0.61 Africa  DZ    &quot;\U000…
+##  4 American Samoa      ASM          Control o…  2021  1.33 Oceania AS    &quot;\U000…
+##  5 Andorra             AND          Control o…  2021  1.33 Europe  AD    &quot;\U000…
+##  6 Angola              AGO          Control o…  2021 -0.66 Africa  AO    &quot;\U000…
+##  7 Antigua and Barbuda ATG          Control o…  2021  0.26 Americ… AG    &quot;\U000…
+##  8 Argentina           ARG          Control o…  2021 -0.4  Americ… AR    &quot;\U000…
+##  9 Armenia             ARM          Control o…  2021  0.07 Asia    AM    &quot;\U000…
+## 10 Aruba               ABW          Control o…  2021  0.83 Americ… AW    &quot;\U000…
+## # … with 193 more rows, and abbreviated variable names ¹​indicator_name,
+## #   ²​continent, ³​unicode_symbol
 # htmlwidgets::saveWidget(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;600px&quot;)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:control-of-corruption"></span>

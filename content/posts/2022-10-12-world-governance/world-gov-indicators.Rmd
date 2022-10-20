@@ -163,29 +163,25 @@ During the preparation I had to pivot the years into a single variable and add t
 # 2_Cleaning
   df_data <- df_data %>% 
                 clean_names() %>%
-                select(-c("indicator_code","x28")) %>%
-                mutate_all(~str_to_lower(.)) %>% 
+                select(-c("indicator_code","x28")) %>% 
                 pivot_longer(-c("country_name", "country_code", "indicator_name"), 
                              names_to = "year", 
                              values_to = "value") %>% 
-                mutate(year = str_remove_all(year, pattern = "x"),
-                       year = paste0(year, "-12-31"),
-                       year = lubridate::ymd(year)) %>% 
-                filter(str_detect(indicator_name, "estimate")) %>% 
+                mutate(year = str_remove_all(year, pattern = "x")) %>% 
+                filter(str_detect(indicator_name, "Estimate")) %>% 
                 mutate(indicator_name = str_extract(indicator_name, pattern = "(.*):"),
                        indicator_name = str_remove_all(indicator_name, ":")) %>% 
-                mutate(value = as.double(value))
+                mutate(year = as.integer(year),
+                       value = as.double(value))
   
   df_country <- df_country %>% 
                   clean_names() %>% 
-                  mutate_all(~str_to_lower(.)) %>%
                   select(country_code, table_name, region)
   
   df_continent <- df_continent %>% 
                     clean_names() %>% 
                     rename(country_code = wb,
-                           country_name = country_name_en) %>% 
-                    mutate_at(.vars = c("continent", "country_code", "country_name"), ~str_to_lower(.))
+                           country_name = country_name_en)
       
 # 3_Creating_Master_Table
   df <- df_data %>% 
@@ -205,11 +201,7 @@ During the preparation I had to pivot the years into a single variable and add t
 # DATA TABLE
   # Preparing
     dt <- df %>% 
-            mutate_at(.vars = c("country_name", "continent"), .funs = str_to_title) %>% 
-            mutate(country_code = str_to_upper(country_code),
-                   year = str_sub(year, start = 1, end = 4),
-                   year = as.integer(year),
-                   value = round(value, 2)) %>% 
+            mutate(value = round(value, 2)) %>% 
             select(country_name,  country_code, continent, indicator_name, year, value) %>% 
             mutate_at(.vars = c("country_name", "country_code", "indicator_name", "year") ,~as_factor(.)) %>%
             arrange(continent) %>% 
@@ -242,39 +234,40 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 # Visualizations
 
-### Most Recent Results ***(2021)***
+## Most Recent Results ***(2021)***
 
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
 You can see the 2021 scores. See Figure \@ref(fig:control-of-corruption) for example:
 
-#### [[View Map in Full Screen](/widgets/WGI_corruption_2021.html)]
+### Control of Corruption [[View Map in Full Screen](/widgets/WGI_corruption_2021.html)]
 
 ```{r control-of-corruption, fig.cap='2021 Control of Corruption.', tidy=FALSE}
 
-corruption <- df %>% 
-                filter(indicator_name == "control of corruption") %>% 
-                mutate(country_name = str_to_title(country_name),
-                       country_code = str_to_upper(country_code),
-                       value = round(value, 2))
+df_corruption <- df %>% 
+                  mutate(value = round(value, 2)) %>% 
+                  filter(year == "2021" ,
+                         indicator_name == "Control of Corruption")
 
 # Highcharter
 map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres", 
                              download_map_data = FALSE,
-                             data = corruption,
-                             name = "Control of Corruption",
+                             data = df_corruption,
+                             name = "Control of Corruption:", color = "#d53b01",
                              value = "GNI",
                              borderWidth = 0,
                              nullColor = "#d3d3d3",
                              joinBy = c("iso-a3", "country_code")) %>% 
+  
                         hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %>% 
+  
                         hc_title(text = "<b>Control of Corruption</b>",
                                  margin = 5,
                                  floating= FALSE,
                                  align = "center",
                                  style = list(fontSize = "28px",
                                               color = "#0e3881", 
-                                              useHTML = TRUE))
+                                              useHTML = TRUE)) %>% 
   
                         # hc_subtitle(text = "<i>2021</i>",
                         #             margin = 20,
@@ -282,9 +275,24 @@ map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres",
                         #             align = "center",
                         #             style = list(fontSize = "28px",
                         #                          color = "#e1a615",
-                        #                          useHTML = TRUE))
+                        #                          useHTML = TRUE)) %>% 
+  
+                        hc_mapNavigation(enabled = TRUE,
+                                         enableMouseWheelZoom = TRUE,
+                                         enableDoubleClickZoom = TRUE) %>% 
+  
+                        hc_exporting(enabled = TRUE) %>% 
+  
+                        hc_credits(enabled = FALSE) %>% 
+                        
+                        hc_tooltip(shared = TRUE,
+                                    useHTML = TRUE,
+                                    headerFormat = '<table><tr><th colspan="2">{point.key}</th></tr>',
+                                    pointFormat = '<tr><td style="color: {series.color}">{series.name} </td><td style="text-align: right"><b>{point.y} {point.value}</b></td></tr>')
+  
+                        
 
-print(corruption)
+print(df_corruption)
 # htmlwidgets::saveWidget(map_corruption_2021, "WGI_corruption_2021.html")
 knitr::include_url("https://www.renanperes.com/widgets/WGI_corruption_2021.html", height = "600px")
 ```
