@@ -287,7 +287,8 @@ map_df_2021 <- hcmap(map = "custom/world-robinson-lowres",
                                  enableMouseWheelZoom = TRUE,
                                  enableDoubleClickZoom = TRUE) %>% 
 
-                hc_exporting(enabled = TRUE) %>% 
+                hc_exporting(enabled = TRUE,
+                             filename = "WGI_2021_Map") %>% 
 
                 hc_credits(enabled = FALSE) %>% 
                 
@@ -301,6 +302,49 @@ print(df_2021)
 # htmlwidgets::saveWidget(map_df_2021, "WGI_2021.html")
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
+
+### USA Results \@ref(fig:USA-Indicators) 
+#### **[[View Map in Full Screen](/widgets/USA_Governance_Results.html)]**
+
+```{r USA-Indicators, fig.cap='USA Governance Results.', tidy=FALSE}
+plot_USA <- df %>% 
+              filter(country_code == "USA") %>% 
+              select(Country = country_name, 
+                     Code = country_code, 
+                     Continent = continent, 
+                     Indicator = indicator_name, 
+                     Year = year, 
+                     Score = value) %>% 
+              mutate(Indicator = case_when(Indicator == "Political Stability and Absence of Violence/Terrorism" ~ "Political Stability",
+                                                T ~ Indicator),
+                     Score = round(Score, 2)) %>% 
+              ggplot(aes(x = Year, y = Score, color = Indicator)) +
+              geom_point() +
+              geom_line(size = 1) +
+              scale_color_brewer(palette = "Dark2") +
+              labs(title = "USA Govenance Indicators", 
+                   x = element_blank(), 
+                   y = element_blank(),
+                   color = "") +
+              cowplot::theme_cowplot() +
+              theme(title = element_text(size = 16)) 
+  
+plot_USA <- plot_USA %>% 
+              plotly::ggplotly() %>% 
+              config(displaylogo = FALSE,
+                     modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
+                                                "select",
+                                                "lasso2d",
+                                                "pan2d"),
+                     toImageButtonOptions = list(format = "svg",
+                                                 filename = "USA_Governance_Results"))
+
+# htmlwidgets::saveWidget(plot_USA, file = "USA_Governance_Results.html")
+knitr::include_url("https://www.renanperes.com/widgets/USA_Governance_Results.html", height = "400px")
+
+
+```
+
 
 <!-- ```{r pressure} -->
 

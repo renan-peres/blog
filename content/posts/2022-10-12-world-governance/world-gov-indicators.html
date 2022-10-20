@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 14:45</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 16:30</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -275,7 +275,8 @@ map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                                  enableMouseWheelZoom = TRUE,
                                  enableDoubleClickZoom = TRUE) %&gt;% 
 
-                hc_exporting(enabled = TRUE) %&gt;% 
+                hc_exporting(enabled = TRUE,
+                             filename = &quot;WGI_2021_Map&quot;) %&gt;% 
 
                 hc_credits(enabled = FALSE) %&gt;% 
                 
@@ -310,6 +311,53 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_2021.html&quot;,
 </iframe>
 <p class="caption">
 Figure 1: WGI 2021 Results.
+</p>
+</div>
+</div>
+</div>
+<div id="usa-results-reffigusa-indicators" class="section level3">
+<h3>USA Results <a href="#fig:USA-Indicators">2</a></h3>
+<div id="view-map-in-full-screen-1" class="section level4">
+<h4><strong>[<a href="/widgets/USA_Governance_Results.html">View Map in Full Screen</a>]</strong></h4>
+<pre class="r"><code>plot_USA &lt;- df %&gt;% 
+              filter(country_code == &quot;USA&quot;) %&gt;% 
+              select(Country = country_name, 
+                     Code = country_code, 
+                     Continent = continent, 
+                     Indicator = indicator_name, 
+                     Year = year, 
+                     Score = value) %&gt;% 
+              mutate(Indicator = case_when(Indicator == &quot;Political Stability and Absence of Violence/Terrorism&quot; ~ &quot;Political Stability&quot;,
+                                                T ~ Indicator),
+                     Score = round(Score, 2)) %&gt;% 
+              ggplot(aes(x = Year, y = Score, color = Indicator)) +
+              geom_point() +
+              geom_line(size = 1) +
+              scale_color_brewer(palette = &quot;Dark2&quot;) +
+              labs(title = &quot;USA Govenance Indicators&quot;, 
+                   x = element_blank(), 
+                   y = element_blank(),
+                   color = &quot;&quot;) +
+              cowplot::theme_cowplot() +
+              theme(title = element_text(size = 16)) 
+  
+plot_USA &lt;- plot_USA %&gt;% 
+              plotly::ggplotly() %&gt;% 
+              config(displaylogo = FALSE,
+                     modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
+                                                &quot;select&quot;,
+                                                &quot;lasso2d&quot;,
+                                                &quot;pan2d&quot;),
+                     toImageButtonOptions = list(format = &quot;svg&quot;,
+                                                 filename = &quot;USA_Governance_Results&quot;))
+
+# htmlwidgets::saveWidget(plot_USA, file = &quot;USA_Governance_Results.html&quot;)
+knitr::include_url(&quot;https://www.renanperes.com/widgets/USA_Governance_Results.html&quot;, height = &quot;400px&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:USA-Indicators"></span>
+<iframe src="https://www.renanperes.com/widgets/USA_Governance_Results.html" width="746.88cm" height="400px" data-external="1">
+</iframe>
+<p class="caption">
+Figure 2: USA Governance Results.
 </p>
 </div>
 <!-- ```{r pressure} -->
