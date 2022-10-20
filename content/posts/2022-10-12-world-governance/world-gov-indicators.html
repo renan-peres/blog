@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 09:48</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 11:50</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -225,12 +225,10 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
-<div id="most-recent-results-2021" class="section level2">
-<h2>Most Recent Results <strong><em>(2021)</em></strong></h2>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<p>You can see the 2021 scores. See Figure <a href="#fig:control-of-corruption">1</a> for example:</p>
-<div id="control-of-corruption-view-map-in-full-screen" class="section level3">
-<h3>Control of Corruption [<a href="/widgets/WGI_corruption_2021.html">View Map in Full Screen</a>]</h3>
+<div id="most-recent-results-2021" class="section level4">
+<h4>Most Recent Results <strong><em>(2021)</em></strong></h4>
+<p><em>Control of Corruption</em> <a href="#fig:control-of-corruption">1</a> <strong>[<a href="/widgets/WGI_corruption_2021.html">View in Full Screen</a>]</strong></p>
 <pre class="r"><code>
 df_corruption &lt;- df %&gt;% 
                   mutate(value = round(value, 2)) %&gt;% 
@@ -297,12 +295,72 @@ print(df_corruption)
 ## # … with 193 more rows, and abbreviated variable names ¹​indicator_name,
 ## #   ²​continent, ³​unicode_symbol
 # htmlwidgets::saveWidget(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;600px&quot;)</code></pre>
+knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:control-of-corruption"></span>
-<iframe src="https://www.renanperes.com/widgets/WGI_corruption_2021.html" width="746.88cm" height="600px" data-external="1">
+<iframe src="https://www.renanperes.com/widgets/WGI_corruption_2021.html" width="746.88cm" height="400px" data-external="1">
 </iframe>
 <p class="caption">
 Figure 1: 2021 Control of Corruption.
+</p>
+</div>
+<p><em>Government Effectiveness</em> <a href="#fig:government-effectiveness">2</a> <strong>[<a href="/widgets/WGI_corruption_2021.html">View in Full Screen</a>]</strong></p>
+<pre class="r"><code>
+df_effectiveness &lt;- df %&gt;% 
+                      mutate(value = round(value, 2)) %&gt;% 
+                      filter(year == &quot;2021&quot; ,
+                             indicator_name == &quot;Government Effectiveness&quot;)
+
+# Highcharter
+map_effectiveness_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
+                                 download_map_data = FALSE,
+                                 data = df_effectiveness,
+                                 name = &quot;Government Effectiveness:&quot;, color = &quot;#75aadb&quot;,
+                                 value = &quot;GNI&quot;,
+                                 borderWidth = 0,
+                                 nullColor = &quot;#d3d3d3&quot;,
+                                 joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
+  
+                          hc_colorAxis(stops = color_stops(n = 5, colors = c(&quot;#211d1f&quot;, &quot;#21908C&quot;, &quot;#FDE725&quot;))) %&gt;% 
+    
+                          hc_title(text = &quot;&lt;b&gt;Government Effectiveness&lt;/b&gt;&quot;,
+                                   margin = 5,
+                                   floating= FALSE,
+                                   align = &quot;center&quot;,
+                                   style = list(fontSize = &quot;28px&quot;,
+                                                color = &quot;#0e3881&quot;, 
+                                                useHTML = TRUE)) %&gt;% 
+    
+                          # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
+                          #             margin = 20,
+                          #             floating= FALSE,
+                          #             align = &quot;center&quot;,
+                          #             style = list(fontSize = &quot;28px&quot;,
+                          #                          color = &quot;#e1a615&quot;,
+                          #                          useHTML = TRUE)) %&gt;% 
+    
+                          hc_mapNavigation(enabled = TRUE,
+                                           enableMouseWheelZoom = TRUE,
+                                           enableDoubleClickZoom = TRUE) %&gt;% 
+    
+                          hc_exporting(enabled = TRUE) %&gt;% 
+    
+                          hc_credits(enabled = FALSE) %&gt;% 
+                          
+                          hc_tooltip(shared = TRUE,
+                                      useHTML = TRUE,
+                                      headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
+                                      pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {series.color}&quot;&gt;{series.name} &lt;/td&gt;&lt;td style=&quot;text-align: right&quot;&gt;&lt;b&gt;{point.y} {point.value}&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&#39;)
+  
+                        
+
+print(map_effectiveness_2021)
+# htmlwidgets::saveWidget(map_effectiveness_2021, &quot;WGI_effectiveness_2021.html&quot;)
+knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_effectiveness_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:government-effectiveness"></span>
+<iframe src="https://www.renanperes.com/widgets/WGI_effectiveness_2021.html" width="746.88cm" height="400px" data-external="1">
+</iframe>
+<p class="caption">
+Figure 2: 2021 Government Effectiveness.
 </p>
 </div>
 <!-- ```{r pressure} -->
@@ -395,7 +453,6 @@ Figure 1: 2021 Control of Corruption.
 <!--           legend.text = element_text(size = 16), -->
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
-</div>
 </div>
 <div id="plotly-view" class="section level2">
 <h2>Plotly <a href="/widgets/plotly.html">View</a></h2>

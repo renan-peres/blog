@@ -236,13 +236,11 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 # Visualizations
 
-## Most Recent Results ***(2021)***
-
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
-You can see the 2021 scores. See Figure \@ref(fig:control-of-corruption) for example:
+#### Most Recent Results ***(2021)*** 
 
-### Control of Corruption [[View Map in Full Screen](/widgets/WGI_corruption_2021.html)]
+*Control of Corruption* \@ref(fig:control-of-corruption) **[[View in Full Screen](/widgets/WGI_corruption_2021.html)]**
 
 ```{r control-of-corruption, fig.cap='2021 Control of Corruption.', tidy=FALSE}
 
@@ -296,7 +294,64 @@ map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres",
 
 print(df_corruption)
 # htmlwidgets::saveWidget(map_corruption_2021, "WGI_corruption_2021.html")
-knitr::include_url("https://www.renanperes.com/widgets/WGI_corruption_2021.html", height = "600px")
+knitr::include_url("https://www.renanperes.com/widgets/WGI_corruption_2021.html", height = "400px")
+```
+
+*Government Effectiveness* \@ref(fig:government-effectiveness) **[[View in Full Screen](/widgets/WGI_corruption_2021.html)]**
+
+```{r government-effectiveness, fig.cap='2021 Government Effectiveness.', tidy=FALSE}
+
+df_effectiveness <- df %>% 
+                      mutate(value = round(value, 2)) %>% 
+                      filter(year == "2021" ,
+                             indicator_name == "Government Effectiveness")
+
+# Highcharter
+map_effectiveness_2021 <- hcmap(map = "custom/world-robinson-lowres", 
+                                 download_map_data = FALSE,
+                                 data = df_effectiveness,
+                                 name = "Government Effectiveness:", color = "#75aadb",
+                                 value = "GNI",
+                                 borderWidth = 0,
+                                 nullColor = "#d3d3d3",
+                                 joinBy = c("iso-a3", "country_code")) %>% 
+  
+                          hc_colorAxis(stops = color_stops(n = 5, colors = c("#211d1f", "#21908C", "#FDE725"))) %>% 
+    
+                          hc_title(text = "<b>Government Effectiveness</b>",
+                                   margin = 5,
+                                   floating= FALSE,
+                                   align = "center",
+                                   style = list(fontSize = "28px",
+                                                color = "#0e3881", 
+                                                useHTML = TRUE)) %>% 
+    
+                          # hc_subtitle(text = "<i>2021</i>",
+                          #             margin = 20,
+                          #             floating= FALSE,
+                          #             align = "center",
+                          #             style = list(fontSize = "28px",
+                          #                          color = "#e1a615",
+                          #                          useHTML = TRUE)) %>% 
+    
+                          hc_mapNavigation(enabled = TRUE,
+                                           enableMouseWheelZoom = TRUE,
+                                           enableDoubleClickZoom = TRUE) %>% 
+    
+                          hc_exporting(enabled = TRUE) %>% 
+    
+                          hc_credits(enabled = FALSE) %>% 
+                          
+                          hc_tooltip(shared = TRUE,
+                                      useHTML = TRUE,
+                                      headerFormat = '<table><tr><th colspan="2">{point.key}</th></tr>',
+                                      pointFormat = '<tr><td style="color: {series.color}">{series.name} </td><td style="text-align: right"><b>{point.y} {point.value}</b></td></tr>')
+  
+                        
+
+print(map_effectiveness_2021)
+# htmlwidgets::saveWidget(map_effectiveness_2021, "WGI_effectiveness_2021.html")
+knitr::include_url("https://www.renanperes.com/widgets/WGI_effectiveness_2021.html", height = "400px")
 ```
 
 <!-- ```{r pressure} -->
