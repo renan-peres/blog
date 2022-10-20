@@ -323,7 +323,7 @@ north_america <- df %>%
                          Score = value) %>% 
                   ggplot(aes(x = Year, y = Score, color = Indicator)) +
                   geom_line(size = .7) +
-                  geom_point(color = "black") +
+                  # geom_point(color = "black") +
                   facet_grid(~Country) +
                   scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                   scale_colour_brewer(palette = "Dark2") +
