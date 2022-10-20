@@ -259,13 +259,14 @@ map_df_2021 <- hcmap(map = "custom/world-robinson-lowres",
                      download_map_data = FALSE,
                      data = df_2021, 
                      value = "mean",
-                     borderWidth = 0,
+                     borderColor = "black",
+                     borderWidth = .7, 
                      nullColor = "#d3d3d3",
                      joinBy = c("iso-a3", "country_code")) %>% 
 
                 hc_colorAxis(stops = color_stops(colors = viridisLite::mako(10, begin = 0.01))) %>% 
 
-                hc_title(text = "<b>WGI Results</b><i>(2021)</i>",
+                hc_title(text = "<b>WGI Results 2021</b><i>(by Country)</i>",
                          margin = 5,
                          floating= FALSE,
                          align = "center",
@@ -292,7 +293,7 @@ map_df_2021 <- hcmap(map = "custom/world-robinson-lowres",
                 hc_tooltip(shared = TRUE,
                             useHTML = TRUE,
                             headerFormat = '<table><tr><th, colspan="2">{point.key}</th></tr>',
-                            pointFormat = '<tr><td style="color: {#252223}"><b>{point.country_name}</b><br>Control of Corruption: {point.control_of_corruption}<br>Government Effectiveness: {point.government_effectiveness}<br>Political Stability: {point.political_stability}<br>Regulatory Quality: {point.regulatory_quality}<br>Rule of Law: {point.rule_of_law}<br>Voice and Accountability: {point.voice_and_accountability}<br><b>Mean: {point.value}</b>')
+                            pointFormat = '<tr><td style="color: {#252223}"><b>{point.country_name} {point.country_name}</b><br>Control of Corruption: {point.control_of_corruption}<br>Government Effectiveness: {point.government_effectiveness}<br>Political Stability: {point.political_stability}<br>Regulatory Quality: {point.regulatory_quality}<br>Rule of Law: {point.rule_of_law}<br>Voice and Accountability: {point.voice_and_accountability}<br><b>Mean: {point.value}</b>')
 
 
 print(df_2021)

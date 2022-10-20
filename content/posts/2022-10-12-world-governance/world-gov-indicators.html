@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 13:09</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 14:02</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -246,13 +246,14 @@ map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                      download_map_data = FALSE,
                      data = df_2021, 
                      value = &quot;mean&quot;,
-                     borderWidth = 0,
+                     borderColor = &quot;black&quot;,
+                     borderWidth = .7, 
                      nullColor = &quot;#d3d3d3&quot;,
                      joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
 
                 hc_colorAxis(stops = color_stops(colors = viridisLite::mako(10, begin = 0.01))) %&gt;% 
 
-                hc_title(text = &quot;&lt;b&gt;WGI Results&lt;/b&gt;&lt;i&gt;(2021)&lt;/i&gt;&quot;,
+                hc_title(text = &quot;&lt;b&gt;WGI Results 2021&lt;/b&gt;&lt;i&gt;(by Country)&lt;/i&gt;&quot;,
                          margin = 5,
                          floating= FALSE,
                          align = &quot;center&quot;,
@@ -279,7 +280,7 @@ map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                 hc_tooltip(shared = TRUE,
                             useHTML = TRUE,
                             headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th, colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
-                            pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {#252223}&quot;&gt;&lt;b&gt;{point.country_name}&lt;/b&gt;&lt;br&gt;Control of Corruption: {point.control_of_corruption}&lt;br&gt;Government Effectiveness: {point.government_effectiveness}&lt;br&gt;Political Stability: {point.political_stability}&lt;br&gt;Regulatory Quality: {point.regulatory_quality}&lt;br&gt;Rule of Law: {point.rule_of_law}&lt;br&gt;Voice and Accountability: {point.voice_and_accountability}&lt;br&gt;&lt;b&gt;Mean: {point.value}&lt;/b&gt;&#39;)
+                            pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {#252223}&quot;&gt;&lt;b&gt;{point.country_name} {point.country_name}&lt;/b&gt;&lt;br&gt;Control of Corruption: {point.control_of_corruption}&lt;br&gt;Government Effectiveness: {point.government_effectiveness}&lt;br&gt;Political Stability: {point.political_stability}&lt;br&gt;Regulatory Quality: {point.regulatory_quality}&lt;br&gt;Rule of Law: {point.rule_of_law}&lt;br&gt;Voice and Accountability: {point.voice_and_accountability}&lt;br&gt;&lt;b&gt;Mean: {point.value}&lt;/b&gt;&#39;)
 
 
 print(df_2021)
