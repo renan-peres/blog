@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 11:50</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 12:01</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -252,7 +252,7 @@ map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                                  floating= FALSE,
                                  align = &quot;center&quot;,
                                  style = list(fontSize = &quot;28px&quot;,
-                                              color = &quot;#0e3881&quot;, 
+                                              color = &quot;#252223&quot;, 
                                               useHTML = TRUE)) %&gt;% 
   
                         # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
@@ -314,20 +314,20 @@ df_effectiveness &lt;- df %&gt;%
 map_effectiveness_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
                                  download_map_data = FALSE,
                                  data = df_effectiveness,
-                                 name = &quot;Government Effectiveness:&quot;, color = &quot;#75aadb&quot;,
+                                 name = &quot;Government Effectiveness:&quot;, color = &quot;#d53b01&quot;,
                                  value = &quot;GNI&quot;,
                                  borderWidth = 0,
                                  nullColor = &quot;#d3d3d3&quot;,
                                  joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
   
-                          hc_colorAxis(stops = color_stops(n = 5, colors = c(&quot;#211d1f&quot;, &quot;#21908C&quot;, &quot;#FDE725&quot;))) %&gt;% 
+                          hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %&gt;% 
     
                           hc_title(text = &quot;&lt;b&gt;Government Effectiveness&lt;/b&gt;&quot;,
                                    margin = 5,
                                    floating= FALSE,
                                    align = &quot;center&quot;,
                                    style = list(fontSize = &quot;28px&quot;,
-                                                color = &quot;#0e3881&quot;, 
+                                                color = &quot;#252223&quot;, 
                                                 useHTML = TRUE)) %&gt;% 
     
                           # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
@@ -353,7 +353,22 @@ map_effectiveness_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot
   
                         
 
-print(map_effectiveness_2021)
+print(df_effectiveness)
+## # A tibble: 203 × 8
+##    country_name        country_code indicato…¹  year value conti…² iso2c unico…³
+##    &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan         AFG          Governmen…  2021 -1.63 Asia    AF    &quot;\U000…
+##  2 Albania             ALB          Governmen…  2021  0    Europe  AL    &quot;\U000…
+##  3 Algeria             DZA          Governmen…  2021 -0.62 Africa  DZ    &quot;\U000…
+##  4 American Samoa      ASM          Governmen…  2021  0.7  Oceania AS    &quot;\U000…
+##  5 Andorra             AND          Governmen…  2021  1.82 Europe  AD    &quot;\U000…
+##  6 Angola              AGO          Governmen…  2021 -1.06 Africa  AO    &quot;\U000…
+##  7 Antigua and Barbuda ATG          Governmen…  2021 -0.14 Americ… AG    &quot;\U000…
+##  8 Argentina           ARG          Governmen…  2021 -0.36 Americ… AR    &quot;\U000…
+##  9 Armenia             ARM          Governmen…  2021 -0.25 Asia    AM    &quot;\U000…
+## 10 Aruba               ABW          Governmen…  2021  1.13 Americ… AW    &quot;\U000…
+## # … with 193 more rows, and abbreviated variable names ¹​indicator_name,
+## #   ²​continent, ³​unicode_symbol
 # htmlwidgets::saveWidget(map_effectiveness_2021, &quot;WGI_effectiveness_2021.html&quot;)
 knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_effectiveness_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:government-effectiveness"></span>

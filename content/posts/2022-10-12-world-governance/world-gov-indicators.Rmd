@@ -266,7 +266,7 @@ map_corruption_2021 <- hcmap(map = "custom/world-robinson-lowres",
                                  floating= FALSE,
                                  align = "center",
                                  style = list(fontSize = "28px",
-                                              color = "#0e3881", 
+                                              color = "#252223", 
                                               useHTML = TRUE)) %>% 
   
                         # hc_subtitle(text = "<i>2021</i>",
@@ -310,20 +310,20 @@ df_effectiveness <- df %>%
 map_effectiveness_2021 <- hcmap(map = "custom/world-robinson-lowres", 
                                  download_map_data = FALSE,
                                  data = df_effectiveness,
-                                 name = "Government Effectiveness:", color = "#75aadb",
+                                 name = "Government Effectiveness:", color = "#d53b01",
                                  value = "GNI",
                                  borderWidth = 0,
                                  nullColor = "#d3d3d3",
                                  joinBy = c("iso-a3", "country_code")) %>% 
   
-                          hc_colorAxis(stops = color_stops(n = 5, colors = c("#211d1f", "#21908C", "#FDE725"))) %>% 
+                          hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %>% 
     
                           hc_title(text = "<b>Government Effectiveness</b>",
                                    margin = 5,
                                    floating= FALSE,
                                    align = "center",
                                    style = list(fontSize = "28px",
-                                                color = "#0e3881", 
+                                                color = "#252223", 
                                                 useHTML = TRUE)) %>% 
     
                           # hc_subtitle(text = "<i>2021</i>",
@@ -349,7 +349,7 @@ map_effectiveness_2021 <- hcmap(map = "custom/world-robinson-lowres",
   
                         
 
-print(map_effectiveness_2021)
+print(df_effectiveness)
 # htmlwidgets::saveWidget(map_effectiveness_2021, "WGI_effectiveness_2021.html")
 knitr::include_url("https://www.renanperes.com/widgets/WGI_effectiveness_2021.html", height = "400px")
 ```
