@@ -293,12 +293,12 @@ map_df_2021 <- hcmap(map = "custom/world-robinson-lowres",
                 hc_tooltip(shared = TRUE,
                             useHTML = TRUE,
                             headerFormat = '<table><tr><th, colspan="2">{point.key}</th></tr>',
-                            pointFormat = '<tr><td style="color: {#252223}"><b>{point.country_name} {point.country_name}</b><br>Control of Corruption: {point.control_of_corruption}<br>Government Effectiveness: {point.government_effectiveness}<br>Political Stability: {point.political_stability}<br>Regulatory Quality: {point.regulatory_quality}<br>Rule of Law: {point.rule_of_law}<br>Voice and Accountability: {point.voice_and_accountability}<br><b>Mean: {point.value}</b>')
+                            pointFormat = '<tr><td style="color: {#252223}"><b>{point.country_name}</b><br>Control of Corruption: {point.control_of_corruption}<br>Government Effectiveness: {point.government_effectiveness}<br>Political Stability: {point.political_stability}<br>Regulatory Quality: {point.regulatory_quality}<br>Rule of Law: {point.rule_of_law}<br>Voice and Accountability: {point.voice_and_accountability}<br><b>Mean: {point.value}</b>')
 
 
 print(df_2021)
 # htmlwidgets::saveWidget(map_df_2021, "WGI_2021.html")
-knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "400px")
+knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
 <!-- ```{r pressure} -->
