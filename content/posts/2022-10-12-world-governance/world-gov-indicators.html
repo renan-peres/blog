@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 16:30</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 18:34</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -163,10 +163,18 @@ h1{
                      by = &quot;country_code&quot;) %&gt;% 
           inner_join(df_continent %&gt;% select(country_code, continent, iso2c, unicode_symbol),
                      by = &quot;country_code&quot;) %&gt;% 
-          mutate(continent = case_when(region == &quot;latin america &amp; caribbean&quot; ~ &quot;south america&quot;,
-                                       region == &quot;north america&quot; ~ &quot;north america&quot;,
-                                       country_name == &quot;greenland&quot; ~ &quot;north america&quot;,
+          mutate_all(~str_trim(., side = &quot;both&quot;)) %&gt;% 
+          mutate(continent = case_when(region == &quot;Latin America &amp; Caribbean&quot; ~ &quot;South America&quot;,
+                                       region == &quot;North America&quot; ~ &quot;North America&quot;,
+                                       country_name == &quot;Greenland&quot; ~ &quot;North America&quot;,
+                                             T ~ continent)) %&gt;%
+          mutate(continent = case_when(country_name == &quot;Mexico&quot; ~ &quot;North America&quot;,
                                        T ~ continent)) %&gt;% 
+          mutate(indicator_name = case_when(indicator_name == &quot;Political Stability and Absence of Violence/Terrorism&quot; ~ &quot;Political Stability&quot;,
+                               T ~ indicator_name)) %&gt;% 
+          mutate(year = as.integer(year),
+                 value = as.double(value),
+                 value = round(value, 2)) %&gt;% 
           filter(continent != &quot;&quot;) %&gt;% 
           filter(value != &quot;&quot;) %&gt;% 
           select(-region) %&gt;% 
@@ -175,7 +183,6 @@ h1{
 # DATA TABLE
   # Preparing
     dt &lt;- df %&gt;% 
-            mutate(value = round(value, 2)) %&gt;% 
             select(country_name,  country_code, continent, indicator_name, year, value) %&gt;% 
             mutate_at(.vars = c(&quot;country_name&quot;, &quot;country_code&quot;, &quot;indicator_name&quot;, &quot;year&quot;) ,~as_factor(.)) %&gt;%
             arrange(continent) %&gt;% 
@@ -193,7 +200,7 @@ h1{
                                                       autowidth = TRUE,
                                                       lengthMenu = c(6, 12, 25, 50),
                                                       dom = &quot;Blfrtip&quot;,
-                                                      buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;, &quot;print&quot;, &quot;pdf&quot;), 
+                                                      buttons = c(&quot;copy&quot;, &quot;csv&quot;, &quot;excel&quot;, &quot;print&quot;, &quot;pdf&quot;),
                                                       initComplete = JS(&quot;function(settings, json) {&quot;,
       &quot;$(this.api().table().header()).css({&#39;background-color&#39;: &#39;#c23d1d&#39;, &#39;color&#39;: &#39;#fff&#39;});&quot;,
       &quot;}&quot;)))
@@ -203,18 +210,18 @@ h1{
 
 print(df)
 ## # A tibble: 27,591 × 8
-##    country_name country_code indicator_name    year  value conti…¹ iso2c unico…²
-##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;            &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 Afghanistan  AFG          Control of Corr…  1996 -1.29  Asia    AF    &quot;\U000…
-##  2 Afghanistan  AFG          Government Effe…  1996 -2.18  Asia    AF    &quot;\U000…
-##  3 Afghanistan  AFG          Political Stabi…  1996 -2.42  Asia    AF    &quot;\U000…
-##  4 Afghanistan  AFG          Regulatory Qual…  1996 -2.09  Asia    AF    &quot;\U000…
-##  5 Afghanistan  AFG          Rule of Law       1996 -1.79  Asia    AF    &quot;\U000…
-##  6 Afghanistan  AFG          Voice and Accou…  1996 -1.91  Asia    AF    &quot;\U000…
-##  7 Albania      ALB          Control of Corr…  1996 -0.894 Europe  AL    &quot;\U000…
-##  8 Albania      ALB          Government Effe…  1996 -0.689 Europe  AL    &quot;\U000…
-##  9 Albania      ALB          Political Stabi…  1996 -0.337 Europe  AL    &quot;\U000…
-## 10 Albania      ALB          Regulatory Qual…  1996 -0.474 Europe  AL    &quot;\U000…
+##    country_name country_code indicator_name     year value conti…¹ iso2c unico…²
+##    &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;             &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+##  1 Afghanistan  AFG          Control of Corru…  1996 -1.29 Asia    AF    &quot;\U000…
+##  2 Afghanistan  AFG          Government Effec…  1996 -2.18 Asia    AF    &quot;\U000…
+##  3 Afghanistan  AFG          Political Stabil…  1996 -2.42 Asia    AF    &quot;\U000…
+##  4 Afghanistan  AFG          Regulatory Quali…  1996 -2.09 Asia    AF    &quot;\U000…
+##  5 Afghanistan  AFG          Rule of Law        1996 -1.79 Asia    AF    &quot;\U000…
+##  6 Afghanistan  AFG          Voice and Accoun…  1996 -1.91 Asia    AF    &quot;\U000…
+##  7 Albania      ALB          Control of Corru…  1996 -0.89 Europe  AL    &quot;\U000…
+##  8 Albania      ALB          Government Effec…  1996 -0.69 Europe  AL    &quot;\U000…
+##  9 Albania      ALB          Political Stabil…  1996 -0.34 Europe  AL    &quot;\U000…
+## 10 Albania      ALB          Regulatory Quali…  1996 -0.47 Europe  AL    &quot;\U000…
 ## # … with 27,581 more rows, and abbreviated variable names ¹​continent,
 ## #   ²​unicode_symbol
 
@@ -226,8 +233,8 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<div id="most-recent-results-2021-reffigwgi-2021" class="section level3">
-<h3>Most Recent Results <strong><em>(2021)</em></strong> <a href="#fig:wgi-2021">1</a></h3>
+<div id="global-results-most-recent-2021-reffigwgi-2021" class="section level3">
+<h3>Global Results <strong><em>(Most Recent: 2021)</em></strong> <a href="#fig:wgi-2021">1</a></h3>
 <div id="view-map-in-full-screen" class="section level4">
 <h4><strong>[<a href="/widgets/WGI_2021.html">View Map in Full Screen</a>]</strong></h4>
 <pre class="r"><code>
@@ -240,8 +247,7 @@ df_2021 &lt;- df %&gt;%
             clean_names() %&gt;% 
             rowwise() %&gt;% 
             mutate(mean = mean(c_across(3:8)),
-                   mean = round(mean, 2)) %&gt;% 
-            rename(political_stability = &quot;political_stability_and_absence_of_violence_terrorism&quot;)
+                   mean = round(mean, 2))
 
 # Highcharter
 map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
@@ -315,49 +321,50 @@ Figure 1: WGI 2021 Results.
 </div>
 </div>
 </div>
-<div id="usa-results-reffigusa-indicators" class="section level3">
-<h3>USA Results <a href="#fig:USA-Indicators">2</a></h3>
-<div id="view-map-in-full-screen-1" class="section level4">
-<h4><strong>[<a href="/widgets/USA_Governance_Results.html">View Map in Full Screen</a>]</strong></h4>
-<pre class="r"><code>plot_USA &lt;- df %&gt;% 
-              filter(country_code == &quot;USA&quot;) %&gt;% 
-              select(Country = country_name, 
-                     Code = country_code, 
-                     Continent = continent, 
-                     Indicator = indicator_name, 
-                     Year = year, 
-                     Score = value) %&gt;% 
-              mutate(Indicator = case_when(Indicator == &quot;Political Stability and Absence of Violence/Terrorism&quot; ~ &quot;Political Stability&quot;,
-                                                T ~ Indicator),
-                     Score = round(Score, 2)) %&gt;% 
-              ggplot(aes(x = Year, y = Score, color = Indicator)) +
-              geom_point() +
-              geom_line(size = 1) +
-              scale_color_brewer(palette = &quot;Dark2&quot;) +
-              labs(title = &quot;USA Govenance Indicators&quot;, 
-                   x = element_blank(), 
-                   y = element_blank(),
-                   color = &quot;&quot;) +
-              cowplot::theme_cowplot() +
-              theme(title = element_text(size = 16)) 
-  
-plot_USA &lt;- plot_USA %&gt;% 
-              plotly::ggplotly() %&gt;% 
-              config(displaylogo = FALSE,
-                     modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
-                                                &quot;select&quot;,
-                                                &quot;lasso2d&quot;,
-                                                &quot;pan2d&quot;),
-                     toImageButtonOptions = list(format = &quot;svg&quot;,
-                                                 filename = &quot;USA_Governance_Results&quot;))
+<div id="north-america-comparison-reffignorth-america" class="section level3">
+<h3>North America Comparison <a href="#fig:north-america">2</a></h3>
+<div id="view-plot-in-full-screen" class="section level4">
+<h4><strong>[<a href="/widgets/North_America_Results.html">View Plot in Full Screen</a>]</strong></h4>
+<pre class="r"><code>north_america &lt;- df %&gt;% 
+                  filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;, &quot;Mexico&quot;)) %&gt;% 
+                  select(Country = country_name, 
+                         Code = country_code, 
+                         Continent = continent, 
+                         Indicator = indicator_name, 
+                         Year = year, 
+                         Score = value) %&gt;% 
+                  ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                  geom_line(size = .7) +
+                  geom_point(color = &quot;black&quot;) +
+                  facet_grid(~Country) +
+                  scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                  scale_colour_brewer(palette = &quot;Dark2&quot;) +
+                  labs(title = &quot;North America&quot;, 
+                       color = &quot;&quot;,
+                       y = element_blank(),
+                       x = element_blank()) +
+                  theme_bw() +
+                  theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = .5, color = &quot;#103f91&quot;),
+                        legend.text = element_text(size = 12), 
+                        strip.text = element_text(size = 12), 
+                        strip.background = element_rect(fill = &quot;#cd4f2f&quot;))
 
-# htmlwidgets::saveWidget(plot_USA, file = &quot;USA_Governance_Results.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/USA_Governance_Results.html&quot;, height = &quot;400px&quot;)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:USA-Indicators"></span>
-<iframe src="https://www.renanperes.com/widgets/USA_Governance_Results.html" width="746.88cm" height="400px" data-external="1">
+north_america_plotly &lt;- ggplotly(north_america, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;% 
+                          config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
+                                                            &quot;select&quot;,
+                                                            &quot;lasso2d&quot;,
+                                                            &quot;pan2d&quot;),
+                                 toImageButtonOptions = list(format = &quot;svg&quot;,
+                                                             filename = &quot;North_America_Results&quot;))
+
+# htmlwidgets::saveWidget(north_america_plotly, file = &quot;North_America_Results.html&quot;)
+knitr::include_url(&quot;https://www.renanperes.com/widgets/North_America_Results.html&quot;, height = &quot;500px&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:north-america"></span>
+<iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 2: USA Governance Results.
+Figure 2: North America Comparison.
 </p>
 </div>
 <!-- ```{r pressure} -->

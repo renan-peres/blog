@@ -191,10 +191,18 @@ Feel welcomed to manipulate or download the prepared data from the table below!
                      by = "country_code") %>% 
           inner_join(df_continent %>% select(country_code, continent, iso2c, unicode_symbol),
                      by = "country_code") %>% 
-          mutate(continent = case_when(region == "latin america & caribbean" ~ "south america",
-                                       region == "north america" ~ "north america",
-                                       country_name == "greenland" ~ "north america",
+          mutate_all(~str_trim(., side = "both")) %>% 
+          mutate(continent = case_when(region == "Latin America & Caribbean" ~ "South America",
+                                       region == "North America" ~ "North America",
+                                       country_name == "Greenland" ~ "North America",
+                                             T ~ continent)) %>%
+          mutate(continent = case_when(country_name == "Mexico" ~ "North America",
                                        T ~ continent)) %>% 
+          mutate(indicator_name = case_when(indicator_name == "Political Stability and Absence of Violence/Terrorism" ~ "Political Stability",
+                               T ~ indicator_name)) %>% 
+          mutate(year = as.integer(year),
+                 value = as.double(value),
+                 value = round(value, 2)) %>% 
           filter(continent != "") %>% 
           filter(value != "") %>% 
           select(-region) %>% 
@@ -203,7 +211,6 @@ Feel welcomed to manipulate or download the prepared data from the table below!
 # DATA TABLE
   # Preparing
     dt <- df %>% 
-            mutate(value = round(value, 2)) %>% 
             select(country_name,  country_code, continent, indicator_name, year, value) %>% 
             mutate_at(.vars = c("country_name", "country_code", "indicator_name", "year") ,~as_factor(.)) %>%
             arrange(continent) %>% 
@@ -221,7 +228,7 @@ Feel welcomed to manipulate or download the prepared data from the table below!
                                                       autowidth = TRUE,
                                                       lengthMenu = c(6, 12, 25, 50),
                                                       dom = "Blfrtip",
-                                                      buttons = c("copy", "csv", "excel", "print", "pdf"), 
+                                                      buttons = c("copy", "csv", "excel", "print", "pdf"),
                                                       initComplete = JS("function(settings, json) {",
       "$(this.api().table().header()).css({'background-color': '#c23d1d', 'color': '#fff'});",
       "}")))
@@ -238,7 +245,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
-### Most Recent Results ***(2021)***  \@ref(fig:wgi-2021) 
+### Global Results ***(Most Recent: 2021)***  \@ref(fig:wgi-2021) 
 #### **[[View Map in Full Screen](/widgets/WGI_2021.html)]**
 
 ```{r wgi-2021, fig.cap='WGI 2021 Results.', tidy=FALSE}
@@ -252,8 +259,7 @@ df_2021 <- df %>%
             clean_names() %>% 
             rowwise() %>% 
             mutate(mean = mean(c_across(3:8)),
-                   mean = round(mean, 2)) %>% 
-            rename(political_stability = "political_stability_and_absence_of_violence_terrorism")
+                   mean = round(mean, 2))
 
 # Highcharter
 map_df_2021 <- hcmap(map = "custom/world-robinson-lowres", 
@@ -303,45 +309,45 @@ print(df_2021)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
-### USA Results \@ref(fig:USA-Indicators) 
-#### **[[View Map in Full Screen](/widgets/USA_Governance_Results.html)]**
+### North America Comparison \@ref(fig:north-america) 
+#### **[[View Plot in Full Screen](/widgets/North_America_Results.html)]**
 
-```{r USA-Indicators, fig.cap='USA Governance Results.', tidy=FALSE}
-plot_USA <- df %>% 
-              filter(country_code == "USA") %>% 
-              select(Country = country_name, 
-                     Code = country_code, 
-                     Continent = continent, 
-                     Indicator = indicator_name, 
-                     Year = year, 
-                     Score = value) %>% 
-              mutate(Indicator = case_when(Indicator == "Political Stability and Absence of Violence/Terrorism" ~ "Political Stability",
-                                                T ~ Indicator),
-                     Score = round(Score, 2)) %>% 
-              ggplot(aes(x = Year, y = Score, color = Indicator)) +
-              geom_point() +
-              geom_line(size = 1) +
-              scale_color_brewer(palette = "Dark2") +
-              labs(title = "USA Govenance Indicators", 
-                   x = element_blank(), 
-                   y = element_blank(),
-                   color = "") +
-              cowplot::theme_cowplot() +
-              theme(title = element_text(size = 16)) 
-  
-plot_USA <- plot_USA %>% 
-              plotly::ggplotly() %>% 
-              config(displaylogo = FALSE,
-                     modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
-                                                "select",
-                                                "lasso2d",
-                                                "pan2d"),
-                     toImageButtonOptions = list(format = "svg",
-                                                 filename = "USA_Governance_Results"))
+```{r north-america, fig.cap='North America Comparison.', tidy=FALSE}
+north_america <- df %>% 
+                  filter(country_name %in% c("Canada", "United States", "Mexico")) %>% 
+                  select(Country = country_name, 
+                         Code = country_code, 
+                         Continent = continent, 
+                         Indicator = indicator_name, 
+                         Year = year, 
+                         Score = value) %>% 
+                  ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                  geom_line(size = .7) +
+                  geom_point(color = "black") +
+                  facet_grid(~Country) +
+                  scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                  scale_colour_brewer(palette = "Dark2") +
+                  labs(title = "North America", 
+                       color = "",
+                       y = element_blank(),
+                       x = element_blank()) +
+                  theme_bw() +
+                  theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
+                        legend.text = element_text(size = 12), 
+                        strip.text = element_text(size = 12), 
+                        strip.background = element_rect(fill = "#cd4f2f"))
 
-# htmlwidgets::saveWidget(plot_USA, file = "USA_Governance_Results.html")
-knitr::include_url("https://www.renanperes.com/widgets/USA_Governance_Results.html", height = "400px")
+north_america_plotly <- ggplotly(north_america, tooltip = c("Year", "Score")) %>% 
+                          config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
+                                                            "select",
+                                                            "lasso2d",
+                                                            "pan2d"),
+                                 toImageButtonOptions = list(format = "svg",
+                                                             filename = "North_America_Results"))
 
+# htmlwidgets::saveWidget(north_america_plotly, file = "North_America_Results.html")
+knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "500px")
 
 ```
 
