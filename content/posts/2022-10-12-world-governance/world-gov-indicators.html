@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 12:01</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 13:09</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -226,156 +226,87 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<div id="most-recent-results-2021" class="section level4">
-<h4>Most Recent Results <strong><em>(2021)</em></strong></h4>
-<p><em>Control of Corruption</em> <a href="#fig:control-of-corruption">1</a> <strong>[<a href="/widgets/WGI_corruption_2021.html">View in Full Screen</a>]</strong></p>
+<div id="most-recent-results-2021-reffigwgi-2021-view-in-full-screen" class="section level4">
+<h4>Most Recent Results <strong><em>(2021)</em></strong> <a href="#fig:wgi-2021">1</a> <strong>[<a href="/widgets/WGI_2021.html">View in Full Screen</a>]</strong></h4>
 <pre class="r"><code>
-df_corruption &lt;- df %&gt;% 
-                  mutate(value = round(value, 2)) %&gt;% 
-                  filter(year == &quot;2021&quot; ,
-                         indicator_name == &quot;Control of Corruption&quot;)
+df_2021 &lt;- df %&gt;% 
+            mutate(value = round(value, 2)) %&gt;% 
+            filter(year == &quot;2021&quot;) %&gt;% 
+            select(country_name, country_code, indicator_name, value) %&gt;% 
+            pivot_wider(names_from = &quot;indicator_name&quot;,
+                        values_from = &quot;value&quot;) %&gt;% 
+            clean_names() %&gt;% 
+            rowwise() %&gt;% 
+            mutate(mean = mean(c_across(3:8)),
+                   mean = round(mean, 2)) %&gt;% 
+            rename(political_stability = &quot;political_stability_and_absence_of_violence_terrorism&quot;)
 
 # Highcharter
-map_corruption_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
-                             download_map_data = FALSE,
-                             data = df_corruption,
-                             name = &quot;Control of Corruption:&quot;, color = &quot;#d53b01&quot;,
-                             value = &quot;GNI&quot;,
-                             borderWidth = 0,
-                             nullColor = &quot;#d3d3d3&quot;,
-                             joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
-  
-                        hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %&gt;% 
-  
-                        hc_title(text = &quot;&lt;b&gt;Control of Corruption&lt;/b&gt;&quot;,
-                                 margin = 5,
-                                 floating= FALSE,
-                                 align = &quot;center&quot;,
-                                 style = list(fontSize = &quot;28px&quot;,
-                                              color = &quot;#252223&quot;, 
-                                              useHTML = TRUE)) %&gt;% 
-  
-                        # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
-                        #             margin = 20,
-                        #             floating= FALSE,
-                        #             align = &quot;center&quot;,
-                        #             style = list(fontSize = &quot;28px&quot;,
-                        #                          color = &quot;#e1a615&quot;,
-                        #                          useHTML = TRUE)) %&gt;% 
-  
-                        hc_mapNavigation(enabled = TRUE,
-                                         enableMouseWheelZoom = TRUE,
-                                         enableDoubleClickZoom = TRUE) %&gt;% 
-  
-                        hc_exporting(enabled = TRUE) %&gt;% 
-  
-                        hc_credits(enabled = FALSE) %&gt;% 
-                        
-                        hc_tooltip(shared = TRUE,
-                                    useHTML = TRUE,
-                                    headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
-                                    pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {series.color}&quot;&gt;{series.name} &lt;/td&gt;&lt;td style=&quot;text-align: right&quot;&gt;&lt;b&gt;{point.y} {point.value}&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&#39;)
-  
-                        
+map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
+                     download_map_data = FALSE,
+                     data = df_2021, 
+                     value = &quot;mean&quot;,
+                     borderWidth = 0,
+                     nullColor = &quot;#d3d3d3&quot;,
+                     joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
 
-print(df_corruption)
-## # A tibble: 203 × 8
-##    country_name        country_code indicato…¹  year value conti…² iso2c unico…³
-##    &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 Afghanistan         AFG          Control o…  2021 -1.14 Asia    AF    &quot;\U000…
-##  2 Albania             ALB          Control o…  2021 -0.56 Europe  AL    &quot;\U000…
-##  3 Algeria             DZA          Control o…  2021 -0.61 Africa  DZ    &quot;\U000…
-##  4 American Samoa      ASM          Control o…  2021  1.33 Oceania AS    &quot;\U000…
-##  5 Andorra             AND          Control o…  2021  1.33 Europe  AD    &quot;\U000…
-##  6 Angola              AGO          Control o…  2021 -0.66 Africa  AO    &quot;\U000…
-##  7 Antigua and Barbuda ATG          Control o…  2021  0.26 Americ… AG    &quot;\U000…
-##  8 Argentina           ARG          Control o…  2021 -0.4  Americ… AR    &quot;\U000…
-##  9 Armenia             ARM          Control o…  2021  0.07 Asia    AM    &quot;\U000…
-## 10 Aruba               ABW          Control o…  2021  0.83 Americ… AW    &quot;\U000…
-## # … with 193 more rows, and abbreviated variable names ¹​indicator_name,
-## #   ²​continent, ³​unicode_symbol
-# htmlwidgets::saveWidget(map_corruption_2021, &quot;WGI_corruption_2021.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_corruption_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:control-of-corruption"></span>
-<iframe src="https://www.renanperes.com/widgets/WGI_corruption_2021.html" width="746.88cm" height="400px" data-external="1">
+                hc_colorAxis(stops = color_stops(colors = viridisLite::mako(10, begin = 0.01))) %&gt;% 
+
+                hc_title(text = &quot;&lt;b&gt;WGI Results&lt;/b&gt;&lt;i&gt;(2021)&lt;/i&gt;&quot;,
+                         margin = 5,
+                         floating= FALSE,
+                         align = &quot;center&quot;,
+                         style = list(fontSize = &quot;28px&quot;,
+                                      color = &quot;#252223&quot;, 
+                                      useHTML = TRUE)) %&gt;% 
+
+                # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
+                #             margin = 20,
+                #             floating= FALSE,
+                #             align = &quot;center&quot;,
+                #             style = list(fontSize = &quot;28px&quot;,
+                #                          color = &quot;#e1a615&quot;,
+                #                          useHTML = TRUE)) %&gt;% 
+
+                hc_mapNavigation(enabled = TRUE,
+                                 enableMouseWheelZoom = TRUE,
+                                 enableDoubleClickZoom = TRUE) %&gt;% 
+
+                hc_exporting(enabled = TRUE) %&gt;% 
+
+                hc_credits(enabled = FALSE) %&gt;% 
+                
+                hc_tooltip(shared = TRUE,
+                            useHTML = TRUE,
+                            headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th, colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
+                            pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {#252223}&quot;&gt;&lt;b&gt;{point.country_name}&lt;/b&gt;&lt;br&gt;Control of Corruption: {point.control_of_corruption}&lt;br&gt;Government Effectiveness: {point.government_effectiveness}&lt;br&gt;Political Stability: {point.political_stability}&lt;br&gt;Regulatory Quality: {point.regulatory_quality}&lt;br&gt;Rule of Law: {point.rule_of_law}&lt;br&gt;Voice and Accountability: {point.voice_and_accountability}&lt;br&gt;&lt;b&gt;Mean: {point.value}&lt;/b&gt;&#39;)
+
+
+print(df_2021)
+## # A tibble: 205 × 9
+## # Rowwise: 
+##    country_name    count…¹ contr…² gover…³ polit…⁴ regul…⁵ rule_…⁶ voice…⁷  mean
+##    &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 Afghanistan     AFG       -1.14   -1.63   -2.53   -1.34   -1.87   -1.57 -1.68
+##  2 Albania         ALB       -0.56    0       0.11    0.19   -0.26    0.09 -0.07
+##  3 Algeria         DZA       -0.61   -0.62   -0.88   -1.17   -0.82   -1.01 -0.85
+##  4 American Samoa  ASM        1.33    0.7     1.05    0.55    1.21    0.91  0.96
+##  5 Andorra         AND        1.33    1.82    1.63    1.36    1.72    1.04  1.48
+##  6 Angola          AGO       -0.66   -1.06   -0.71   -0.66   -0.95   -0.84 -0.81
+##  7 Antigua and Ba… ATG        0.26   -0.14    0.96    0.39    0.34    0.74  0.42
+##  8 Argentina       ARG       -0.4    -0.36   -0.11   -0.62   -0.46    0.62 -0.22
+##  9 Armenia         ARM        0.07   -0.25   -0.84    0.15   -0.1     0.06 -0.15
+## 10 Aruba           ABW        0.83    1.13    1.47    0.95    1.28    1.03  1.11
+## # … with 195 more rows, and abbreviated variable names ¹​country_code,
+## #   ²​control_of_corruption, ³​government_effectiveness, ⁴​political_stability,
+## #   ⁵​regulatory_quality, ⁶​rule_of_law, ⁷​voice_and_accountability
+# htmlwidgets::saveWidget(map_df_2021, &quot;WGI_2021.html&quot;)
+knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
+<div class="figure"><span style="display:block;" id="fig:wgi-2021"></span>
+<iframe src="https://www.renanperes.com/widgets/WGI_2021.html" width="746.88cm" height="400px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 1: 2021 Control of Corruption.
-</p>
-</div>
-<p><em>Government Effectiveness</em> <a href="#fig:government-effectiveness">2</a> <strong>[<a href="/widgets/WGI_corruption_2021.html">View in Full Screen</a>]</strong></p>
-<pre class="r"><code>
-df_effectiveness &lt;- df %&gt;% 
-                      mutate(value = round(value, 2)) %&gt;% 
-                      filter(year == &quot;2021&quot; ,
-                             indicator_name == &quot;Government Effectiveness&quot;)
-
-# Highcharter
-map_effectiveness_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;, 
-                                 download_map_data = FALSE,
-                                 data = df_effectiveness,
-                                 name = &quot;Government Effectiveness:&quot;, color = &quot;#d53b01&quot;,
-                                 value = &quot;GNI&quot;,
-                                 borderWidth = 0,
-                                 nullColor = &quot;#d3d3d3&quot;,
-                                 joinBy = c(&quot;iso-a3&quot;, &quot;country_code&quot;)) %&gt;% 
-  
-                          hc_colorAxis(stops = color_stops(colors = viridisLite::mako(5, begin = 0.1))) %&gt;% 
-    
-                          hc_title(text = &quot;&lt;b&gt;Government Effectiveness&lt;/b&gt;&quot;,
-                                   margin = 5,
-                                   floating= FALSE,
-                                   align = &quot;center&quot;,
-                                   style = list(fontSize = &quot;28px&quot;,
-                                                color = &quot;#252223&quot;, 
-                                                useHTML = TRUE)) %&gt;% 
-    
-                          # hc_subtitle(text = &quot;&lt;i&gt;2021&lt;/i&gt;&quot;,
-                          #             margin = 20,
-                          #             floating= FALSE,
-                          #             align = &quot;center&quot;,
-                          #             style = list(fontSize = &quot;28px&quot;,
-                          #                          color = &quot;#e1a615&quot;,
-                          #                          useHTML = TRUE)) %&gt;% 
-    
-                          hc_mapNavigation(enabled = TRUE,
-                                           enableMouseWheelZoom = TRUE,
-                                           enableDoubleClickZoom = TRUE) %&gt;% 
-    
-                          hc_exporting(enabled = TRUE) %&gt;% 
-    
-                          hc_credits(enabled = FALSE) %&gt;% 
-                          
-                          hc_tooltip(shared = TRUE,
-                                      useHTML = TRUE,
-                                      headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
-                                      pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {series.color}&quot;&gt;{series.name} &lt;/td&gt;&lt;td style=&quot;text-align: right&quot;&gt;&lt;b&gt;{point.y} {point.value}&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&#39;)
-  
-                        
-
-print(df_effectiveness)
-## # A tibble: 203 × 8
-##    country_name        country_code indicato…¹  year value conti…² iso2c unico…³
-##    &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 Afghanistan         AFG          Governmen…  2021 -1.63 Asia    AF    &quot;\U000…
-##  2 Albania             ALB          Governmen…  2021  0    Europe  AL    &quot;\U000…
-##  3 Algeria             DZA          Governmen…  2021 -0.62 Africa  DZ    &quot;\U000…
-##  4 American Samoa      ASM          Governmen…  2021  0.7  Oceania AS    &quot;\U000…
-##  5 Andorra             AND          Governmen…  2021  1.82 Europe  AD    &quot;\U000…
-##  6 Angola              AGO          Governmen…  2021 -1.06 Africa  AO    &quot;\U000…
-##  7 Antigua and Barbuda ATG          Governmen…  2021 -0.14 Americ… AG    &quot;\U000…
-##  8 Argentina           ARG          Governmen…  2021 -0.36 Americ… AR    &quot;\U000…
-##  9 Armenia             ARM          Governmen…  2021 -0.25 Asia    AM    &quot;\U000…
-## 10 Aruba               ABW          Governmen…  2021  1.13 Americ… AW    &quot;\U000…
-## # … with 193 more rows, and abbreviated variable names ¹​indicator_name,
-## #   ²​continent, ³​unicode_symbol
-# htmlwidgets::saveWidget(map_effectiveness_2021, &quot;WGI_effectiveness_2021.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_effectiveness_2021.html&quot;, height = &quot;400px&quot;)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:government-effectiveness"></span>
-<iframe src="https://www.renanperes.com/widgets/WGI_effectiveness_2021.html" width="746.88cm" height="400px" data-external="1">
-</iframe>
-<p class="caption">
-Figure 2: 2021 Government Effectiveness.
+Figure 1: WGI 2021 Results.
 </p>
 </div>
 <!-- ```{r pressure} -->
