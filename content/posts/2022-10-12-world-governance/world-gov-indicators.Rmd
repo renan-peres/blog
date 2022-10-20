@@ -327,7 +327,7 @@ north_america <- df %>%
                   facet_grid(~Country) +
                   scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                   scale_colour_brewer(palette = "Dark2") +
-                  labs(title = "North America", 
+                  labs(title = "", 
                        color = "",
                        y = element_blank(),
                        x = element_blank()) +
@@ -335,7 +335,8 @@ north_america <- df %>%
                   theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
                         legend.text = element_text(size = 12), 
                         strip.text = element_text(size = 12), 
-                        strip.background = element_rect(fill = "#cd4f2f"))
+                        strip.background = element_rect(fill = "#cd4f2f"), 
+                        strip.text.x = element_text(color = "white"))
 
 north_america_plotly <- ggplotly(north_america, tooltip = c("Year", "Score")) %>% 
                           config(displaylogo = FALSE,
