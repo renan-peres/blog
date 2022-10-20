@@ -145,7 +145,9 @@ The dataset lists composite governance indicators based on over 30 underlying da
 
 # Data Preparation
 
-During the preparation I had to pivot the years into a single variable and add the corresponding continent to each country.
+For the ease of understanding and to make our analyzes more clearer, during the preparation I filtered the indicators by its estimates which gives the country a score on the aggregate indicator, in units of a standard normal distribution, ranging from approximately -2.5 to 2.5.
+
+Feel welcomed to manipulate or download the prepared data from the table below!
 
 #### [[View Table in Full Screen](/widgets/WGI_DT.html)]
 
