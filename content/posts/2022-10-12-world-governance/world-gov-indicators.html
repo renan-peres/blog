@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 14:08</p>
+<p><strong>Last Update:</strong> October 20, 2022 - 14:16</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -226,8 +226,10 @@ knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, h
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
 <p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<div id="most-recent-results-2021-reffigwgi-2021-view-in-full-screen" class="section level4">
-<h4>Most Recent Results <strong><em>(2021)</em></strong> <a href="#fig:wgi-2021">1</a> <strong>[<a href="/widgets/WGI_2021.html">View in Full Screen</a>]</strong></h4>
+<div id="most-recent-results-2021-reffigwgi-2021" class="section level3">
+<h3>Most Recent Results <strong><em>(2021)</em></strong> <a href="#fig:wgi-2021">1</a></h3>
+<div id="view-map-in-full-screen" class="section level4">
+<h4><strong>[<a href="/widgets/WGI_2021.html">View Map in Full Screen</a>]</strong></h4>
 <pre class="r"><code>
 df_2021 &lt;- df %&gt;% 
             mutate(value = round(value, 2)) %&gt;% 
@@ -400,6 +402,7 @@ Figure 1: WGI 2021 Results.
 <!--           legend.text = element_text(size = 16), -->
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
+</div>
 </div>
 <div id="plotly-view" class="section level2">
 <h2>Plotly <a href="/widgets/plotly.html">View</a></h2>

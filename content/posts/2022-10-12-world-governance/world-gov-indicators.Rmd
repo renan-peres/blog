@@ -238,7 +238,8 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
 
-#### Most Recent Results ***(2021)***  \@ref(fig:wgi-2021) **[[View in Full Screen](/widgets/WGI_2021.html)]**
+### Most Recent Results ***(2021)***  \@ref(fig:wgi-2021) 
+#### **[[View Map in Full Screen](/widgets/WGI_2021.html)]**
 
 ```{r wgi-2021, fig.cap='WGI 2021 Results.', tidy=FALSE}
 
