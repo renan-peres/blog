@@ -13,7 +13,7 @@ coverSize: partial
 metaAlignment: center
 ---
 
-This report presents six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.
+This report presents the results of six broad dimensions of governance over 215 countries and territories between 1996-2021.
 
 <!--more-->
 
@@ -117,16 +117,21 @@ h1{
 3.  [Dataset]🗒️
 4.  [Data Preparation] 💻
 5.  [Visualizations] 📈
+    -   [Worldwide: Most Recent Release (2021)](#worldwide-most-recent-release-2021)
+
+    -   [Continents: Past 10 Years]
+
+    -   [North America: Timeline Comparison (1996-2021)](#north-america-timeline-comparison-1996-2021)
 6.  [Conclusion]
 7.  [References]
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) which includes six broad indicators of a country's governance between the periods of 1996-2021.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021. The charts in this report highlight the worldwide results of 2021, an overall comparison between the continents for the past ten years, and a comparison between the major countries in North America from 1996-2021.
 
 # Motivation
 
-As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I had always been curious in understanding how each country's government operates and how they have progressed over time. Indeed, when I was navigating through <https://www.worldbank.org/> looking for a dataset to perform some analyzes, I couldn't choose any dataset other than the [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022) to release my first open-source data analysis project.
+As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I have always been curious to understand how each country operates, how successful they are, and how they have progressed over time. As a result, when navigating through <https://www.worldbank.org/> looking for some data to perform analyses, I couldn't choose any dataset other than the one presented in this report to release this open-source project.
 
 # Dataset
 
@@ -145,9 +150,9 @@ The dataset lists composite governance indicators based on over 30 underlying da
 
 # Data Preparation
 
-For the ease of understanding and to make our analyzes more clearer, during the preparation I filtered the indicators by its estimates which gives the country a score on the aggregate indicator, in units of a standard normal distribution, ranging from approximately -2.5 to 2.5.
+For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which gives the country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.
 
-Feel welcomed to manipulate or download the prepared data from the table below!
+I have attached below the prepared data I used to make the visualizations. Feel welcome to explore the code and manipulate or download the information!
 
 #### [[View Table in Full Screen](/widgets/WGI_DT.html)]
 
@@ -237,15 +242,19 @@ Feel welcomed to manipulate or download the prepared data from the table below!
 # write_csv(df, file = "./WGI_cleaned.csv")
 
 print(df)
+```
 
+```{r, echo=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "600px")
 ```
 
+
 # Visualizations
 
-To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.
+As this is a significant project which involves variables across many different countries, I thought the best way to explore the results would be to first make a map with the most recent indicator results comparing all nations and, second, compare the results grouped by continent over a period of the last five years, and lastly comparing the results between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!
 
-### Global Results ***(Most Recent: 2021)***  \@ref(fig:wgi-2021) 
+### Worldwide: Most Recent Release (2021) {#worldwide-most-recent-release-2021}
+
 #### **[[View Map in Full Screen](/widgets/WGI_2021.html)]**
 
 ```{r wgi-2021, fig.cap='WGI 2021 Results.', tidy=FALSE}
@@ -303,55 +312,17 @@ map_df_2021 <- hcmap(map = "custom/world-robinson-lowres",
                             headerFormat = '<table><tr><th, colspan="2">{point.key}</th></tr>',
                             pointFormat = '<tr><td style="color: {#252223}"><b>{point.country_name}</b><br>Control of Corruption: {point.control_of_corruption}<br>Government Effectiveness: {point.government_effectiveness}<br>Political Stability: {point.political_stability}<br>Regulatory Quality: {point.regulatory_quality}<br>Rule of Law: {point.rule_of_law}<br>Voice and Accountability: {point.voice_and_accountability}<br><b>Mean: {point.value}</b>')
 
+# htmlwidgets::saveWidget(map_df_2021, "WGI_2021.html")
 
 print(df_2021)
-# htmlwidgets::saveWidget(map_df_2021, "WGI_2021.html")
+```
+
+```{r, echo=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
-### North America Comparison \@ref(fig:north-america) 
-#### **[[View Plot in Full Screen](/widgets/North_America_Results.html)]**
 
-```{r north-america, fig.cap='North America Comparison.', tidy=FALSE}
-north_america <- df %>% 
-                  filter(country_name %in% c("Canada", "United States", "Mexico")) %>% 
-                  select(Country = country_name, 
-                         Code = country_code, 
-                         Continent = continent, 
-                         Indicator = indicator_name, 
-                         Year = year, 
-                         Score = value) %>% 
-                  ggplot(aes(x = Year, y = Score, color = Indicator)) +
-                  geom_line(size = .7) +
-                  # geom_point(color = "black") +
-                  facet_grid(~Country) +
-                  scale_x_continuous(breaks = seq(1995, 2020, 10)) +
-                  scale_colour_brewer(palette = "Dark2") +
-                  labs(title = "", 
-                       color = "",
-                       y = element_blank(),
-                       x = element_blank()) +
-                  theme_bw() +
-                  theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
-                        legend.text = element_text(size = 12), 
-                        strip.text = element_text(size = 12), 
-                        strip.background = element_rect(fill = "#cd4f2f"), 
-                        strip.text.x = element_text(color = "white"))
-
-north_america_plotly <- ggplotly(north_america, tooltip = c("Year", "Score")) %>% 
-                          config(displaylogo = FALSE,
-                                 modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
-                                                            "select",
-                                                            "lasso2d",
-                                                            "pan2d"),
-                                 toImageButtonOptions = list(format = "svg",
-                                                             filename = "North_America_Results"))
-
-# htmlwidgets::saveWidget(north_america_plotly, file = "North_America_Results.html")
-knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "500px")
-
-```
-
+### Continents: Past 10 Years
 
 <!-- ```{r pressure} -->
 
@@ -535,6 +506,62 @@ knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.htm
 
 ## Plotly [View](/widgets/plotly.html)
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
 ```
+
+
+### North America: Timeline Comparison (1996-2021) {#north-america-timeline-comparison-1996-2021}
+
+#### **[[View Plot in Full Screen](/widgets/North_America_Results.html)]**
+
+```{r north-america, fig.cap='North America Comparison.', tidy=FALSE}
+north_america <- df %>% 
+                  filter(country_name %in% c("Canada", "United States", "Mexico")) %>% 
+                  select(Country = country_name, 
+                         Code = country_code, 
+                         Continent = continent, 
+                         Indicator = indicator_name, 
+                         Year = year, 
+                         Score = value)
+
+north_america_plot <- north_america %>% 
+                        ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                        geom_line(size = .7) +
+                        # geom_point(color = "black") +
+                        facet_grid(~Country) +
+                        scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                        scale_colour_brewer(palette = "Dark2") +
+                        labs(title = "", 
+                             color = "",
+                             y = element_blank(),
+                             x = element_blank()) +
+                        theme_bw() +
+                        theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
+                              legend.text = element_text(size = 12), 
+                              strip.text = element_text(size = 12), 
+                              strip.background = element_rect(fill = "#cd4f2f"), 
+                              strip.text.x = element_text(color = "white"))
+
+north_america_plotly <- ggplotly(north_america_plot, tooltip = c("Year", "Score")) %>%
+                          config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
+                                                            "select",
+                                                            "lasso2d",
+                                                            "pan2d"),
+                                 toImageButtonOptions = list(format = "svg",
+                                                             filename = "North_America_Results"))
+
+# htmlwidgets::saveWidget(north_america_plotly, file = "North_America_Results.html")
+
+print(north_america)
+```
+
+```{r, echo=FALSE}
+knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "500px")
+```
+
+
+# Conclusion
+
+# References

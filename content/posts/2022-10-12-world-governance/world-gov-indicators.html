@@ -15,7 +15,7 @@ metaAlignment: center
 
 
 
-<p>This report presents six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.</p>
+<p>This report presents the results of six broad dimensions of governance over 215 countries and territories between 1996-2021.</p>
 <!--more-->
 <!-- <a class="header-title-link" href="http://renanperes.com" aria-label="Go to homepage">Home💻</a> -->
 <style type="text/css">
@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 20, 2022 - 18:51</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 08:02</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -91,18 +91,23 @@ h1{
 <li><a href="#motivation">Motivation</a> 💡</li>
 <li><a href="#dataset">Dataset</a>🗒️</li>
 <li><a href="#data-preparation">Data Preparation</a> 💻</li>
-<li><a href="#visualizations">Visualizations</a> 📈</li>
-<li>[Conclusion]</li>
-<li>[References]</li>
+<li><a href="#visualizations">Visualizations</a> 📈
+<ul>
+<li><p><a href="#worldwide-most-recent-release-2021">Worldwide: Most Recent Release (2021)</a></p></li>
+<li><p><a href="#continents-past-10-years">Continents: Past 10 Years</a></p></li>
+<li><p><a href="#north-america-timeline-comparison-1996-2021">North America: Timeline Comparison (1996-2021)</a></p></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
 </ol>
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.This report is based on the data source <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) which includes six broad indicators of a country’s governance between the periods of 1996-2021.</p>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), which includes six broad indicators of a country’s governance between the periods of 1996-2021. The charts in this report highlight the worldwide results of 2021, an overall comparison between the continents for the past ten years, and a comparison between the major countries in North America from 1996-2021.</p>
 </div>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I had always been curious in understanding how each country’s government operates and how they have progressed over time. Indeed, when I was navigating through <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a> looking for a dataset to perform some analyzes, I couldn’t choose any dataset other than the <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022) to release my first open-source data analysis project.</p>
+<p>As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I have always been curious to understand how each country operates, how successful they are, and how they have progressed over time. As a result, when navigating through <a href="https://www.worldbank.org/" class="uri">https://www.worldbank.org/</a> looking for some data to perform analyses, I couldn’t choose any dataset other than the one presented in this report to release this open-source project.</p>
 </div>
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
@@ -120,8 +125,8 @@ h1{
 </div>
 <div id="data-preparation" class="section level1">
 <h1>Data Preparation</h1>
-<p>For the ease of understanding and to make our analyzes more clearer, during the preparation I filtered the indicators by its estimates which gives the country a score on the aggregate indicator, in units of a standard normal distribution, ranging from approximately -2.5 to 2.5.</p>
-<p>Feel welcomed to manipulate or download the prepared data from the table below!</p>
+<p>For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which gives the country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.</p>
+<p>I have attached below the prepared data I used to make the visualizations. Feel welcome to explore the code and manipulate or download the information!</p>
 <div id="view-table-in-full-screen" class="section level4">
 <h4>[<a href="/widgets/WGI_DT.html">View Table in Full Screen</a>]</h4>
 <pre class="r"><code># 1_Importing
@@ -223,18 +228,16 @@ print(df)
 ##  9 Albania      ALB          Political Stabil…  1996 -0.34 Europe  AL    &quot;\U000…
 ## 10 Albania      ALB          Regulatory Quali…  1996 -0.47 Europe  AL    &quot;\U000…
 ## # … with 27,581 more rows, and abbreviated variable names ¹​continent,
-## #   ²​unicode_symbol
-
-knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_DT.html&quot;, height = &quot;600px&quot;)</code></pre>
+## #   ²​unicode_symbol</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
 </div>
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
-<p>To better analyze the dataset, I decided to group the countries available in the dataset by continent and compare them accordingly.</p>
-<div id="global-results-most-recent-2021-reffigwgi-2021" class="section level3">
-<h3>Global Results <strong><em>(Most Recent: 2021)</em></strong> <a href="#fig:wgi-2021">1</a></h3>
+<p>As this is a significant project which involves variables across many different countries, I thought the best way to explore the results would be to first make a map with the most recent indicator results comparing all nations and, second, compare the results grouped by continent over a period of the last five years, and lastly comparing the results between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!</p>
+<div id="worldwide-most-recent-release-2021" class="section level3">
+<h3>Worldwide: Most Recent Release (2021)</h3>
 <div id="view-map-in-full-screen" class="section level4">
 <h4><strong>[<a href="/widgets/WGI_2021.html">View Map in Full Screen</a>]</strong></h4>
 <pre class="r"><code>
@@ -291,6 +294,7 @@ map_df_2021 &lt;- hcmap(map = &quot;custom/world-robinson-lowres&quot;,
                             headerFormat = &#39;&lt;table&gt;&lt;tr&gt;&lt;th, colspan=&quot;2&quot;&gt;{point.key}&lt;/th&gt;&lt;/tr&gt;&#39;,
                             pointFormat = &#39;&lt;tr&gt;&lt;td style=&quot;color: {#252223}&quot;&gt;&lt;b&gt;{point.country_name}&lt;/b&gt;&lt;br&gt;Control of Corruption: {point.control_of_corruption}&lt;br&gt;Government Effectiveness: {point.government_effectiveness}&lt;br&gt;Political Stability: {point.political_stability}&lt;br&gt;Regulatory Quality: {point.regulatory_quality}&lt;br&gt;Rule of Law: {point.rule_of_law}&lt;br&gt;Voice and Accountability: {point.voice_and_accountability}&lt;br&gt;&lt;b&gt;Mean: {point.value}&lt;/b&gt;&#39;)
 
+# htmlwidgets::saveWidget(map_df_2021, &quot;WGI_2021.html&quot;)
 
 print(df_2021)
 ## # A tibble: 205 × 9
@@ -309,65 +313,13 @@ print(df_2021)
 ## 10 Aruba           ABW        0.83    1.13    1.47    0.95    1.28    1.03  1.11
 ## # … with 195 more rows, and abbreviated variable names ¹​country_code,
 ## #   ²​control_of_corruption, ³​government_effectiveness, ⁴​political_stability,
-## #   ⁵​regulatory_quality, ⁶​rule_of_law, ⁷​voice_and_accountability
-# htmlwidgets::saveWidget(map_df_2021, &quot;WGI_2021.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/WGI_2021.html&quot;, height = &quot;600px&quot;)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:wgi-2021"></span>
+## #   ⁵​regulatory_quality, ⁶​rule_of_law, ⁷​voice_and_accountability</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_2021.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
-<p class="caption">
-Figure 1: WGI 2021 Results.
-</p>
 </div>
 </div>
-</div>
-<div id="north-america-comparison-reffignorth-america" class="section level3">
-<h3>North America Comparison <a href="#fig:north-america">2</a></h3>
-<div id="view-plot-in-full-screen" class="section level4">
-<h4><strong>[<a href="/widgets/North_America_Results.html">View Plot in Full Screen</a>]</strong></h4>
-<pre class="r"><code>north_america &lt;- df %&gt;% 
-                  filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;, &quot;Mexico&quot;)) %&gt;% 
-                  select(Country = country_name, 
-                         Code = country_code, 
-                         Continent = continent, 
-                         Indicator = indicator_name, 
-                         Year = year, 
-                         Score = value) %&gt;% 
-                  ggplot(aes(x = Year, y = Score, color = Indicator)) +
-                  geom_line(size = .7) +
-                  # geom_point(color = &quot;black&quot;) +
-                  facet_grid(~Country) +
-                  scale_x_continuous(breaks = seq(1995, 2020, 10)) +
-                  scale_colour_brewer(palette = &quot;Dark2&quot;) +
-                  labs(title = &quot;&quot;, 
-                       color = &quot;&quot;,
-                       y = element_blank(),
-                       x = element_blank()) +
-                  theme_bw() +
-                  theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = .5, color = &quot;#103f91&quot;),
-                        legend.text = element_text(size = 12), 
-                        strip.text = element_text(size = 12), 
-                        strip.background = element_rect(fill = &quot;#cd4f2f&quot;), 
-                        strip.text.x = element_text(color = &quot;white&quot;))
-
-north_america_plotly &lt;- ggplotly(north_america, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;% 
-                          config(displaylogo = FALSE,
-                                 modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
-                                                            &quot;select&quot;,
-                                                            &quot;lasso2d&quot;,
-                                                            &quot;pan2d&quot;),
-                                 toImageButtonOptions = list(format = &quot;svg&quot;,
-                                                             filename = &quot;North_America_Results&quot;))
-
-# htmlwidgets::saveWidget(north_america_plotly, file = &quot;North_America_Results.html&quot;)
-knitr::include_url(&quot;https://www.renanperes.com/widgets/North_America_Results.html&quot;, height = &quot;500px&quot;)</code></pre>
-<div class="figure"><span style="display:block;" id="fig:north-america"></span>
-<iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
-</iframe>
-<p class="caption">
-Figure 2: North America Comparison.
-</p>
-</div>
+<div id="continents-past-10-years" class="section level3">
+<h3>Continents: Past 10 Years</h3>
 <!-- ```{r pressure} -->
 <!-- # Effectiveness -->
 <!--   df_wgi %>% -->
@@ -459,11 +411,76 @@ Figure 2: North America Comparison.
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
 </div>
-</div>
 <div id="plotly-view" class="section level2">
 <h2>Plotly <a href="/widgets/plotly.html">View</a></h2>
-<pre class="r"><code>knitr::include_url(&quot;https://www.renanperes.com/widgets/plotly.html&quot;, height = &quot;600px&quot;)</code></pre>
 <iframe src="https://www.renanperes.com/widgets/plotly.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
+<div id="north-america-timeline-comparison-1996-2021" class="section level3">
+<h3>North America: Timeline Comparison (1996-2021)</h3>
+<div id="view-plot-in-full-screen" class="section level4">
+<h4><strong>[<a href="/widgets/North_America_Results.html">View Plot in Full Screen</a>]</strong></h4>
+<pre class="r"><code>north_america &lt;- df %&gt;% 
+                  filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;, &quot;Mexico&quot;)) %&gt;% 
+                  select(Country = country_name, 
+                         Code = country_code, 
+                         Continent = continent, 
+                         Indicator = indicator_name, 
+                         Year = year, 
+                         Score = value)
+
+north_america_plot &lt;- north_america %&gt;% 
+                        ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                        geom_line(size = .7) +
+                        # geom_point(color = &quot;black&quot;) +
+                        facet_grid(~Country) +
+                        scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                        scale_colour_brewer(palette = &quot;Dark2&quot;) +
+                        labs(title = &quot;&quot;, 
+                             color = &quot;&quot;,
+                             y = element_blank(),
+                             x = element_blank()) +
+                        theme_bw() +
+                        theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = .5, color = &quot;#103f91&quot;),
+                              legend.text = element_text(size = 12), 
+                              strip.text = element_text(size = 12), 
+                              strip.background = element_rect(fill = &quot;#cd4f2f&quot;), 
+                              strip.text.x = element_text(color = &quot;white&quot;))
+
+north_america_plotly &lt;- ggplotly(north_america_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
+                          config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
+                                                            &quot;select&quot;,
+                                                            &quot;lasso2d&quot;,
+                                                            &quot;pan2d&quot;),
+                                 toImageButtonOptions = list(format = &quot;svg&quot;,
+                                                             filename = &quot;North_America_Results&quot;))
+
+# htmlwidgets::saveWidget(north_america_plotly, file = &quot;North_America_Results.html&quot;)
+
+print(north_america)
+## # A tibble: 414 × 6
+##    Country Code  Continent     Indicator                 Year Score
+##    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
+##  1 Canada  CAN   North America Control of Corruption     1996  2.03
+##  2 Canada  CAN   North America Government Effectiveness  1996  1.74
+##  3 Canada  CAN   North America Political Stability       1996  1.23
+##  4 Canada  CAN   North America Regulatory Quality        1996  1.49
+##  5 Canada  CAN   North America Rule of Law               1996  1.65
+##  6 Canada  CAN   North America Voice and Accountability  1996  1.57
+##  7 Mexico  MEX   North America Control of Corruption     1996 -0.51
+##  8 Mexico  MEX   North America Government Effectiveness  1996  0.23
+##  9 Mexico  MEX   North America Political Stability       1996 -0.93
+## 10 Mexico  MEX   North America Regulatory Quality        1996  0.13
+## # … with 404 more rows</code></pre>
+<iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
+</iframe>
 </div>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
 </div>
