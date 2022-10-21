@@ -422,7 +422,7 @@ north_america_plot <- north_america %>%
                         theme_bw() +
                         theme(legend.text = element_text(size = 10), 
                               strip.background = element_rect(fill = "#bcdefc"),
-                              strip.text = element_text(size = 11, color = "black"))
+                              strip.text = element_text(size = 10, color = "black"))
 
 north_america_plotly <- ggplotly(north_america_plot, tooltip = c("Year", "Score")) %>%
                           config(displaylogo = FALSE,
@@ -439,7 +439,7 @@ print(north_america)
 ```
 
 ```{r, echo=FALSE, fig.cap='North America Comparison.', tidy=FALSE}
-knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "500px")
+knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "600px")
 ```
 
 # Conclusion
