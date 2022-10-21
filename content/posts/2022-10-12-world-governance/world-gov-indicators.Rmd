@@ -379,7 +379,7 @@ cont_df_2021_plot <- df %>%
                         ggplot(aes(x = year, y = value, fill = continent)) +
                         geom_boxplot(na.rm = T) +
                         coord_flip() +
-                        facet_wrap(~indicator_name) +
+                        facet_wrap(~indicator_name, scales = "free") +
                         geom_hline(yintercept =-2, linetype = "dotted", size = .7, color = "black") +
                         geom_hline(yintercept = -1, linetype = "dotted", size = .7, color = "black") +
                         geom_hline(yintercept = 0, linetype = "dotted", size = .7, color = "black") +

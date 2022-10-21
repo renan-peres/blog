@@ -80,7 +80,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 13:24</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 13:30</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -386,7 +386,7 @@ print(df_2021)
                         ggplot(aes(x = year, y = value, fill = continent)) +
                         geom_boxplot(na.rm = T) +
                         coord_flip() +
-                        facet_wrap(~indicator_name) +
+                        facet_wrap(~indicator_name, scales = &quot;free&quot;) +
                         geom_hline(yintercept =-2, linetype = &quot;dotted&quot;, size = .7, color = &quot;black&quot;) +
                         geom_hline(yintercept = -1, linetype = &quot;dotted&quot;, size = .7, color = &quot;black&quot;) +
                         geom_hline(yintercept = 0, linetype = &quot;dotted&quot;, size = .7, color = &quot;black&quot;) +
