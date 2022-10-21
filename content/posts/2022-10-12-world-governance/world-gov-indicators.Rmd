@@ -121,7 +121,7 @@ ol {
 
     -   [Worldwide: Most Recent Release (2021)](#worldwide-most-recent-release-2021)
 
-    -   [Continents: Past 5 Years]
+    -   [Continents: Most Recent Release (2021)]
 
     -   [North America: Timeline Comparison (1996-2021)](#north-america-timeline-comparison-1996-2021)
 6.  [Conclusion]
@@ -259,6 +259,7 @@ As this is a significant project which involves many variables and records, I th
 ### Correlation Between Indicators
 
 ```{r indicators-correlation, fig.cap='Correlation between Indicators.', tidy=FALSE, fig.height= 7, out.width= "100%"}
+
 # Correlation Matrix
 df_cor <- df %>% 
             select(country_name:continent) %>% 
@@ -370,192 +371,32 @@ print(df_2021)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
-### Continents: Past 5 Years
-
-<!-- ```{r pressure} -->
-
-<!-- # Effectiveness -->
-
-<!--   df_wgi %>% -->
-
-<!--   filter(indicator_name == "Government Effectiveness: Estimate") %>% -->
-
-<!--   mutate(indicator_name = str_replace(indicator_name, -->
-
-<!--                                       pattern =  "Government Effectiveness: Estimate", -->
-
-<!--                                       replacement = "Government Effectiveness")) %>% -->
-
-<!--   group_by(continent) %>% -->
-
-<!--   filter(continent != "NA", -->
-
-<!--          year > 2015) %>% -->
-
-<!--   ggplot(aes(x = year, y = value, fill = continent)) + -->
-
-<!--   geom_boxplot(na.rm = T) + -->
-
-<!--   # scale_fill_viridis_d(option = "mako") + -->
-
-<!--   scale_fill_brewer(palette = "Dark2") + -->
-
-<!--   coord_flip() + -->
-
-<!--   geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
-
-<!--   labs(title = "Effectiveness", x = element_blank(), y = element_blank()) + -->
-
-<!--   # theme_bw() + -->
-
-<!--   cowplot::theme_cowplot() + -->
-
-<!--   theme(axis.text = element_text(size = 14, face = "bold"), -->
-
-<!--         title = element_text(size = 20), -->
-
-<!--         legend.text = element_text(size = 16), -->
-
-<!--         legend.title = element_blank()) -> p1 -->
-
-<!-- # Control of Corruption -->
-
-<!--   df_wgi %>% -->
-
-<!--     filter(indicator_name == "Control of Corruption: Estimate") %>% -->
-
-<!--     mutate(indicator_name = str_replace(indicator_name, -->
-
-<!--                                         pattern =  "Control of Corruption: Estimate", -->
-
-<!--                                         replacement = "Control of Corruption")) %>% -->
-
-<!--     group_by(continent) %>% -->
-
-<!--     filter(continent != "NA", -->
-
-<!--            year > 2015) %>% -->
-
-<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
-
-<!--     geom_boxplot(na.rm = T) + -->
-
-<!--     # scale_fill_viridis_d(option = "mako") + -->
-
-<!--     scale_fill_brewer(palette = "Dark2") + -->
-
-<!--     coord_flip() + -->
-
-<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
-
-<!--     labs(title = "Control of Corruption", x = element_blank(), y = element_blank()) + -->
-
-<!--     # theme_bw() + -->
-
-<!--     cowplot::theme_cowplot() + -->
-
-<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
-
-<!--           title = element_text(size = 20), -->
-
-<!--           legend.text = element_text(size = 16), -->
-
-<!--           legend.title = element_blank()) -> p2 -->
-
-<!-- # Regulatory Quality -->
-
-<!--   df_wgi %>% -->
-
-<!--     filter(indicator_name == "Regulatory Quality: Estimate") %>% -->
-
-<!--     mutate(indicator_name = str_replace(indicator_name, -->
-
-<!--                                         pattern =  "Regulatory Quality: Estimate", -->
-
-<!--                                         replacement = "Regulatory Quality")) %>% -->
-
-<!--     group_by(continent) %>% -->
-
-<!--     filter(continent != "NA", -->
-
-<!--            year > 2015) %>% -->
-
-<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
-
-<!--     geom_boxplot(na.rm = T) + -->
-
-<!--     # scale_fill_viridis_d(option = "mako") + -->
-
-<!--     scale_fill_brewer(palette = "Dark2") + -->
-
-<!--     coord_flip() + -->
-
-<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
-
-<!--     labs(title = "Regulatory Quality", x = element_blank(), y = element_blank()) + -->
-
-<!--     # theme_bw() + -->
-
-<!--     cowplot::theme_cowplot() + -->
-
-<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
-
-<!--           title = element_text(size = 20), -->
-
-<!--           legend.text = element_text(size = 16), -->
-
-<!--           legend.title = element_blank()) -> p3 -->
-
-<!-- # Rule of Law -->
-
-<!--   df_wgi %>% -->
-
-<!--     filter(indicator_name == "Rule of Law: Estimate") %>% -->
-
-<!--     mutate(indicator_name = str_replace(indicator_name, -->
-
-<!--                                         pattern =  "Rule of Law: Estimate", -->
-
-<!--                                         replacement = "Rule of Law")) %>% -->
-
-<!--     group_by(continent) %>% -->
-
-<!--     filter(continent != "NA", -->
-
-<!--            year > 2015) %>% -->
-
-<!--     ggplot(aes(x = year, y = value, fill = continent)) + -->
-
-<!--     geom_boxplot(na.rm = T) + -->
-
-<!--     # scale_fill_viridis_d(option = "mako") + -->
-
-<!--     scale_fill_brewer(palette = "Dark2") + -->
-
-<!--     coord_flip() + -->
-
-<!--     geom_hline(yintercept = 0, linetype = "dashed", size = .8) + -->
-
-<!--     labs(title = "Rule of Law", x = element_blank(), y = element_blank()) + -->
-
-<!--     # theme_bw() + -->
-
-<!--     cowplot::theme_cowplot() + -->
-
-<!--     theme(axis.text = element_text(size = 14, face = "bold"), -->
-
-<!--           title = element_text(size = 20), -->
-
-<!--           legend.text = element_text(size = 16), -->
-
-<!--           legend.title = element_blank()) -> p4 -->
-
-<!-- ``` -->
-
-#### **[[View Plot in Full Screen](/widgets/plotly.html)**
-
-```{r, echo=FALSE}
-knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
+### Continents: Most Recent Release (2021)
+
+```{r 2021-continent-comparison, fig.cap='2021 Comparison between Continents.', tidy=FALSE, fig.height= 7, out.width= "100%"}
+cont_df_2021_plot <- df %>% 
+                        filter(year == 2021) %>% 
+                        ggplot(aes(x = year, y = value, fill = continent)) +
+                        geom_boxplot(na.rm = T) +
+                        coord_flip() +
+                        facet_wrap(~indicator_name) +
+                        geom_hline(yintercept =-2, linetype = "dotted", size = .7, color = "black") +
+                        geom_hline(yintercept = -1, linetype = "dotted", size = .7, color = "black") +
+                        geom_hline(yintercept = 0, linetype = "dotted", size = .7, color = "black") +
+                        geom_hline(yintercept = 1, linetype = "dotted", size = .7, color = "black") +
+                        geom_hline(yintercept = 2, linetype = "dotted", size = .7, color = "black") +
+                        labs(x = element_blank(),
+                             y = element_blank(),
+                             fill = "") +
+                        theme_bw() +
+                        theme(axis.text.y = element_blank(),
+                              axis.text.x = element_text(size = 10, face = "bold"),
+                              legend.text = element_text(size = 12), 
+                              panel.grid = element_blank(),
+                              strip.background = element_rect(fill = "#bcdefc"),
+                              strip.text = element_text(size = 11)) +
+                        guides(fill = guide_legend(reverse = TRUE))
+print(cont_df_2021_plot)
 ```
 
 ### North America: Timeline Comparison (1996-2021) {#north-america-timeline-comparison-1996-2021}
