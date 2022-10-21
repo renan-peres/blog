@@ -400,7 +400,7 @@ print(cont_df_2021_plot)
 
 ```{r north-america}
 north_america <- df %>% 
-                  filter(country_name %in% c("Canada", "United States", "Mexico")) %>% 
+                  filter(country_name %in% c("Canada", "United States")) %>% 
                   select(Country = country_name, 
                          Code = country_code, 
                          Continent = continent, 
@@ -411,7 +411,7 @@ north_america <- df %>%
 north_america_plot <- north_america %>% 
                         ggplot(aes(x = Year, y = Score, color = Indicator)) +
                         geom_line(size = .7) +
-                        # geom_point(color = "black") +
+                        geom_point(color = "black", size = .5) +
                         facet_grid(~Country) +
                         scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                         scale_colour_brewer(palette = "Dark2") +
@@ -421,10 +421,9 @@ north_america_plot <- north_america %>%
                              x = element_blank()) +
                         theme_bw() +
                         theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
-                              legend.text = element_text(size = 12), 
-                              strip.text = element_text(size = 12), 
-                              strip.background = element_rect(fill = "#cd4f2f"), 
-                              strip.text.x = element_text(color = "white"))
+                              legend.text = element_text(size = 10), 
+                              strip.background = element_rect(fill = "#bcdefc"),
+                              strip.text = element_text(size = 11, color = "black"))
 
 north_america_plotly <- ggplotly(north_america_plot, tooltip = c("Year", "Score")) %>%
                           config(displaylogo = FALSE,
