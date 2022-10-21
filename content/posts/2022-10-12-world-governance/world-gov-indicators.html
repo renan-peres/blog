@@ -80,7 +80,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 13:30</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 13:47</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -297,10 +297,8 @@ Figure 1: Correlation between Indicators.
 </p>
 </div>
 </div>
-<div id="worldwide-most-recent-release-2021" class="section level3">
-<h3>Worldwide: Most Recent Release (2021)</h3>
-<div id="view-map-in-full-screen" class="section level4">
-<h4><strong>[<a href="/widgets/WGI_2021.html">View Map in Full Screen</a>]</strong></h4>
+<div id="worldwide-most-recent-release-2021-full-screen" class="section level3">
+<h3>Worldwide: Most Recent Release (2021) [<a href="/widgets/WGI_2021.html">Full Screen</a>]</h3>
 <pre class="r"><code>
 df_2021 &lt;- df %&gt;% 
             mutate(value = round(value, 2)) %&gt;% 
@@ -378,7 +376,6 @@ print(df_2021)
 <iframe src="https://www.renanperes.com/widgets/WGI_2021.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
 </div>
-</div>
 <div id="continents-most-recent-release-2021" class="section level3">
 <h3>Continents: Most Recent Release (2021)</h3>
 <pre class="r"><code>cont_df_2021_plot &lt;- df %&gt;% 
@@ -411,10 +408,8 @@ Figure 2: 2021 Comparison between Continents.
 </p>
 </div>
 </div>
-<div id="north-america-timeline-comparison-1996-2021" class="section level3">
-<h3>North America: Timeline Comparison (1996-2021)</h3>
-<div id="view-plot-in-full-screen" class="section level4">
-<h4><strong>[<a href="/widgets/North_America_Results.html">View Plot in Full Screen</a>]</strong></h4>
+<div id="north-america-timeline-comparison-1996-2021-full-screen" class="section level3">
+<h3>North America: Timeline Comparison (1996-2021) [<a href="/widgets/North_America_Results.html">Full Screen</a>]</h3>
 <pre class="r"><code>north_america &lt;- df %&gt;% 
                   filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;, &quot;Mexico&quot;)) %&gt;% 
                   select(Country = country_name, 
@@ -470,7 +465,6 @@ print(north_america)
 ## # … with 404 more rows</code></pre>
 <iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
 </iframe>
-</div>
 </div>
 </div>
 <div id="conclusion" class="section level1">
