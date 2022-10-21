@@ -409,10 +409,10 @@ north_america <- df %>%
                          Score = value)
 
 north_america_plot <- north_america %>% 
-                        ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                        ggplot(aes(x = Year, y = Score, color = Country)) +
                         geom_line(size = .7) +
                         geom_point(color = "black", size = .5) +
-                        facet_grid(~Country) +
+                        facet_wrap(~Indicator) +
                         scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                         scale_colour_brewer(palette = "Dark2") +
                         labs(title = "", 
@@ -420,8 +420,7 @@ north_america_plot <- north_america %>%
                              y = element_blank(),
                              x = element_blank()) +
                         theme_bw() +
-                        theme(plot.title = element_text(size = 16, face = "bold", hjust = .5, color = "#103f91"),
-                              legend.text = element_text(size = 10), 
+                        theme(legend.text = element_text(size = 10), 
                               strip.background = element_rect(fill = "#bcdefc"),
                               strip.text = element_text(size = 11, color = "black"))
 

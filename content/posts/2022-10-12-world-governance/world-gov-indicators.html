@@ -85,7 +85,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 15:15</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 16:00</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -430,10 +430,10 @@ Figure 3: 2021 Comparison between Continents.
                          Score = value)
 
 north_america_plot &lt;- north_america %&gt;% 
-                        ggplot(aes(x = Year, y = Score, color = Indicator)) +
+                        ggplot(aes(x = Year, y = Score, color = Country)) +
                         geom_line(size = .7) +
                         geom_point(color = &quot;black&quot;, size = .5) +
-                        facet_grid(~Country) +
+                        facet_wrap(~Indicator) +
                         scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                         scale_colour_brewer(palette = &quot;Dark2&quot;) +
                         labs(title = &quot;&quot;, 
@@ -441,8 +441,7 @@ north_america_plot &lt;- north_america %&gt;%
                              y = element_blank(),
                              x = element_blank()) +
                         theme_bw() +
-                        theme(plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = .5, color = &quot;#103f91&quot;),
-                              legend.text = element_text(size = 10), 
+                        theme(legend.text = element_text(size = 10), 
                               strip.background = element_rect(fill = &quot;#bcdefc&quot;),
                               strip.text = element_text(size = 11, color = &quot;black&quot;))
 
