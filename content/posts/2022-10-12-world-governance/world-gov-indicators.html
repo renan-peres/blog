@@ -85,7 +85,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 16:20</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 16:51</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -419,33 +419,50 @@ Figure 3: 2021 Comparison between Continents.
 </div>
 </div>
 <div id="north-america-timeline-comparison-1996-2021-full-screen" class="section level3">
-<h3>North America: Timeline Comparison (1996-2021) [<a href="/widgets/North_America_Results.html">Full Screen</a>]</h3>
-<pre class="r"><code>north_america &lt;- df %&gt;% 
-                  filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;)) %&gt;% 
-                  select(Country = country_name, 
-                         Code = country_code, 
-                         Continent = continent, 
-                         Indicator = indicator_name, 
-                         Year = year, 
-                         Score = value)
+<h3>North America: Timeline Comparison (1996-2021) [<a href="/widgets/Top_3_Comparison.html">Full Screen</a>]</h3>
+<pre class="r"><code>
+top_3_2021 &lt;- df %&gt;% 
+                mutate(value = round(value, 2)) %&gt;%  
+                select(country_name, country_code, indicator_name, year, value) %&gt;% 
+                pivot_wider(names_from = &quot;indicator_name&quot;,
+                            values_from = &quot;value&quot;) %&gt;% 
+                clean_names() %&gt;% 
+                rowwise() %&gt;% 
+                mutate(mean = mean(c_across(4:9)),
+                       mean = round(mean, 2)) %&gt;% 
+                group_by(year) %&gt;% 
+                arrange(year, desc(mean)) %&gt;% 
+                mutate(rank = row_number()) %&gt;% 
+                ungroup() %&gt;% 
+                filter(year == 2021,
+                       rank &lt;= 3) %&gt;% 
+                distinct(country_name)
 
-north_america_plot &lt;- north_america %&gt;% 
-                        ggplot(aes(x = Year, y = Score, color = Country)) +
-                        geom_line(size = .7) +
-                        geom_point(color = &quot;black&quot;, size = .5) +
-                        facet_wrap(~Indicator) +
-                        scale_x_continuous(breaks = seq(1995, 2020, 10)) +
-                        scale_colour_brewer(palette = &quot;Dark2&quot;) +
-                        labs(title = &quot;&quot;, 
-                             color = &quot;&quot;,
-                             y = element_blank(),
-                             x = element_blank()) +
-                        theme_bw() +
-                        theme(legend.text = element_text(size = 10), 
-                              strip.background = element_rect(fill = &quot;#bcdefc&quot;),
-                              strip.text = element_text(size = 10, color = &quot;black&quot;))
 
-north_america_plotly &lt;- ggplotly(north_america_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
+top_3_plot &lt;- df %&gt;% 
+                filter(country_name %in% c(top_3_2021$country_name)) %&gt;% 
+                select(Country = country_name, 
+                       Code = country_code, 
+                       Continent = continent, 
+                       Indicator = indicator_name, 
+                       Year = year, 
+                       Score = value) %&gt;% 
+                ggplot(aes(x = Year, y = Score, color = Country)) +
+                geom_line(size = .7) +
+                geom_point(color = &quot;black&quot;, size = .5) +
+                facet_wrap(~Indicator) +
+                scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                scale_colour_brewer(palette = &quot;Dark2&quot;) +
+                labs(title = &quot;&quot;, 
+                     color = &quot;&quot;,
+                     y = element_blank(),
+                     x = element_blank()) +
+                theme_bw() +
+                theme(legend.text = element_text(size = 10), 
+                      strip.background = element_rect(fill = &quot;#bcdefc&quot;),
+                      strip.text = element_text(size = 10, color = &quot;black&quot;))
+
+top_3_plotly &lt;- ggplotly(top_3_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
                           config(displaylogo = FALSE,
                                  modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
                                                             &quot;select&quot;,
@@ -454,28 +471,20 @@ north_america_plotly &lt;- ggplotly(north_america_plot, tooltip = c(&quot;Year&q
                                  toImageButtonOptions = list(format = &quot;svg&quot;,
                                                              filename = &quot;North_America_Results&quot;))
 
-# htmlwidgets::saveWidget(north_america_plotly, file = &quot;North_America_Results.html&quot;)
+# htmlwidgets::saveWidget(north_america_plotly, file = &quot;Top_3_Comparison.html&quot;)
 
-print(north_america)
-## # A tibble: 276 × 6
-##    Country       Code  Continent     Indicator                 Year Score
-##    &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
-##  1 Canada        CAN   North America Control of Corruption     1996  2.03
-##  2 Canada        CAN   North America Government Effectiveness  1996  1.74
-##  3 Canada        CAN   North America Political Stability       1996  1.23
-##  4 Canada        CAN   North America Regulatory Quality        1996  1.49
-##  5 Canada        CAN   North America Rule of Law               1996  1.65
-##  6 Canada        CAN   North America Voice and Accountability  1996  1.57
-##  7 United States USA   North America Control of Corruption     1996  1.57
-##  8 United States USA   North America Government Effectiveness  1996  1.52
-##  9 United States USA   North America Political Stability       1996  0.94
-## 10 United States USA   North America Regulatory Quality        1996  1.59
-## # … with 266 more rows</code></pre>
+print(top_3_2021)
+## # A tibble: 3 × 1
+##   country_name
+##   &lt;chr&gt;       
+## 1 Finland     
+## 2 Denmark     
+## 3 Norway</code></pre>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
-<iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="600px" data-external="1">
+<iframe src="https://www.renanperes.com/widgets/Top_3_Comparison.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
 <p class="caption">
-Figure 4: North America Comparison.
+Figure 4: 2021 Top 3 Comparison.
 </p>
 </div>
 </div>
