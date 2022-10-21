@@ -83,7 +83,7 @@ h1{
 <!--     color: #29b542; -->
 <!-- } -->
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 08:02</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 09:19</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -103,7 +103,7 @@ h1{
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), which includes six broad indicators of a country’s governance between the periods of 1996-2021. The charts in this report highlight the worldwide results of 2021, an overall comparison between the continents for the past ten years, and a comparison between the major countries in North America from 1996-2021.</p>
+<p>Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government’s capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators"><em>Worldwide-Governance-Indicators</em></a> (Sep 23, 2022), which includes six broad indicators of a country’s governance between the periods of 1996-2021. The charts in this report first include a map with the overall results of 2021 for each country, a comparison between the continents for each indicator for the past five years, and lastly, a comparison between Canada, Mexico, and the United States from 1996-2021.</p>
 </div>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
@@ -235,7 +235,7 @@ print(df)
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
-<p>As this is a significant project which involves variables across many different countries, I thought the best way to explore the results would be to first make a map with the most recent indicator results comparing all nations and, second, compare the results grouped by continent over a period of the last five years, and lastly comparing the results between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!</p>
+<p>As this is a significant project which involves many variables and records, I thought the best way to explore the results would be by first making a map with the most recent indicator results for all nations, comparing results grouped by continents over the period of the last five years, and lastly making a comparison between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!</p>
 <div id="worldwide-most-recent-release-2021" class="section level3">
 <h3>Worldwide: Most Recent Release (2021)</h3>
 <div id="view-map-in-full-screen" class="section level4">
@@ -410,14 +410,15 @@ print(df_2021)
 <!--           legend.text = element_text(size = 16), -->
 <!--           legend.title = element_blank()) -> p4 -->
 <!-- ``` -->
-</div>
-<div id="plotly-view" class="section level2">
-<h2>Plotly <a href="/widgets/plotly.html">View</a></h2>
+<div id="view-plot-in-full-screen" class="section level4">
+<h4><strong>[<a href="/widgets/plotly.html">View Plot in Full Screen</a></strong></h4>
 <iframe src="https://www.renanperes.com/widgets/plotly.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
+</div>
+</div>
 <div id="north-america-timeline-comparison-1996-2021" class="section level3">
 <h3>North America: Timeline Comparison (1996-2021)</h3>
-<div id="view-plot-in-full-screen" class="section level4">
+<div id="view-plot-in-full-screen-1" class="section level4">
 <h4><strong>[<a href="/widgets/North_America_Results.html">View Plot in Full Screen</a>]</strong></h4>
 <pre class="r"><code>north_america &lt;- df %&gt;% 
                   filter(country_name %in% c(&quot;Canada&quot;, &quot;United States&quot;, &quot;Mexico&quot;)) %&gt;% 
@@ -474,7 +475,6 @@ print(north_america)
 ## # … with 404 more rows</code></pre>
 <iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
 </iframe>
-</div>
 </div>
 </div>
 </div>

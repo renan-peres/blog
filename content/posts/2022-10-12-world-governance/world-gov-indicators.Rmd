@@ -127,7 +127,7 @@ h1{
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021. The charts in this report highlight the worldwide results of 2021, an overall comparison between the continents for the past ten years, and a comparison between the major countries in North America from 1996-2021.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021. The charts in this report first include a map with the overall results of 2021 for each country, a comparison between the continents for each indicator for the past five years, and lastly, a comparison between Canada, Mexico, and the United States from 1996-2021.
 
 # Motivation
 
@@ -251,7 +251,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 # Visualizations
 
-As this is a significant project which involves variables across many different countries, I thought the best way to explore the results would be to first make a map with the most recent indicator results comparing all nations and, second, compare the results grouped by continent over a period of the last five years, and lastly comparing the results between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!
+As this is a significant project which involves many variables and records, I thought the best way to explore the results would be by first making a map with the most recent indicator results for all nations, comparing results grouped by continents over the period of the last five years, and lastly making a comparison between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!
 
 ### Worldwide: Most Recent Release (2021) {#worldwide-most-recent-release-2021}
 
@@ -504,7 +504,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = 
 
 <!-- ``` -->
 
-## Plotly [View](/widgets/plotly.html)
+#### **[[View Plot in Full Screen](/widgets/plotly.html)**
 
 ```{r, echo=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
