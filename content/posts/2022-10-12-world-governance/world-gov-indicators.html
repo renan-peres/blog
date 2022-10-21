@@ -11,6 +11,11 @@ thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/wo
 coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666106580/world_continents_partial_2_pvadnp.svg
 coverSize: partial
 metaAlignment: center
+output: html_document
+link-citations: TRUE
+bibliography: [packages.bib, resources.bib]
+biblio-style: "apalike"
+nocite: "@*"
 ---
 
 
@@ -80,7 +85,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 21, 2022 - 13:47</p>
+<p><strong>Last Update:</strong> October 21, 2022 - 14:50</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -373,8 +378,13 @@ print(df_2021)
 ## # … with 195 more rows, and abbreviated variable names ¹​country_code,
 ## #   ²​control_of_corruption, ³​government_effectiveness, ⁴​political_stability,
 ## #   ⁵​regulatory_quality, ⁶​rule_of_law, ⁷​voice_and_accountability</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <iframe src="https://www.renanperes.com/widgets/WGI_2021.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
+<p class="caption">
+Figure 2: WGI 2021 Results.
+</p>
+</div>
 </div>
 <div id="continents-most-recent-release-2021" class="section level3">
 <h3>Continents: Most Recent Release (2021)</h3>
@@ -404,7 +414,7 @@ print(cont_df_2021_plot)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:2021-continent-comparison"></span>
 <img src="/posts/2022-10-12-world-governance/world-gov-indicators_files/figure-html/2021-continent-comparison-1.png" alt="2021 Comparison between Continents." width="100%" />
 <p class="caption">
-Figure 2: 2021 Comparison between Continents.
+Figure 3: 2021 Comparison between Continents.
 </p>
 </div>
 </div>
@@ -463,13 +473,101 @@ print(north_america)
 ##  9 Mexico  MEX   North America Political Stability       1996 -0.93
 ## 10 Mexico  MEX   North America Regulatory Quality        1996  0.13
 ## # … with 404 more rows</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <iframe src="https://www.renanperes.com/widgets/North_America_Results.html" width="746.88cm" height="500px" data-external="1">
 </iframe>
+<p class="caption">
+Figure 4: North America Comparison.
+</p>
+</div>
 </div>
 </div>
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
 </div>
-<div id="references" class="section level1">
+<div id="references" class="section level1 unnumbered">
 <h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-countrycode" class="csl-entry">
+Arel-Bundock, Vincent. 2022. <em>Countrycode: Convert Country Names and Country Codes</em>. <a href="https://vincentarelbundock.github.io/countrycode/">https://vincentarelbundock.github.io/countrycode/</a>.
+</div>
+<div id="ref-countrycode2018" class="csl-entry">
+Arel-Bundock, Vincent, Nils Enevoldsen, and CJ Yetman. 2018. <span>“Countrycode: An r Package to Convert Country Names and Country Codes.”</span> <em>Journal of Open Source Software</em> 3 (28): 848. <a href="https://doi.org/10.21105/joss.00848">https://doi.org/10.21105/joss.00848</a>.
+</div>
+<div id="ref-R-janitor" class="csl-entry">
+Firke, Sam. 2021. <em>Janitor: Simple Tools for Examining and Cleaning Dirty Data</em>. <a href="https://github.com/sfirke/janitor">https://github.com/sfirke/janitor</a>.
+</div>
+<div id="ref-R-purrr" class="csl-entry">
+Henry, Lionel, and Hadley Wickham. 2020. <em>Purrr: Functional Programming Tools</em>. <a href="https://CRAN.R-project.org/package=purrr">https://CRAN.R-project.org/package=purrr</a>.
+</div>
+<div id="ref-R-corrr" class="csl-entry">
+Kuhn, Max, Simon Jackson, and Jorge Cimentada. 2022. <em>Corrr: Correlations in r</em>. <a href="https://CRAN.R-project.org/package=corrr">https://CRAN.R-project.org/package=corrr</a>.
+</div>
+<div id="ref-R-highcharter" class="csl-entry">
+Kunst, Joshua. 2022. <em>Highcharter: A Wrapper for the Highcharts Library</em>. <a href="https://CRAN.R-project.org/package=highcharter">https://CRAN.R-project.org/package=highcharter</a>.
+</div>
+<div id="ref-R-tibble" class="csl-entry">
+Müller, Kirill, and Hadley Wickham. 2022. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+</div>
+<div id="ref-R-base" class="csl-entry">
+R Core Team. 2022. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div id="ref-R-GGally" class="csl-entry">
+Schloerke, Barret, Di Cook, Joseph Larmarange, Francois Briatte, Moritz Marbach, Edwin Thoen, Amos Elberg, and Jason Crowley. 2021. <em>GGally: Extension to Ggplot2</em>. <a href="https://CRAN.R-project.org/package=GGally">https://CRAN.R-project.org/package=GGally</a>.
+</div>
+<div id="ref-plotly2020" class="csl-entry">
+Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plotly, and Shiny</em>. Chapman; Hall/CRC. <a href="https://plotly-r.com">https://plotly-r.com</a>.
+</div>
+<div id="ref-R-plotly" class="csl-entry">
+Sievert, Carson, Chris Parmer, Toby Hocking, Scott Chamberlain, Karthik Ram, Marianne Corvellec, and Pedro Despouy. 2021. <em>Plotly: Create Interactive Web Graphics via Plotly.js</em>. <a href="https://CRAN.R-project.org/package=plotly">https://CRAN.R-project.org/package=plotly</a>.
+</div>
+<div id="ref-R-htmlwidgets" class="csl-entry">
+Vaidyanathan, Ramnath, Yihui Xie, JJ Allaire, Joe Cheng, Carson Sievert, and Kenton Russell. 2021. <em>Htmlwidgets: HTML Widgets for r</em>. <a href="https://github.com/ramnathv/htmlwidgets">https://github.com/ramnathv/htmlwidgets</a>.
+</div>
+<div id="ref-ggplot22016" class="csl-entry">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-R-forcats" class="csl-entry">
+———. 2021. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
+</div>
+<div id="ref-R-stringr" class="csl-entry">
+———. 2022a. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div id="ref-R-tidyverse" class="csl-entry">
+———. 2022b. <em>Tidyverse: Easily Install and Load the Tidyverse</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+</div>
+<div id="ref-tidyverse2019" class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>.
+</div>
+<div id="ref-R-ggplot2" class="csl-entry">
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. 2022. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+</div>
+<div id="ref-R-dplyr" class="csl-entry">
+Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2022. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
+</div>
+<div id="ref-R-tidyr" class="csl-entry">
+Wickham, Hadley, and Maximilian Girlich. 2022. <em>Tidyr: Tidy Messy Data</em>. <a href="https://CRAN.R-project.org/package=tidyr">https://CRAN.R-project.org/package=tidyr</a>.
+</div>
+<div id="ref-R-readr" class="csl-entry">
+Wickham, Hadley, Jim Hester, and Jennifer Bryan. 2022. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
+</div>
+<div id="ref-WBI-WDI" class="csl-entry">
+World Bank Group. Sep 23, 2022. <em>Worldwide Governance Indicators</em>. World Bank Group. <a href="https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators">https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators</a>.
+</div>
+<div id="ref-R-corrgram" class="csl-entry">
+Wright, Kevin. 2021. <em>Corrgram: Plot a Correlogram</em>. <a href="https://kwstat.github.io/corrgram/">https://kwstat.github.io/corrgram/</a>.
+</div>
+<div id="ref-knitr2014" class="csl-entry">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div id="ref-knitr2015" class="csl-entry">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-R-knitr" class="csl-entry">
+———. 2022. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-R-DT" class="csl-entry">
+Xie, Yihui, Joe Cheng, and Xianying Tan. 2022. <em>DT: A Wrapper of the JavaScript Library DataTables</em>. <a href="https://github.com/rstudio/DT">https://github.com/rstudio/DT</a>.
+</div>
+</div>
 </div>
