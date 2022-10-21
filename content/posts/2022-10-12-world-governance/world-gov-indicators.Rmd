@@ -34,6 +34,9 @@ library(ggimage)
 library(leaflet)
 library(htmltools)
 library(highcharter)
+library(corrgram)
+library(corrr)
+library(GGally)
 # klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
@@ -52,6 +55,33 @@ knitr::opts_chunk$set(fig.width = unit(7.78, "cm"), fig.height = unit(10, "cm"))
     text-decoration: auto;
 }
 
+.post-header-cover .post-header .post-title {
+    max-width: 750px;
+    margin: 0 auto;
+    color: #141414;
+    text-shadow: 0 2px 0 #f7f8f8;
+}
+
+.post-header-cover .post-header .post-meta {
+    display: none
+}
+
+
+.post .post-content :not(blockquote):not(li):not(.alert)>p {
+    margin: 0em 0 0em 0;
+}
+
+p{
+    font-size: 1.9rem;
+}
+
+h1, h2, h3 {
+    margin: 1em 0 0em 0;
+}
+
+.post .post-content :not(blockquote):not(li):not(.alert)>p {
+    margin: 0em 0 1em 0;
+}
 
 ol {
     display: block;
@@ -64,26 +94,6 @@ ol {
     padding-inline-start: 40px;
 }
 
-.post-header-cover .post-header .post-title {
-    max-width: 750px;
-    margin: 0 auto;
-    color: #141414;
-    text-shadow: 0 2px 0 #f7f8f8;
-    margin-bottom: 20px;
-}
-
-.post-header-cover .post-header .post-meta {
-    display: none
-}
-
-p{
-    font-size: 1.9rem;
-}
-
-
-.post .post-content :not(blockquote):not(li):not(.alert)>p {
-    margin: 0em 0 0 0;
-}
 
 .post .post-content {
     text-rendering: optimizelegibility;
@@ -95,17 +105,7 @@ p{
     overflow: hidden;
 }
 
-h1{
-    margin: 1em 0 0em 0;
-}
 
-<!-- h1{ -->
-<!--     letter-spacing: -.04em; -->
-<!--     font-family: "Open Sans",sans-serif; -->
-<!--     font-weight: 700; -->
-<!--     line-height: 1.45em; -->
-<!--     color: #29b542; -->
-<!-- } -->
 ```
 
 **Last Update:** `r format(lubridate::now('US/Eastern'), ' %B %d, %Y - %H:%M')`
@@ -117,9 +117,11 @@ h1{
 3.  [Dataset]🗒️
 4.  [Data Preparation] 💻
 5.  [Visualizations] 📈
+    -   [Correlation Between Indicators]
+
     -   [Worldwide: Most Recent Release (2021)](#worldwide-most-recent-release-2021)
 
-    -   [Continents: Past 10 Years]
+    -   [Continents: Past 5 Years]
 
     -   [North America: Timeline Comparison (1996-2021)](#north-america-timeline-comparison-1996-2021)
 6.  [Conclusion]
@@ -127,7 +129,9 @@ h1{
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021. The charts in this report first include a map with the overall results of 2021 for each country, a comparison between the continents for each indicator for the past five years, and lastly, a comparison between Canada, Mexico, and the United States from 1996-2021.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021. 
+
+The charts in this report first include a map with the overall results of 2021 for each country, a comparison between the continents for each indicator for the past five years, and lastly, a comparison between Canada, Mexico, and the United States from 1996-2021.
 
 # Motivation
 
@@ -248,10 +252,55 @@ print(df)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "600px")
 ```
 
-
 # Visualizations
 
 As this is a significant project which involves many variables and records, I thought the best way to explore the results would be by first making a map with the most recent indicator results for all nations, comparing results grouped by continents over the period of the last five years, and lastly making a comparison between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!
+
+### Correlation Between Indicators
+
+```{r indicators-correlation, fig.cap='Correlation between Indicators.', tidy=FALSE, fig.height= 7, out.width= "100%"}
+# Correlation Matrix
+df_cor <- df %>% 
+            select(country_name:continent) %>% 
+            pivot_wider(names_from = "indicator_name",
+                        values_from = "value") %>% 
+            select(5:10) %>% 
+            rename(Corruption = 1,
+                   Effectiveness = 2,
+                   Stability = 3,
+                   Regulation = 4,
+                   Law = 5,
+                   Accountability = 6) %>% 
+            corrr::correlate(quiet = TRUE) %>% 
+            corrr::rearrange()
+
+# Correlation Plot
+cor_plot <- df_cor %>% 
+              GGally::ggcorr(low = "#abc3ff",
+                             mid = "#ff6432",
+                             high = "#0048ff",
+                             label = TRUE,
+                             label_round = 2,
+                             label_color = "white",
+                             label_size = 6,
+                             legend.size = 12,
+                             digits = 2,
+                             limits = c(0, 1),
+                             midpoint = 0.4,
+                             palette = NULL,
+                             geom = "tile",
+                             hjust = 0.5,
+                             vjust = 1,
+                             size = 4.5,
+                             angle = 0) +
+              # ggtitle("Indicators Correlation") +
+              cowplot::theme_cowplot() +
+              theme(plot.title = element_text(size = 24, hjust = .5))
+
+print(df_cor)
+print(cor_plot)
+```
+
 
 ### Worldwide: Most Recent Release (2021) {#worldwide-most-recent-release-2021}
 
@@ -321,8 +370,7 @@ print(df_2021)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
-
-### Continents: Past 10 Years
+### Continents: Past 5 Years
 
 <!-- ```{r pressure} -->
 
@@ -510,7 +558,6 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = 
 knitr::include_url("https://www.renanperes.com/widgets/plotly.html", height = "600px")
 ```
 
-
 ### North America: Timeline Comparison (1996-2021) {#north-america-timeline-comparison-1996-2021}
 
 #### **[[View Plot in Full Screen](/widgets/North_America_Results.html)]**
@@ -560,7 +607,6 @@ print(north_america)
 ```{r, echo=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/North_America_Results.html", height = "500px")
 ```
-
 
 # Conclusion
 
