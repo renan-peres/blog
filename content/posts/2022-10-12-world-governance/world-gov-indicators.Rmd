@@ -450,12 +450,11 @@ top_3_plotly <- ggplotly(top_3_plot, tooltip = c("Year", "Score")) %>%
                                  toImageButtonOptions = list(format = "svg",
                                                              filename = "North_America_Results"))
 
-# htmlwidgets::saveWidget(north_america_plotly, file = "Top_3_Comparison.html")
-
+# htmlwidgets::saveWidget(top_3_plotly, file = "Top_3_Comparison.html")
 print(top_3_2021)
 ```
 
-```{r, echo=FALSE, fig.cap='2021 Top 3 Comparison.', tidy=FALSE}
+```{r, echo=FALSE, fig.cap='2021 Top 3 Countries Comparison.', tidy=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", height = "600px")
 ```
 
