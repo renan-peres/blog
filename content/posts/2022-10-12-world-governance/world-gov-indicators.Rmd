@@ -122,7 +122,7 @@ ol {
 
     -   [Continents: Most Recent Release (2021)](#continents-most-recent-release-2021)
 
-    -   [Top 3 of 2021: Timeline Comparison (1996-2021)]
+    -   [Top 3 of 2021: Timeline Comparison (1996-2021)](#top-3-of-2021-timeline-comparison-1996-2021)
 6.  [Conclusion]
 7.  [References]
 
@@ -301,7 +301,8 @@ print(df_cor)
 print(cor_plot)
 ```
 
-### Worldwide: Most Recent Release (2021) [[Full Screen](/widgets/WGI_2021.html)]
+### Worldwide: Most Recent Release (2021) 
+**[[Full Screen](/widgets/WGI_2021.html)]**
 
 ```{r wgi-2021}
 
@@ -396,7 +397,7 @@ print(cont_df_2021_plot)
 ```
 
 ### Top 3 of 2021: Timeline Comparison (1996-2021) 
-[[Full Screen](/widgets/Top_3_Comparison.html)]
+**[[Full Screen](/widgets/Top_3_Comparison.html)]**
 
 ```{r top-3-2021}
 
