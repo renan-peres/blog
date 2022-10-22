@@ -123,6 +123,8 @@ ol {
     -   [Continents: Most Recent Release (2021)](#continents-most-recent-release-2021)
 
     -   [Top 3 of 2021: Timeline Comparison (1996-2021)](#top-3-of-2021-timeline-comparison-1996-2021)
+    
+    -   [USA Timeline (1996-2021)]
 6.  [Conclusion]
 7.  [References]
 
@@ -457,6 +459,38 @@ print(top_3_2021)
 ```{r, echo=FALSE, fig.cap='2021 Top 3 Countries Comparison.', tidy=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", height = "600px")
 ```
+
+
+### USA Timeline (1996-2021) 
+**[[Full Screen](/widgets/USA_Plotly.html)]**
+
+```{r usa-timeline-animated, echo=TRUE}
+df_usa <- df %>% 
+            filter(country_code == "USA") %>% 
+            select(country_name:value)
+
+usa_plot <- df_usa %>% 
+              ggplot(aes(year, value)) +
+              geom_point(aes(frame = year, color = indicator_name)) +
+              geom_line(aes(color = indicator_name), alpha = 0.8) +
+              theme_bw() +
+              labs(color = " ")
+              theme(axis.title = element_blank())
+
+usa_plotly <- ggplotly(usa_plot, tooltip = c("year", "value")) %>%
+                animation_opts(1000, ) %>% 
+                animation_button(label = "Animate") %>% 
+                config(displayLogo = FALSE,
+                       displayModeBar = FALSE)
+
+# htmlwidgets::saveWidget(usa_plotly, "USA_Plotly.html")
+print(df_usa)
+```
+
+```{r, echo=FALSE, fig.cap='USA Indicator Evolutin.', tidy=FALSE}
+knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height = "500px")
+```
+
 
 # Conclusion
 

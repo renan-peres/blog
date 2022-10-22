@@ -85,7 +85,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 22, 2022 - 11:28</p>
+<p><strong>Last Update:</strong> October 22, 2022 - 13:09</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -99,6 +99,7 @@ ol {
 <li><p><a href="#worldwide-most-recent-release-2021">Worldwide: Most Recent Release (2021)</a></p></li>
 <li><p><a href="#continents-most-recent-release-2021">Continents: Most Recent Release (2021)</a></p></li>
 <li><p><a href="#top-3-of-2021-timeline-comparison-1996-2021">Top 3 of 2021: Timeline Comparison (1996-2021)</a></p></li>
+<li><p><a href="#usa-timeline-1996-2021">USA Timeline (1996-2021)</a></p></li>
 </ul></li>
 <li><a href="#conclusion">Conclusion</a></li>
 <li><a href="#references">References</a></li>
@@ -489,6 +490,58 @@ print(top_3_2021)
 </iframe>
 <p class="caption">
 Figure 4: 2021 Top 3 Countries Comparison.
+</p>
+</div>
+</div>
+<div id="usa-timeline-1996-2021" class="section level3">
+<h3>USA Timeline (1996-2021)</h3>
+<p><strong>[<a href="/widgets/USA_Plotly.html">Full Screen</a>]</strong></p>
+<pre class="r"><code>df_usa &lt;- df %&gt;% 
+            filter(country_code == &quot;USA&quot;) %&gt;% 
+            select(country_name:value)
+
+usa_plot &lt;- df_usa %&gt;% 
+              ggplot(aes(year, value)) +
+              geom_point(aes(frame = year, color = indicator_name)) +
+              geom_line(aes(color = indicator_name), alpha = 0.8) +
+              theme_bw() +
+              labs(color = &quot; &quot;)
+## Warning: Ignoring unknown aesthetics: frame
+              theme(axis.title = element_blank())
+## List of 1
+##  $ axis.title: list()
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE
+
+usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;year&quot;, &quot;value&quot;)) %&gt;%
+                animation_opts(1000, ) %&gt;% 
+                animation_button(label = &quot;Animate&quot;) %&gt;% 
+                config(displayLogo = FALSE,
+                       displayModeBar = FALSE)
+
+# htmlwidgets::saveWidget(usa_plotly, &quot;USA_Plotly.html&quot;)
+print(df_usa)
+## # A tibble: 138 × 5
+##    country_name  country_code indicator_name            year value
+##    &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
+##  1 United States USA          Control of Corruption     1996  1.57
+##  2 United States USA          Government Effectiveness  1996  1.52
+##  3 United States USA          Political Stability       1996  0.94
+##  4 United States USA          Regulatory Quality        1996  1.59
+##  5 United States USA          Rule of Law               1996  1.5 
+##  6 United States USA          Voice and Accountability  1996  1.35
+##  7 United States USA          Control of Corruption     1998  1.55
+##  8 United States USA          Government Effectiveness  1998  1.7 
+##  9 United States USA          Political Stability       1998  0.88
+## 10 United States USA          Regulatory Quality        1998  1.61
+## # … with 128 more rows</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<iframe src="https://www.renanperes.com/widgets/USA_Plotly.html" width="746.88cm" height="500px" data-external="1">
+</iframe>
+<p class="caption">
+Figure 5: USA Indicator Evolutin.
 </p>
 </div>
 </div>
