@@ -444,8 +444,8 @@ top_3_plot <- df %>%
                 ggplot(aes(x = Year, y = Score, color = Country)) +
                 geom_line(size = .7) +
                 geom_point(color = "black", size = .5) +
-                facet_wrap(~Indicator) +
-                scale_x_continuous(breaks = seq(1995, 2020, 10)) +
+                facet_wrap(~Indicator, scales = "free") +
+                scale_x_continuous(breaks = seq(1995, 2020, 5)) +
                 scale_colour_brewer(palette = "Dark2") +
                 labs(title = "", 
                      color = "",
