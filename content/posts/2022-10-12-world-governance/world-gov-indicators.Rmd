@@ -385,7 +385,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = 
 
 ### Comparison by Continent
 
-```{r 2021-continent-comparison, fig.cap='2021 Comparison between Continents.', tidy=FALSE, fig.height= 7, out.width= "100%"}
+```{r 2021-continent-comparison, fig.cap='Comparison by Continent.', tidy=FALSE, fig.height= 7, out.width= "100%"}
 cont_df_2021_plot <- df %>% 
                         filter(year == 2021) %>% 
                         ggplot(aes(x = year, y = value, fill = continent)) +
@@ -470,7 +470,7 @@ top_3_plotly <- ggplotly(top_3_plot, tooltip = c("Year", "Score")) %>%
 print(top_3_2021)
 ```
 
-```{r, echo=FALSE, fig.cap='2021 Top 3 Countries Comparison.', tidy=FALSE}
+```{r, echo=FALSE, fig.cap='Comparison between the top 3 Countries of 2021.', tidy=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", height = "600px")
 ```
 
@@ -501,10 +501,13 @@ usa_plotly <- ggplotly(usa_plot, tooltip = c("year", "value")) %>%
 print(df_usa)
 ```
 
-```{r, echo=FALSE, fig.cap='USA Indicator Evolutin.', tidy=FALSE}
+```{r, echo=FALSE, fig.cap='USA progression over time.', tidy=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height = "500px")
 ```
 
 # Conclusion
+
+Overall, this was a very interesting project which I learned a lot from it. 
+
 
 # References
