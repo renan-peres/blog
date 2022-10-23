@@ -85,7 +85,7 @@ ol {
 
 
 </style>
-<p><strong>Last Update:</strong> October 23, 2022 - 07:31</p>
+<p><strong>Last Update:</strong> October 23, 2022 - 12:58</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -116,7 +116,7 @@ ol {
 </div>
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
-<p>The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.</p>
+<p>The dataset lists composite governance indicators based on over 30 underlying data sources. As mentioned in the introduction, it reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021, which are:</p>
 <ol style="list-style-type: decimal">
 <li>Control of Corruption;</li>
 <li>Government Effectiveness;</li>
@@ -125,15 +125,14 @@ ol {
 <li>Rule of Law;</li>
 <li>Voice and Accountability.</li>
 </ol>
-<!-- Feel free to download the raw data if you want to perform some analyzes as well! -->
-<!-- #### [[Download Raw Data](/WGIData.csv)] -->
+<p>Feel free to download the raw data from the link below if you also want to explore it in-depth!</p>
+<p><strong>[<a href="/WGIData.csv">Download Raw Data</a>]</strong></p>
 </div>
 <div id="data-preparation" class="section level1">
 <h1>Data Preparation</h1>
 <p>For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which give each country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.</p>
-<p>I have attached below the prepared data that I used throughout this report. Feel welcome to explore the code, manipulate the data, or download it from the table below.</p>
-<div id="view-table-in-full-screen" class="section level5">
-<h5>[<a href="/widgets/WGI_DT.html">View Table in Full Screen</a>]</h5>
+<p>I have attached below the prepared data that I used throughout this report. You are welcome to explore the code, manipulate the data, or download it in the format you wish from the table below.</p>
+<p><strong>[<a href="/widgets/WGI_DT.html">View Table in Full Screen</a>]</strong></p>
 <pre class="r"><code># 1_Importing
   # url &lt;- &quot;https://databank.worldbank.org/data/download/WGI_csv.zip&quot;
   # directory &lt;- getwd()
@@ -236,7 +235,6 @@ print(df)
 ## #   ²​unicode_symbol</code></pre>
 <iframe src="https://www.renanperes.com/widgets/WGI_DT.html" width="746.88cm" height="600px" data-external="1">
 </iframe>
-</div>
 </div>
 <div id="visualizations" class="section level1">
 <h1>Visualizations</h1>
@@ -556,7 +554,9 @@ Figure 5: USA progression over time.
 </div>
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
-<p>Overall, this was a very interesting project which I learned a lot from it.</p>
+<p>In conclusion, this was a very satisfying and exciting project, and I learned much from it. It highlighted the six governance indicators which determine how prosperous a country is compared to another and how they have progressed over time.</p>
+<p>As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this article. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data.</p>
+<p>Thank you!</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>

@@ -140,7 +140,7 @@ As a worldwide traveler who has just recently been in an almost 3-month study ab
 
 # Dataset
 
-The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.
+The dataset lists composite governance indicators based on over 30 underlying data sources. As mentioned in the introduction, it reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021, which are:
 
 1.  Control of Corruption;
 2.  Government Effectiveness;
@@ -149,17 +149,17 @@ The dataset lists composite governance indicators based on over 30 underlying da
 5.  Rule of Law;
 6.  Voice and Accountability.
 
-<!-- Feel free to download the raw data if you want to perform some analyzes as well! -->
+Feel free to download the raw data from the link below if you also want to explore it in-depth!
 
-<!-- #### [[Download Raw Data](/WGIData.csv)] -->
+**[[Download Raw Data](/WGIData.csv)]**
 
 # Data Preparation
 
 For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which give each country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.
 
-I have attached below the prepared data that I used throughout this report. Feel welcome to explore the code, manipulate the data, or download it from the table below.
+I have attached below the prepared data that I used throughout this report. You are welcome to explore the code, manipulate the data, or download it in the format you wish from the table below.
 
-##### [[View Table in Full Screen](/widgets/WGI_DT.html)]
+**[[View Table in Full Screen](/widgets/WGI_DT.html)]**
 
 ```{r prepare, echo=TRUE, message=FALSE, warning=FALSE}
 # 1_Importing
@@ -507,7 +507,11 @@ knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height 
 
 # Conclusion
 
-Overall, this was a very interesting project which I learned a lot from it. 
+In conclusion, this was a very satisfying and exciting project, and I learned much from it. It highlighted the six governance indicators which determine how prosperous a country is compared to another and how they have progressed over time. 
+
+As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this article. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data. 
+
+Thank you!
 
 
 # References
