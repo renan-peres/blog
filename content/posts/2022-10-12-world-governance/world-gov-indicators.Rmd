@@ -509,7 +509,7 @@ knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height 
 
 In conclusion, this was a very satisfying and exciting project, and I learned much from it. It highlighted the six governance indicators which determine how prosperous a country is compared to another and how they have progressed over time. 
 
-As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this article. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data. 
+As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this page. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data. 
 
 Thank you!
 
