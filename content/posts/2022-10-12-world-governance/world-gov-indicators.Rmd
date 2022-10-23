@@ -1,5 +1,5 @@
 ---
-title: Governance Indicators
+title: Worldwide Governance Indicators
 author: ''
 date: '2022-10-19'
 categories:
@@ -116,31 +116,31 @@ ol {
 3.  [Dataset]🗒️
 4.  [Data Preparation] 💻
 5.  [Visualizations] 📈
-    -   [Correlation Between Indicators]
+    -   [Correlation between Indicators]
 
-    -   [Worldwide: Most Recent Release (2021)](#worldwide-most-recent-release-2021)
+    -   [Most recent results 2021 by Country]
 
-    -   [Continents: Most Recent Release (2021)](#continents-most-recent-release-2021)
+    -   [Comparison by Continent]
 
-    -   [Top 3 of 2021: Timeline Comparison (1996-2021)](#top-3-of-2021-timeline-comparison-1996-2021)
-    
-    -   [USA Timeline (1996-2021)]
+    -   [Comparison between the top 3 Countries of 2021]
+
+    -   [USA progression over time]
 6.  [Conclusion]
 7.  [References]
 
 # Introduction
 
-Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them. This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which includes six broad indicators of a country's governance between the periods of 1996-2021.
+Governance consists of the traditions and institutions by which authority in a country is exercised. This includes the process by which governments are selected, monitored, and replaced; the government's capacity to effectively formulate and implement sound policies; and the respect of citizens and the state for the institutions that govern economic and social interactions among them.
 
-The charts in this report first include a map with the overall results of 2021 for each country, a comparison between the continents for each indicator for the past five years, and lastly, a comparison between Canada, Mexico, and the United States from 1996-2021.
+This report is based on the data source [*Worldwide-Governance-Indicators*](https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators) (Sep 23, 2022), which highlights six broad indicators of a country's governance. The data includes results from 1996 to 2021.
 
 # Motivation
 
-As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I have always been curious to understand how each country operates, how successful they are, and how they have progressed over time. As a result, when navigating through <https://www.worldbank.org/> looking for some data to perform analyses, I couldn't choose any dataset other than the one presented in this report to release this open-source project.
+As a worldwide traveler who has just recently been in an almost 3-month study abroad program in Europe - traveling across 13 different countries, I have always been curious to understand the indicators that determine the success of a nation and how they are compared between one another. For that reason, when navigating through <https://www.worldbank.org/> looking for some dataset to perform analyses, I found the one on which this report is based, so I decided to explore it.
 
 # Dataset
 
-The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021 which are:
+The dataset lists composite governance indicators based on over 30 underlying data sources. It reports on six broad dimensions of governance for over 215 countries and territories over the period 1996-2021.
 
 1.  Control of Corruption;
 2.  Government Effectiveness;
@@ -155,11 +155,11 @@ The dataset lists composite governance indicators based on over 30 underlying da
 
 # Data Preparation
 
-For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which gives the country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.
+For ease of understanding and to make our analyses more transparent, during the data preparation stage, I filtered the indicators by their estimates which give each country a score on the aggregate hand, in units of standard normal distribution, ranging from approximately -2.5 to 2.5.
 
-I have attached below the prepared data I used to make the visualizations. Feel welcome to explore the code and manipulate or download the information!
+I have attached below the prepared data that I used throughout this report. Feel welcome to explore the code, manipulate the data, or download it from the table below.
 
-#### [[View Table in Full Screen](/widgets/WGI_DT.html)]
+##### [[View Table in Full Screen](/widgets/WGI_DT.html)]
 
 ```{r prepare, echo=TRUE, message=FALSE, warning=FALSE}
 # 1_Importing
@@ -255,9 +255,21 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_DT.html", height = "6
 
 # Visualizations
 
-As this is a significant project which involves many variables and records, I thought the best way to explore the results would be by first making a map with the most recent indicator results for all nations, comparing results grouped by continents over the period of the last five years, and lastly making a comparison between the countries in North America - Canada, Mexico, and the United States. Therefore, the three different interactive charts below accomplish the requisites mentioned above. Feel free to explore them as you wish!
+As this is a significant project involving many variables and records, I created five charts to understand the results better.
 
-### Correlation Between Indicators
+1.  Correlation between Indicators **(Correlation Matrix)**
+
+2.  Most recent results 2021 by Country **(Interactive Map)**
+
+3.  Comparison by Continent **(Box Plot)**
+
+4.  Comparison between the top 3 Countries of 2021 **(Line Chart)**
+
+5.  USA progression over time **(Animated Line Chart)**
+
+Most of the charts are interactive! If you see a ***[Full Screen]*** option next to a chart,  it means the chart is interactive and you can view it in full screen.
+
+### Correlation between Indicators
 
 ```{r indicators-correlation, fig.cap='Correlation between Indicators.', tidy=FALSE, fig.height= 7, out.width= "100%"}
 
@@ -303,7 +315,8 @@ print(df_cor)
 print(cor_plot)
 ```
 
-### Worldwide: Most Recent Release (2021) 
+### Most recent results 2021 by Country
+
 **[[Full Screen](/widgets/WGI_2021.html)]**
 
 ```{r wgi-2021}
@@ -370,7 +383,7 @@ print(df_2021)
 knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = "600px")
 ```
 
-### Continents: Most Recent Release (2021) {#continents-most-recent-release-2021}
+### Comparison by Continent
 
 ```{r 2021-continent-comparison, fig.cap='2021 Comparison between Continents.', tidy=FALSE, fig.height= 7, out.width= "100%"}
 cont_df_2021_plot <- df %>% 
@@ -398,7 +411,8 @@ cont_df_2021_plot <- df %>%
 print(cont_df_2021_plot)
 ```
 
-### Top 3 of 2021: Timeline Comparison (1996-2021) 
+### Comparison between the top 3 Countries of 2021
+
 **[[Full Screen](/widgets/Top_3_Comparison.html)]**
 
 ```{r top-3-2021}
@@ -460,8 +474,8 @@ print(top_3_2021)
 knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", height = "600px")
 ```
 
+### USA progression over time
 
-### USA Timeline (1996-2021) 
 **[[Full Screen](/widgets/USA_Plotly.html)]**
 
 ```{r usa-timeline-animated, echo=TRUE}
@@ -490,7 +504,6 @@ print(df_usa)
 ```{r, echo=FALSE, fig.cap='USA Indicator Evolutin.', tidy=FALSE}
 knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height = "500px")
 ```
-
 
 # Conclusion
 
