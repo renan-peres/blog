@@ -92,7 +92,7 @@ h3 {
 }
 
 </style>
-<p><strong>Last Update:</strong> October 24, 2022 - 09:56</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 11:19</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -525,24 +525,25 @@ Figure 4: Comparison between the top 3 Countries of 2021.
 <p><strong>[<a href="/widgets/USA_Plotly.html">Full Screen</a>]</strong></p>
 <pre class="r"><code>df_usa &lt;- df %&gt;% 
             filter(country_code == &quot;USA&quot;) %&gt;% 
-            select(country_name:value)
+            select(country_name:value) %&gt;% 
+            rename(Year = year,
+                   Score = value)
 
 usa_plot &lt;- df_usa %&gt;% 
-              ggplot(aes(year, value)) +
-              geom_point(aes(frame = year, color = indicator_name)) +
+              ggplot(aes(Year, Score)) +
+              geom_point(aes(frame = Year, color = indicator_name)) +
               geom_line(aes(color = indicator_name), alpha = 0.8) +
               theme_bw() +
-              labs(color = &quot; &quot;)
+              labs(color = &quot; &quot;) +
+              # ggtitle(&quot;USA Governance Indicators&quot;) +
+              scale_color_viridis_d(option = &quot;turbo&quot;) +
+              theme(axis.title = element_blank(),
+                    legend.text = element_text(size = 10),
+                    plot.title = element_text(size = 18, hjust = .5),
+                    axis.text = element_text(size = 10))
 ## Warning: Ignoring unknown aesthetics: frame
-              theme(axis.title = element_blank())
-## List of 1
-##  $ axis.title: list()
-##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_blank&quot; &quot;element&quot;
-##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
-##  - attr(*, &quot;complete&quot;)= logi FALSE
-##  - attr(*, &quot;validate&quot;)= logi TRUE
 
-usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;year&quot;, &quot;value&quot;)) %&gt;%
+usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
                 animation_opts(1000, ) %&gt;% 
                 animation_button(label = &quot;Animate&quot;) %&gt;% 
                 config(displayLogo = FALSE,
@@ -551,7 +552,7 @@ usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;year&quot;, &quot;value&qu
 # htmlwidgets::saveWidget(usa_plotly, &quot;USA_Plotly.html&quot;)
 print(df_usa)
 ## # A tibble: 138 × 5
-##    country_name  country_code indicator_name            year value
+##    country_name  country_code indicator_name            Year Score
 ##    &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;                    &lt;int&gt; &lt;dbl&gt;
 ##  1 United States USA          Control of Corruption     1996  1.57
 ##  2 United States USA          Government Effectiveness  1996  1.52

@@ -511,17 +511,24 @@ knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", h
 ```{r usa-timeline-animated, echo=TRUE}
 df_usa <- df %>% 
             filter(country_code == "USA") %>% 
-            select(country_name:value)
+            select(country_name:value) %>% 
+            rename(Year = year,
+                   Score = value)
 
 usa_plot <- df_usa %>% 
-              ggplot(aes(year, value)) +
-              geom_point(aes(frame = year, color = indicator_name)) +
+              ggplot(aes(Year, Score)) +
+              geom_point(aes(frame = Year, color = indicator_name)) +
               geom_line(aes(color = indicator_name), alpha = 0.8) +
               theme_bw() +
-              labs(color = " ")
-              theme(axis.title = element_blank())
+              labs(color = " ") +
+              # ggtitle("USA Governance Indicators") +
+              scale_color_viridis_d(option = "turbo") +
+              theme(axis.title = element_blank(),
+                    legend.text = element_text(size = 10),
+                    plot.title = element_text(size = 18, hjust = .5),
+                    axis.text = element_text(size = 10))
 
-usa_plotly <- ggplotly(usa_plot, tooltip = c("year", "value")) %>%
+usa_plotly <- ggplotly(usa_plot, tooltip = c("Year", "Score")) %>%
                 animation_opts(1000, ) %>% 
                 animation_button(label = "Animate") %>% 
                 config(displayLogo = FALSE,
