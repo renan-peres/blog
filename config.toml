@@ -8,7 +8,6 @@ disqusShortname = "renanperes"
 googleAnalytics = "G-28DEPBGLFN"
 paginate = 7
 canonifyurls = true
-disableSiteImageMetaTags = true
 
 [permalinks]
   posts = "/:year/:month/:slug/"
