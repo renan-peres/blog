@@ -58,13 +58,6 @@
   {{ end }}
 {{ end }}
 
-
-{{ with .Params.gallery }}
-  {{ range . }}
-    <meta property="og:image" content="{{ range first 1 (split . " ") }}{{ . | absURL }}{{ end }}">
-    <meta property="twitter:image" content="{{ range first 1 (split . " ") }}{{ . | absURL }}{{ end }}">
-  {{ end }}
-{{ end }}
 {{ with .Params.coverImage }}
   <meta property="og:image" content="{{ . | absURL }}">
   <meta property="twitter:image" content="{{ . | absURL }}">
