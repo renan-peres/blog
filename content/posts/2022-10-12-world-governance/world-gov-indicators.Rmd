@@ -414,27 +414,28 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = 
 
 ```{r 2021-continent-comparison, fig.cap='Comparison by Continent.', tidy=FALSE, fig.height= 7, out.width= "100%"}
 cont_df_2021_plot <- df %>% 
-                        filter(year == 2021) %>% 
-                        ggplot(aes(x = year, y = value, fill = continent)) +
-                        geom_boxplot(na.rm = T) +
-                        coord_flip() +
-                        facet_wrap(~indicator_name, scales = "free") +
-                        geom_hline(yintercept =-2, linetype = "dotted", size = .7, color = "black") +
-                        geom_hline(yintercept = -1, linetype = "dotted", size = .7, color = "black") +
-                        geom_hline(yintercept = 0, linetype = "dotted", size = .7, color = "black") +
-                        geom_hline(yintercept = 1, linetype = "dotted", size = .7, color = "black") +
-                        geom_hline(yintercept = 2, linetype = "dotted", size = .7, color = "black") +
-                        labs(x = element_blank(),
-                             y = element_blank(),
-                             fill = "") +
-                        theme_bw() +
-                        theme(axis.text.y = element_blank(),
-                              axis.text.x = element_text(size = 10, face = "bold"),
-                              legend.text = element_text(size = 12), 
-                              panel.grid = element_blank(),
-                              strip.background = element_rect(fill = "#bcdefc"),
-                              strip.text = element_text(size = 11)) +
-                        guides(fill = guide_legend(reverse = TRUE))
+                      filter(year == 2021) %>% 
+                      ggplot(aes(x = year, y = value, fill = continent)) +
+                      geom_boxplot(na.rm = T) +
+                      scale_fill_manual(values = c("#3b7f39", "#edbe48", "#52a8b7", "#c23c2b", "#e48223", "#39bd4b")) +
+                      coord_flip() +
+                      facet_wrap(~indicator_name, scales = "free") +
+                      # geom_hline(yintercept =-2, linetype = "dotted", size = .7, color = "black") +
+                      # geom_hline(yintercept = -1, linetype = "dotted", size = .7, color = "black") +
+                      geom_hline(yintercept = 0, linetype = "dotted", size = .7, color = "black") +
+                      # geom_hline(yintercept = 1, linetype = "dotted", size = .7, color = "black") +
+                      # geom_hline(yintercept = 2, linetype = "dotted", size = .7, color = "black") +
+                      labs(x = element_blank(),
+                           y = element_blank(),
+                           fill = "") +
+                      theme_bw() +
+                      theme(axis.text.y = element_blank(),
+                            axis.text.x = element_text(size = 10),
+                            legend.text = element_text(size = 12), 
+                            panel.grid = element_blank(),
+                            # strip.background = element_rect(fill = "#6e2b0e"),
+                            strip.text = element_text(size = 11)) +
+                      guides(fill = guide_legend(reverse = TRUE))
 print(cont_df_2021_plot)
 ```
 
