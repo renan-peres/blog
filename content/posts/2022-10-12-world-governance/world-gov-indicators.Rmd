@@ -8,7 +8,7 @@ slug: world-gov-indicators
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
-coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666106580/world_continents_partial_2_pvadnp.svg
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666618499/world_continents_partial_2_kzlp29.svg
 coverSize: partial
 metaAlignment: center
 output: html_document
@@ -481,7 +481,7 @@ top_3_plot <- df %>%
                      x = element_blank()) +
                 theme_bw() +
                 theme(legend.text = element_text(size = 10), 
-                      strip.background = element_rect(fill = "#bcdefc"),
+                      # strip.background = element_rect(fill = "#bcdefc"),
                       strip.text = element_text(size = 10, color = "black"))
 
 top_3_plotly <- ggplotly(top_3_plot, tooltip = c("Year", "Score")) %>%

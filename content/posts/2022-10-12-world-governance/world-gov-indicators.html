@@ -8,7 +8,7 @@ slug: world-gov-indicators
 autoThumbnailImage: no
 thumbnailImagePosition: left
 thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666019877/world_thumb_ret92f.png
-coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666106580/world_continents_partial_2_pvadnp.svg
+coverImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666618499/world_continents_partial_2_kzlp29.svg
 coverSize: partial
 metaAlignment: center
 output: html_document
@@ -92,7 +92,7 @@ h3 {
 }
 
 </style>
-<p><strong>Last Update:</strong> October 24, 2022 - 09:25</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 09:39</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -485,7 +485,7 @@ top_3_plot &lt;- df %&gt;%
                      x = element_blank()) +
                 theme_bw() +
                 theme(legend.text = element_text(size = 10), 
-                      strip.background = element_rect(fill = &quot;#bcdefc&quot;),
+                      # strip.background = element_rect(fill = &quot;#bcdefc&quot;),
                       strip.text = element_text(size = 10, color = &quot;black&quot;))
 
 top_3_plotly &lt;- ggplotly(top_3_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
