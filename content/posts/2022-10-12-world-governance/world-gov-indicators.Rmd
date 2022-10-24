@@ -531,7 +531,7 @@ usa_plot <- df_usa %>%
                     plot.title = element_text(size = 18, hjust = .5),
                     axis.text = element_text(size = 12))
               
-# usa_animation <- animate(usa_plot, fps = 10, width = 800, height = 400)
+# usa_animation <- animate(usa_plot, fps = 10, width = 600, height = 400)
 # anim_save("usa_animation.gif", usa_animation)
 
 usa_plotly <- ggplotly(usa_plot, tooltip = c("Year", "Score")) %>%
