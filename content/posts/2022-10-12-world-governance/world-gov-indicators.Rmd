@@ -531,8 +531,14 @@ usa_plot <- df_usa %>%
 usa_plotly <- ggplotly(usa_plot, tooltip = c("Year", "Score")) %>%
                 animation_opts(1000, ) %>% 
                 animation_button(label = "Animate") %>% 
-                config(displayLogo = FALSE,
-                       displayModeBar = FALSE)
+                config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c("zoom2d","zoomIn2d", "zoomOut2d",
+                                                            "select",
+                                                            "lasso2d",
+                                                            "pan2d",
+                                                            "autoScale"),
+                                 toImageButtonOptions = list(format = "svg",
+                                                             filename = "North_America_Results"))
 
 # htmlwidgets::saveWidget(usa_plotly, "USA_Plotly.html")
 print(df_usa)

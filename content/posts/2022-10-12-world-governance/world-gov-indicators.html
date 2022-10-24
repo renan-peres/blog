@@ -92,7 +92,7 @@ h3 {
 }
 
 </style>
-<p><strong>Last Update:</strong> October 24, 2022 - 11:19</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 11:37</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -546,8 +546,14 @@ usa_plot &lt;- df_usa %&gt;%
 usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
                 animation_opts(1000, ) %&gt;% 
                 animation_button(label = &quot;Animate&quot;) %&gt;% 
-                config(displayLogo = FALSE,
-                       displayModeBar = FALSE)
+                config(displaylogo = FALSE,
+                                 modeBarButtonsToRemove = c(&quot;zoom2d&quot;,&quot;zoomIn2d&quot;, &quot;zoomOut2d&quot;,
+                                                            &quot;select&quot;,
+                                                            &quot;lasso2d&quot;,
+                                                            &quot;pan2d&quot;,
+                                                            &quot;autoScale&quot;),
+                                 toImageButtonOptions = list(format = &quot;svg&quot;,
+                                                             filename = &quot;North_America_Results&quot;))
 
 # htmlwidgets::saveWidget(usa_plotly, &quot;USA_Plotly.html&quot;)
 print(df_usa)
