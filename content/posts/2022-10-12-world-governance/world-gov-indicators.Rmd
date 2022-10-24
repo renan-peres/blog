@@ -484,7 +484,7 @@ top_3_plot <- df %>%
                 theme_bw() +
                 theme(legend.text = element_text(size = 10), 
                       # strip.background = element_rect(fill = "#bcdefc"),
-                      strip.text = element_text(size = 11, color = "black"))
+                      strip.text = element_text(size = 10, color = "black"))
 
 top_3_plotly <- ggplotly(top_3_plot, tooltip = c("Year", "Score")) %>%
                           config(displaylogo = FALSE,
