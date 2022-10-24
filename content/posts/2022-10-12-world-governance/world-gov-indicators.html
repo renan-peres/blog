@@ -92,7 +92,7 @@ h3 {
 }
 
 </style>
-<p><strong>Last Update:</strong> October 24, 2022 - 09:39</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 09:48</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -472,12 +472,14 @@ top_3_plot &lt;- df %&gt;%
                        Continent = continent, 
                        Indicator = indicator_name, 
                        Year = year, 
-                       Score = value) %&gt;% 
+                       Score = value) %&gt;%
+                mutate(Indicator = case_when(Indicator == &quot;Government Effectiveness&quot; ~ &quot;Effectiveness&quot;,
+                                             T ~ Indicator)) %&gt;% 
                 ggplot(aes(x = Year, y = Score, color = Country)) +
                 geom_line(size = .7) +
                 geom_point(color = &quot;black&quot;, size = .5) +
                 facet_wrap(~Indicator, scales = &quot;free&quot;) +
-                scale_x_continuous(breaks = seq(1995, 2020, 5)) +
+                scale_x_continuous(breaks = seq(1995, 2020, 10)) +
                 scale_colour_brewer(palette = &quot;Dark2&quot;) +
                 labs(title = &quot;&quot;, 
                      color = &quot;&quot;,
