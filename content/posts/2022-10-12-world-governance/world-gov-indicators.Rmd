@@ -35,6 +35,7 @@ library(highcharter)
 library(corrgram)
 library(corrr)
 library(GGally)
+library(gganimate)
 # klippy::klippy(c("r", "python", "sql"), position = "right")
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(echo = TRUE)
@@ -518,15 +519,20 @@ df_usa <- df %>%
 usa_plot <- df_usa %>% 
               ggplot(aes(Year, Score)) +
               geom_point(aes(frame = Year, color = indicator_name)) +
-              geom_line(aes(color = indicator_name), alpha = 0.8) +
+              geom_line(aes(color = indicator_name), size = 1, alpha = 0.8) +
               theme_bw() +
               labs(color = " ") +
               # ggtitle("USA Governance Indicators") +
               scale_color_viridis_d(option = "turbo") +
+              # gganimate::transition_reveal(Year) +
+              # coord_cartesian(clip = 'off') +
               theme(axis.title = element_blank(),
-                    legend.text = element_text(size = 10),
+                    legend.text = element_text(size = 12),
                     plot.title = element_text(size = 18, hjust = .5),
-                    axis.text = element_text(size = 10))
+                    axis.text = element_text(size = 12))
+              
+# usa_animation <- animate(usa_plot, fps = 10, width = 800, height = 400)
+# anim_save("usa_animation.gif", usa_animation)
 
 usa_plotly <- ggplotly(usa_plot, tooltip = c("Year", "Score")) %>%
                 animation_opts(1000, ) %>% 

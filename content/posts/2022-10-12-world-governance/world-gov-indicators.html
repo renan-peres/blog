@@ -92,7 +92,7 @@ h3 {
 }
 
 </style>
-<p><strong>Last Update:</strong> October 24, 2022 - 11:37</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 12:04</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
@@ -532,16 +532,21 @@ Figure 4: Comparison between the top 3 Countries of 2021.
 usa_plot &lt;- df_usa %&gt;% 
               ggplot(aes(Year, Score)) +
               geom_point(aes(frame = Year, color = indicator_name)) +
-              geom_line(aes(color = indicator_name), alpha = 0.8) +
+              geom_line(aes(color = indicator_name), size = 1, alpha = 0.8) +
               theme_bw() +
               labs(color = &quot; &quot;) +
               # ggtitle(&quot;USA Governance Indicators&quot;) +
               scale_color_viridis_d(option = &quot;turbo&quot;) +
+              # gganimate::transition_reveal(Year) +
+              # coord_cartesian(clip = &#39;off&#39;) +
               theme(axis.title = element_blank(),
-                    legend.text = element_text(size = 10),
+                    legend.text = element_text(size = 12),
                     plot.title = element_text(size = 18, hjust = .5),
-                    axis.text = element_text(size = 10))
+                    axis.text = element_text(size = 12))
 ## Warning: Ignoring unknown aesthetics: frame
+              
+# usa_animation &lt;- animate(usa_plot, fps = 10, width = 800, height = 400)
+# anim_save(&quot;usa_animation.gif&quot;, usa_animation)
 
 usa_plotly &lt;- ggplotly(usa_plot, tooltip = c(&quot;Year&quot;, &quot;Score&quot;)) %&gt;%
                 animation_opts(1000, ) %&gt;% 
@@ -609,6 +614,9 @@ Kunst, Joshua. 2022. <em>Highcharter: A Wrapper for the Highcharts Library</em>.
 </div>
 <div id="ref-R-tibble" class="csl-entry">
 Müller, Kirill, and Hadley Wickham. 2022. <em>Tibble: Simple Data Frames</em>. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
+</div>
+<div id="ref-R-gganimate" class="csl-entry">
+Pedersen, Thomas Lin, and David Robinson. 2020. <em>Gganimate: A Grammar of Animated Graphics</em>. <a href="https://CRAN.R-project.org/package=gganimate">https://CRAN.R-project.org/package=gganimate</a>.
 </div>
 <div id="ref-R-base" class="csl-entry">
 R Core Team. 2022. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
