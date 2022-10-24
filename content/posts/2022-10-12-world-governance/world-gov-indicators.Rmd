@@ -104,6 +104,13 @@ ol {
     overflow: hidden;
 }
 
+h3 {
+    letter-spacing: -.04em;
+    font-family: "Open Sans",sans-serif;
+    font-weight: 700;
+    line-height: 1.45em;
+    color: crimson;
+}
 
 ```
 
@@ -112,10 +119,10 @@ ol {
 # Table of Contents
 
 1.  [Introduction]
-2.  [Motivation] 💡
-3.  [Dataset]🗒️
-4.  [Data Preparation] 💻
-5.  [Visualizations] 📈
+2.  [Motivation]
+3.  [Dataset]
+4.  [Data Preparation]
+5.  [Visualizations]
     -   [Correlation between Indicators]
 
     -   [Most recent results 2021 by Country]
@@ -267,11 +274,27 @@ As this is a significant project involving many variables and records, I created
 
 5.  USA progression over time **(Animated Line Chart)**
 
-Most of the charts are interactive! If you see a ***[Full Screen]*** option next to a chart,  it means the chart is interactive and you can view it in full screen.
+Most of the charts are interactive! If you see a ***[Full Screen]*** option next to a chart, it means the chart is interactive and you can view it in full screen.
 
 ### Correlation between Indicators
 
-```{r indicators-correlation, fig.cap='Correlation between Indicators.', tidy=FALSE, fig.height= 7, out.width= "100%"}
+The correlation chart below shows the connection between indicators. 
+
+For purposes of text space in the chart below, I have shortened the indicator’s names:
+
+-   **Corruption** = Control of Corruption;
+
+-   **Effectiveness** = Government Effectiveness;
+
+-   **Stability** = Political Stability and Absence of Violence;
+
+-   **Regulations** = Regulatory Quality;
+
+-   **Law** = Rule of Law;
+
+-   **Voice** = Voice and Accountability.
+
+```{r indicators-correlation, fig.cap='Correlation between Indicators.', tidy=FALSE, fig.height= 6.2, out.width= "100%"}
 
 # Correlation Matrix
 df_cor <- df %>% 
@@ -282,9 +305,9 @@ df_cor <- df %>%
             rename(Corruption = 1,
                    Effectiveness = 2,
                    Stability = 3,
-                   Regulation = 4,
+                   Regulations = 4,
                    Law = 5,
-                   Accountability = 6) %>% 
+                   Voice = 6) %>% 
             corrr::correlate(quiet = TRUE) %>% 
             corrr::rearrange()
 
@@ -309,7 +332,7 @@ cor_plot <- df_cor %>%
                              angle = 0) +
               # ggtitle("Indicators Correlation") +
               cowplot::theme_cowplot() +
-              theme(plot.title = element_text(size = 24, hjust = .5))
+              theme(plot.title = element_text(size = 22, hjust = .5))
 
 print(df_cor)
 print(cor_plot)
@@ -318,6 +341,10 @@ print(cor_plot)
 ### Most recent results 2021 by Country
 
 **[[Full Screen](/widgets/WGI_2021.html)]**
+
+The map below shows the **2021 results** for each country. 
+
+As this is an interactive map, for you to see the scores, you will need to hover the mouse over the country, and then you will see the results of all six indicators, including the mean.
 
 ```{r wgi-2021}
 
@@ -507,11 +534,10 @@ knitr::include_url("https://www.renanperes.com/widgets/USA_Plotly.html", height 
 
 # Conclusion
 
-In conclusion, this was a very satisfying and exciting project, and I learned much from it. It highlighted the six governance indicators which determine how prosperous a country is compared to another and how they have progressed over time. 
+In conclusion, this was a very satisfying and exciting project, and I learned much from it. It highlighted the six governance indicators which determine how prosperous a country is compared to another and how they have progressed over time.
 
-As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this page. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data. 
+As this is an open-source project, you are welcome to edit this content and send me a pull request through the GitHub edit button I embedded in the footer of this page. Also, in the comment section, let me know your thoughts on this project and which comparisons and charts you wish you saw. I will be reiterating it and adding more content throughout the time and, of course, always keep it updated with the most recent data.
 
 Thank you!
-
 
 # References

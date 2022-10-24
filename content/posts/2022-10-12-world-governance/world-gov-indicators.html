@@ -83,17 +83,24 @@ ol {
     overflow: hidden;
 }
 
+h3 {
+    letter-spacing: -.04em;
+    font-family: "Open Sans",sans-serif;
+    font-weight: 700;
+    line-height: 1.45em;
+    color: crimson;
+}
 
 </style>
-<p><strong>Last Update:</strong> October 23, 2022 - 13:22</p>
+<p><strong>Last Update:</strong> October 24, 2022 - 09:00</p>
 <div id="table-of-contents" class="section level1">
 <h1>Table of Contents</h1>
 <ol style="list-style-type: decimal">
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#motivation">Motivation</a> 💡</li>
-<li><a href="#dataset">Dataset</a>🗒️</li>
-<li><a href="#data-preparation">Data Preparation</a> 💻</li>
-<li><a href="#visualizations">Visualizations</a> 📈
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#dataset">Dataset</a></li>
+<li><a href="#data-preparation">Data Preparation</a></li>
+<li><a href="#visualizations">Visualizations</a>
 <ul>
 <li><p><a href="#correlation-between-indicators">Correlation between Indicators</a></p></li>
 <li><p><a href="#most-recent-results-2021-by-country">Most recent results 2021 by Country</a></p></li>
@@ -249,6 +256,16 @@ print(df)
 <p>Most of the charts are interactive! If you see a <strong><em>[Full Screen]</em></strong> option next to a chart, it means the chart is interactive and you can view it in full screen.</p>
 <div id="correlation-between-indicators" class="section level3">
 <h3>Correlation between Indicators</h3>
+<p>The correlation chart below shows the connection between indicators.</p>
+<p>For purposes of text space in the chart below, I have shortened the indicator’s names:</p>
+<ul>
+<li><p><strong>Corruption</strong> = Control of Corruption;</p></li>
+<li><p><strong>Effectiveness</strong> = Government Effectiveness;</p></li>
+<li><p><strong>Stability</strong> = Political Stability and Absence of Violence;</p></li>
+<li><p><strong>Regulations</strong> = Regulatory Quality;</p></li>
+<li><p><strong>Law</strong> = Rule of Law;</p></li>
+<li><p><strong>Voice</strong> = Voice and Accountability.</p></li>
+</ul>
 <pre class="r"><code>
 # Correlation Matrix
 df_cor &lt;- df %&gt;% 
@@ -259,9 +276,9 @@ df_cor &lt;- df %&gt;%
             rename(Corruption = 1,
                    Effectiveness = 2,
                    Stability = 3,
-                   Regulation = 4,
+                   Regulations = 4,
                    Law = 5,
-                   Accountability = 6) %&gt;% 
+                   Voice = 6) %&gt;% 
             corrr::correlate(quiet = TRUE) %&gt;% 
             corrr::rearrange()
 
@@ -286,21 +303,20 @@ cor_plot &lt;- df_cor %&gt;%
                              angle = 0) +
               # ggtitle(&quot;Indicators Correlation&quot;) +
               cowplot::theme_cowplot() +
-              theme(plot.title = element_text(size = 24, hjust = .5))
+              theme(plot.title = element_text(size = 22, hjust = .5))
 ## Warning in GGally::ggcorr(., low = &quot;#abc3ff&quot;, mid = &quot;#ff6432&quot;, high =
 ## &quot;#0048ff&quot;, : data in column(s) &#39;term&#39; are not numeric and were ignored
 
 print(df_cor)
 ## # A tibble: 6 × 7
-##   term           Effectiveness Regulation    Law Corruption Accountabi…¹ Stabi…²
-##   &lt;chr&gt;                  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Effectiveness         NA          0.932  0.929      0.918        0.752   0.714
-## 2 Regulation             0.932     NA      0.903      0.865        0.781   0.667
-## 3 Law                    0.929      0.903 NA          0.937        0.822   0.789
-## 4 Corruption             0.918      0.865  0.937     NA            0.772   0.750
-## 5 Accountability         0.752      0.781  0.822      0.772       NA       0.688
-## 6 Stability              0.714      0.667  0.789      0.750        0.688  NA    
-## # … with abbreviated variable names ¹​Accountability, ²​Stability
+##   term          Effectiveness Regulations    Law Corruption  Voice Stability
+##   &lt;chr&gt;                 &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Effectiveness        NA           0.932  0.929      0.918  0.752     0.714
+## 2 Regulations           0.932      NA      0.903      0.865  0.781     0.667
+## 3 Law                   0.929       0.903 NA          0.937  0.822     0.789
+## 4 Corruption            0.918       0.865  0.937     NA      0.772     0.750
+## 5 Voice                 0.752       0.781  0.822      0.772 NA         0.688
+## 6 Stability             0.714       0.667  0.789      0.750  0.688    NA
 print(cor_plot)</code></pre>
 <div class="figure"><span style="display:block;" id="fig:indicators-correlation"></span>
 <img src="/posts/2022-10-12-world-governance/world-gov-indicators_files/figure-html/indicators-correlation-1.png" alt="Correlation between Indicators." width="100%" />
@@ -312,6 +328,8 @@ Figure 1: Correlation between Indicators.
 <div id="most-recent-results-2021-by-country" class="section level3">
 <h3>Most recent results 2021 by Country</h3>
 <p><strong>[<a href="/widgets/WGI_2021.html">Full Screen</a>]</strong></p>
+<p>The map below shows the <strong>2021 results</strong> for each country.</p>
+<p>As this is an interactive map, for you to see the scores, you will need to hover the mouse over the country, and then you will see the results of all six indicators, including the mean.</p>
 <pre class="r"><code>
 df_2021 &lt;- df %&gt;% 
             mutate(value = round(value, 2)) %&gt;% 
