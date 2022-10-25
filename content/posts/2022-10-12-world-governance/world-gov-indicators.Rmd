@@ -412,6 +412,7 @@ knitr::include_url("https://www.renanperes.com/widgets/WGI_2021.html", height = 
 ```
 
 ### Comparison by Continent
+The box plot below is based on the **2021 results** and demonstrates how a continent is compared to each other within each indicator.
 
 ```{r 2021-continent-comparison, fig.cap='Comparison by Continent.', tidy=FALSE, fig.height= 7, out.width= "100%"}
 cont_df_2021_plot <- df %>% 
@@ -443,6 +444,8 @@ print(cont_df_2021_plot)
 ### Comparison between the top 3 Countries of 2021
 
 **[[Full Screen](/widgets/Top_3_Comparison.html)]**
+
+The line chart below represents a progression of the top 3 countries of 2021 since 1996. By the way, the calculation of the top 3 countries was based on the average(mean) of the six indicators combined.
 
 ```{r top-3-2021}
 
@@ -509,7 +512,7 @@ knitr::include_url("https://www.renanperes.com/widgets/Top_3_Comparison.html", h
 
 **[[Full Screen](/widgets/USA_Plotly.html)]**
 
-```{r usa-timeline-animated, echo=TRUE}
+```{r usa-timeline-animated, echo=TRUE, message=FALSE, warning=FALSE}
 df_usa <- df %>% 
             filter(country_code == "USA") %>% 
             select(country_name:value) %>% 
