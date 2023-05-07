@@ -21,13 +21,6 @@ library(htmlwidgets)
 knitr::opts_chunk$set(fig.width = 8, fig.height=5)
 ```
 
-```{css, echo=FALSE}
-
-.main-container{
-  margin-left: 0px !important
-}
-```
-
 <!-- ***This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.*** -->
 
 ## Flexdashboard. ([View in Full Screen](http://dashboard-stocks.renanperes.com/))
@@ -58,7 +51,7 @@ knitr::include_app("https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00Y
 <h3><iframe allow="fullscreen" title="Corporate Spend" width="1200" height="800"  src="https://app.powerbi.com/reportEmbed?reportId=9003d92f-5d23-47e2-82b9-38e57a1b7bb4&autoAuth=true&ctid=b8e8d71a-947d-41dd-81dd-8401dcc51007" frameborder="0" allowFullScreen="true"></iframe></h2>
 
 
-<iframe title="Corporate Spend" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=9003d92f-5d23-47e2-82b9-38e57a1b7bb4&autoAuth=true&embeddedDemo=true" frameborder="0" allowFullScreen="true"></iframe>
+<iframe title="Corporate Spend" width="1200" height="800" src="https://app.powerbi.com/reportEmbed?reportId=9003d92f-5d23-47e2-82b9-38e57a1b7bb4&autoAuth=true&embeddedDemo=true" frameborder="0" allowFullScreen="true"></iframe>
 
 ---
 
