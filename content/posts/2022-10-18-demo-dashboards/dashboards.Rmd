@@ -22,7 +22,7 @@ knitr::opts_chunk$set(fig.width = 8, fig.height=5)
 ```
 
 
-***This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.***
+<!-- ***This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.*** -->
 
 ## Flexdashboard. ([View in Full Screen](http://dashboard-stocks.renanperes.com/))
 
