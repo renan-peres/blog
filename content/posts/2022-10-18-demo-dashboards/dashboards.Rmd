@@ -35,7 +35,7 @@ knitr::include_url("https://dashboard-stocks.renanperes.com/", height = "700px")
 knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/", height = "700px")
 ```
 
-## Executive Insights by Decisive Data ([View in Full Screen](https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlY2ItYjFhYS00YjkyLThkMmEtMTQwYjVlYzExNjA0IiwidCI6ImQyYWY4YjViLTlhN2UtNGM4NS1hM2ZkLWI2OWE2Njk4YjdkNiJ9))
+## Executive Insights by Decisive Data ([View in Full Screen](https://app.powerbi.com/view?r=eyJrIjoiYTYxMzllYjQtYjU5NS00MTM4LTlmMjEtMTY0NzVkM2U4OGE4IiwidCI6IjdlY2M4YWEwLTgzMGUtNGQ4Ni1hZjc4LTgzYTNkY2MyNjIzOCIsImMiOjZ9))
 **Power BI Community**
 ```{r, echo=FALSE}
 knitr::include_app("https://app.powerbi.com/view?r=eyJrIjoiYTYxMzllYjQtYjU5NS00MTM4LTlmMjEtMTY0NzVkM2U4OGE4IiwidCI6IjdlY2M4YWEwLTgzMGUtNGQ4Ni1hZjc4LTgzYTNkY2MyNjIzOCIsImMiOjZ9", height = "700px")
