@@ -36,8 +36,8 @@ canonifyurls = true
 # ------
 [author]
   name = "Renan Peres"
-  bio = "A ***Business*** guy who is very passionate about ***Analytics*** and loves transforming complex data into beautiful yet insightful charts."
-  job = "*B.A. in Business*"
+  bio = "An ***Accountant*** who is very passionate about ***Analytics*** and loves transforming complex data into beautiful yet insightful charts."
+  job = "Accountant"
   location = "Orlando-FL, USA"
   picture = "images/profile.jpg"
   email = "contact@renanperes.com"
