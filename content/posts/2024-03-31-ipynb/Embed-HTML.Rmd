@@ -1,0 +1,36 @@
+---
+title: 'Dashboards: Power BI & Shiny'
+author: ''
+date: '2022-10-18'
+categories:
+  - Dashboards
+slug: dashboards
+autoThumbnailImage: no
+thumbnailImagePosition: left
+thumbnailImage: https://res.cloudinary.com/dqtnflaeh/image/upload/v1666178340/dashboards_cphppx.png
+---
+This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.
+
+<!--more-->
+
+```{r, echo=FALSE}
+library(webshot)
+library(knitr)
+library(htmltools)
+library(htmlwidgets)
+knitr::opts_chunk$set(fig.width = 8, fig.height=5)
+```
+
+<!-- ***This post is currently just for a demonstration purpose. In the future I will be adding some interactive dashboards to the website.*** -->
+
+## **FAANG** Stock Price Comparison ([View in Full Screen](http://dashboard-stocks.renanperes.com/))
+**Flexdashboard**
+```{r, echo=FALSE}
+knitr::include_url("https://raw.githack.com/renan-peres/blog/main/static/widgets/WGI_2021.html", height = "700px")
+```
+
+
+%%html
+<iframe width="100%", height="600px"
+    src="https://raw.githack.com/renan-peres/blog/main/static/widgets/WGI_2021.html"
+    allowfullscreen></iframe>
